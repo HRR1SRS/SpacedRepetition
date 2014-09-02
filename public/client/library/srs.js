@@ -1,5 +1,3 @@
-
-
 // "snooze" each card
 // get it right? long snooze! :)
 // get it wrong? short snooze. :(
@@ -8,7 +6,6 @@
 var App = function() {
 // this might be overstepping the boundaries
 //   of a library
-
   // I have decks!
   // I have users!
 };
