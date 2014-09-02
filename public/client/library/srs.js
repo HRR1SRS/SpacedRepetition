@@ -56,17 +56,14 @@ var Topic = function() {
 };
 
 
-var Deck = function(deckName) {
+var Deck = function() {
   // I have Cards!
   return {
     _cards: [],
-    name: deckName || '',
+    name: '',
     topics: [],
     author: '', // what if deck has multiple contributors?
 
-    //precondition: add in instance of card
-    //postcondition: add to the cards Array
-    //otherwise: return null
     addCard: function(){
     },
     removeCard: function(){
