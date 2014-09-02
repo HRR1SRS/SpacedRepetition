@@ -1,4 +1,13 @@
+'use strict';
+
+// "snooze" each card
+// get it right? long snooze! :)
+// get it wrong? short snooze. :(
+
 // this creates our app
+// this might be overstepping the boundaries
+//   of a library
+
 var app = function() {
   // I have decks!
   // I have users!
@@ -9,6 +18,8 @@ var app = function() {
 // deck has many cards
 // cards belong to many decks
 // queues hold many cards from many decks
+//   each queue tracks priority of each card
+// each user has their own queues
 
 
 /*
@@ -40,18 +51,64 @@ deck2.addCard(card1);
 // deck 1 and deck 2 both have card 1
 // card 1 belongs to both deck 1 and deck 2
 
-var Topic = function() {
+
+var Topic = function(topicName) {
+  var decks = [];
+  for(var i = 1; i < arguments.length; i++) {
+    decks.push(arguments[i]);
+  }
+
   return {
-    _decks: [],
-    name: '',
+    _decks: decks,
+    name: topicName || '',
 
-    addDeck: function() {},
-    removeDeck: function() {},
-    getDeck: function() {},
+    // precondition: pass in new instance of Deck
+    // postcondition: if Topic doesn't have Deck, add it.
+    //   otherwise, don't add it.
+    addDeck: function(deck) {
+      if(this.isDeck(deck.getName())) {
+        return null;
+      } else {
+        this._decks.push(deck);
+      }
+    },
 
-    setName: function() {},
-    getName: function() {}
+    removeDeck: function(deckName) {
+      for(var i = 0; i < this._decks.length; i++) {
+        if(this._decks[i].getName() === deckName) {
+          this._decks.splice(i, 1);
+        }
+      }
+    },
 
+    getDeck: function(deckName) {
+      for(var i = 0; i < this._decks.length; i++) {
+        if(this._decks[i].getName() === deckName) {
+          this._decks.splice(i, 1);
+        }
+      }
+    },
+
+    isDeck: function(deckName) {
+      for(var i = 0; i < this._decks.length; i++) {
+        if(this._decks[i].getName() === deckName) {
+          return true;
+        }
+      }
+      return false;
+    },
+
+    setName: function(topicName) {
+      this.name = topicName;
+    },
+
+    getName: function() {
+      return this.name;
+    },
+
+    isName: function(topicName){
+      return this.getName() === topicName;
+    }
   };
 };
 
@@ -138,6 +195,24 @@ var Queue = function() {
 // each User has their own Queue
 // maybe each User has multiple Queues
 var User = function() {
+  /*
+  We need to track progress for each user
+  Each User has multiple Queues
+  queue1 = new Queue('jquery', 'underscore')
+  queue2 = new Queue('Backbone.js', 'Angular')
+  queue1 = {
+    has references to the decks
+    which have references to cards
+    and we store 'priority' number for each card
+
+    OR
+
+    has references to cards
+    and we store 'priority' number for each card
+  }
+  */
+
+
   /*
   where do we store the information about
   how to prioritize cards for a specific user?
