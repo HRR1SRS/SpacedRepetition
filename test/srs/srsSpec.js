@@ -9,16 +9,16 @@ describe('the SRS library', function(){
     it('should be a function', function(){
       expect(app).to.be.a('function');
     });
-    it('should return an object', function(){
-      var topic = new Topic();
-      expect(topic).to.be.a('object');
-    });
   });
   
   
   describe('the Topic function', function(){
     it('should be a function', function(){
       expect(Topic).to.be.a('function');
+    });
+    it('should return an object', function(){
+      var topic = new Topic();
+      expect(topic).to.be.a('object');
     });
   });
   
