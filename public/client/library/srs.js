@@ -67,22 +67,9 @@ var Deck = function(deckName) {
     //precondition: add in instance of card
     //postcondition: add to the cards Array
     //otherwise: return null
-    addCard: function(cardName){
-      if(Object.constructor(cardName) === "Card"){
-        this._cards.push(cardName);
-      }else{
-        return null;
-      }
+    addCard: function(){
     },
-    removeCard: function(cardName){
-      var args = Array.prototype.slice.call(arguments);
-      var index = [];
-      if(args[1]){
-        for(var i = 0; i < args.length; i++){
-
-        }
-      }
-      var index = this._cards.indexOf(cardName);
+    removeCard: function(){
     },
     getCard: function(){},
 
