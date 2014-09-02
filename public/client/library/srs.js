@@ -1,5 +1,5 @@
 // this creates our app
-var app = function() {
+var App = function() {
   // I have decks!
   // I have users!
 };
@@ -56,16 +56,34 @@ var Topic = function() {
 };
 
 
-var Deck = function() {
+var Deck = function(deckName) {
   // I have Cards!
   return {
     _cards: [],
-    name: '',
+    name: deckName || '',
     topics: [],
     author: '', // what if deck has multiple contributors?
 
-    addCard: function(){},
-    removeCard: function(){},
+    //precondition: add in instance of card
+    //postcondition: add to the cards Array
+    //otherwise: return null
+    addCard: function(cardName){
+      if(Object.constructor(cardName) === "Card"){
+        this._cards.push(cardName);
+      }else{
+        return null;
+      }
+    },
+    removeCard: function(cardName){
+      var args = Array.prototype.slice.call(arguments);
+      var index = [];
+      if(args[1]){
+        for(var i = 0; i < args.length; i++){
+
+        }
+      }
+      var index = this._cards.indexOf(cardName);
+    },
     getCard: function(){},
 
     setName: function(){},
@@ -76,7 +94,6 @@ var Deck = function() {
     editAuthor: function(){}
   };
 };
-
 
 var Card = function() {
   // I have questions and answers!
@@ -121,6 +138,8 @@ var Card = function() {
   };
 };
 
+var card = new Card();
+console.log(Object.prototype.constructor(card));
 
 // orders the cards randomly
 var Queue = function() {
