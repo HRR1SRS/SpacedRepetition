@@ -122,9 +122,6 @@ var Card = function() {
   };
 };
 
-var card = new Card();
-console.log(Object.prototype.constructor(card));
-
 // orders the cards randomly
 var Queue = function() {
   // I have Cards (in rand order)!
