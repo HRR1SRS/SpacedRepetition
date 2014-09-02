@@ -33,8 +33,9 @@
     "karma-mocha": "^0.1.9",
     "karma-sinon": "^1.0.3",
     "sinon": "^1.10.3"
-
   },
   "devDependencies": {
+    "karma-requirejs": "^0.2.2",
+    "requirejs": "^2.1.14"
   }
 }
