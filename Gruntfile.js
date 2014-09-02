@@ -89,6 +89,27 @@ module.exports = function(grunt) {
       }
     },
 
+    karma: {
+      options: {
+        configFile: 'karma.conf.js',
+        reporters: ['progress', 'coverage']
+      },
+      watch: {
+        background: true,
+        reporters: ['progress']
+      },
+      single: {
+        singleRun: true,
+      },
+      ci: {
+        singleRun: true,
+        coverageReporter: {
+          type: 'lcov',
+          dir: 'results/coverage/'
+        }
+      }
+    },
+
     shell: {
       prodServer: {
 
@@ -110,6 +131,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
+  grunt.loadNpmTasks('grunt-karma');
+
 
   grunt.registerTask('server-dev', function (target) {
     // Running nodejs in a different process and displaying output on the main console
@@ -133,6 +156,8 @@ module.exports = function(grunt) {
     'jshint',
         'mochaTest'
   ]);
+
+  grunt.registerTask('unitTest', [ 'karma:single']);
 
   grunt.registerTask('build', [
 
