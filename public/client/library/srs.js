@@ -110,33 +110,17 @@ var Topic = function(topicName) {
 };
 
 
-var Deck = function(deckName) {
+var Deck = function() {
   // I have Cards!
   return {
     _cards: [],
-    name: deckName || '',
+    name: '',
     topics: [],
     author: '', // what if deck has multiple contributors?
 
-    //precondition: add in instance of card
-    //postcondition: add to the cards Array
-    //otherwise: return null
-    addCard: function(cardName){
-      if(Object.constructor(cardName) === "Card"){
-        this._cards.push(cardName);
-      }else{
-        return null;
-      }
+    addCard: function(){
     },
-    removeCard: function(cardName){
-      var args = Array.prototype.slice.call(arguments);
-      var index = [];
-      if(args[1]){
-        for(var i = 0; i < args.length; i++){
-
-        }
-      }
-      var index = this._cards.indexOf(cardName);
+    removeCard: function(){
     },
     getCard: function(){},
 
@@ -191,9 +175,6 @@ var Card = function() {
     editAuthor: function(){}
   };
 };
-
-var card = new Card();
-console.log(Object.prototype.constructor(card));
 
 // orders the cards randomly
 var Queue = function() {
