@@ -1,3 +1,10 @@
 {
-  "packages": {}
+  "mocha-web": {
+    "git": "https://github.com/mad-eye/meteor-mocha-web",
+    "branch": "velocity"
+  },
+  "velocity": {
+    "git": "https://github.com/xolvio/velocity",
+    "branch": "master"
+  }
 }
