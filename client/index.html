@@ -4,6 +4,10 @@
 
 <body>
 
-  {{> intro}}
-</body>
+  {{#if currentUser}}
+     {{> dashboard}}
+  {{else}}
+     {{> intro}} 
+  {{/if}}
 
+</body>
