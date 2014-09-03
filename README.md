@@ -1,12 +1,10 @@
 # HR SRS
 
-> HR SRS is a study aid that leverages the pinciples of [Spaced Repetition](http://en.wikipedia.org/wiki/Spaced_repetition).
+HR SRS is a study aid that leverages the principles of [Spaced Repetition](http://en.wikipedia.org/wiki/Spaced_repetition). You can find a deployed version [here](http://hr-srs.meteor.com/).
 
 ## Team
 
-  - __Product Owner__:
-  - __Scrum Master__:
-  - __Development Team Members__: Mike Axtman, Robin Kim, Chris Bradley, Chibueze Ikedi
+  - __Development Team Members__: [Mike Axtman](https://github.com/mdaxtman), [Chris Bradley](https://github.com/chrbradley), [Chibueze Ikedi](https://github.com/icukaegbu), [Robin Kim](https://github.com/therobinkim)
 
 ## Table of Contents
 
@@ -20,23 +18,16 @@
 
 ## Usage
 
-> Some usage instructions
 * /client: holds the client-side files
 * /client/template: holds the client-side templates
 * /server: holds server-side files
 
-Meteor commands:
-* meteor add accounts-passwords
-* meteor add mizzao:bootstrap-3 OR meteor add ian:bootstrap-3
-* meteor add ian:accounts-ui-bootstrap-3 (see usage instructions at http://atmospherejs.com/ian/accounts-ui-bootstrap-3)
 
 ## Requirements
 
 - Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- Meteor 0.9.x
+
 
 ## Development
 
@@ -44,15 +35,14 @@ Meteor commands:
 
 From within the root directory:
 
-```sh
-sudo npm install -g bower
-npm install
-bower install
-```
+* `meteor add accounts-passwords`
+* `meteor add mizzao:bootstrap-3` OR `meteor add ian:bootstrap-3`
+* `meteor add ian:accounts-ui-bootstrap-3` (see usage instructions at http://atmospherejs.com/ian/accounts-ui-bootstrap-3)
+
 
 ### Roadmap
 
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
+View the project roadmap [here](https://waffle.io/HRR1SRS/SpacedRepetition)
 
 
 ## Contributing
