@@ -1,14 +1,11 @@
-'use strict';
-
 // "snooze" each card
 // get it right? long snooze! :)
 // get it wrong? short snooze. :(
 
 // this creates our app
+var App = function() {
 // this might be overstepping the boundaries
 //   of a library
-
-var app = function() {
   // I have decks!
   // I have users!
 };
@@ -121,8 +118,10 @@ var Deck = function() {
     topics: [],
     author: '', // what if deck has multiple contributors?
 
-    addCard: function(){},
-    removeCard: function(){},
+    addCard: function(){
+    },
+    removeCard: function(){
+    },
     getCard: function(){},
 
     setName: function(){},
@@ -133,7 +132,6 @@ var Deck = function() {
     editAuthor: function(){}
   };
 };
-
 
 var Card = function() {
   // I have questions and answers!
@@ -177,7 +175,6 @@ var Card = function() {
     editAuthor: function(){}
   };
 };
-
 
 // orders the cards randomly
 var Queue = function() {
