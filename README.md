@@ -21,6 +21,14 @@
 ## Usage
 
 > Some usage instructions
+* /client: holds the client-side files
+* /client/template: holds the client-side templates
+* /server: holds server-side files
+
+Meteor commands:
+* meteor add accounts-passwords
+* meteor add mizzao:bootstrap-3 OR meteor add ian:bootstrap-3
+* meteor add ian:accounts-ui-bootstrap-3 (see usage instructions at http://atmospherejs.com/ian/accounts-ui-bootstrap-3)
 
 ## Requirements
 
