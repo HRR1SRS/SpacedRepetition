@@ -1,0 +1,26 @@
+<head>
+  <title>srs</title>
+</head>
+
+<body>
+  {{> loginMenu}}
+
+<!--   {{#if currentUser}}
+     {{> dashboard}}
+  {{else}} -->
+     <!-- {{> intro}}  -->
+<!--   {{/if}} -->
+<div class='container'>
+  <div class='row'>
+    {{>addToReviewList}}
+  </div>
+  <div class='row'>
+    <div class='col-lg-6'>
+      {{>cardsList}}
+    </div>
+    <div class='col-lg-6'>
+      {{>usersList}}
+    </div>
+  </div>
+</div>
+</body>
