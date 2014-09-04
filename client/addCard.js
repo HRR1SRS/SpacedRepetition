@@ -1,4 +1,4 @@
-Template.dashboard.events({
+Template.addCard.events({
   'submit': function(event, template) {
     var e = event;
     var t = template;
@@ -12,20 +12,19 @@ Template.dashboard.events({
       question: question,
       answer: answer
     });
-    console.log('newCard: ' + newCard);
 
     // if we find the topic
     if(Topics.find({name: topic}).fetch().length) {
       // update topic to have newCard
+      var topicId = Topics.findOne({name: topic});
+      Topics.update({_id: topicId._id}, {$push: {cards: newCard}});
+      Cards.update({_id: newCard}, {$set: {topic: topicId._id}});
     }
     // else it doesn't exist, so create it
     else {
       var newTopic = Topics.insert({name: topic, cards: [newCard]});
       // update newCard to have newTopic
+      Cards.update({_id: newCard}, {$set: {topic: newTopic}});
     }
   }
 });
-
-// Topics.update({})
-
-// Meteor.users.update({_id:Meteor.user()._id}, {$push: {'profile.topics': selectedTopic}});
