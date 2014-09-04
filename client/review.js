@@ -6,8 +6,8 @@ if(Meteor.isClient){
       if(arg === undefined){
         return cardData.question;
       }else{
-        $('.card p').after('<p class="answer"><b>'+cardData.answer+'</b></p>')
-        $('.answer').after('<br><p>rate your difficulty with the question</p><button>easy</button><button>hard</button>')
+        $('.card p').after('<p class="answer"><b>'+cardData.answer+'</b></p>');
+        $('.answer').after('<br><p>rate your difficulty with the question</p><button>easy</button><button>hard</button>');
         $('.button').remove();
       }
     },
@@ -17,7 +17,7 @@ if(Meteor.isClient){
     return topics;
     }
 
-  })
+  });
     //click event that lists topics being reviewed
   var clickedTopic = {};
   Template.review.events({
