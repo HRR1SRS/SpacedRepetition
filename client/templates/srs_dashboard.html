@@ -4,60 +4,65 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview</a></li>
-            <li><a href="#">Reports</a></li>
-            <li><a href="#">Analytics</a></li>
-            <li><a href="#">Export</a></li>
+            <li class="active"><a href="#">Topics</a></li>
+            <li><a href="#">Topic</a></li>
+            <li><a href="#">Topic</a></li>
+            <li><a href="#">Topic</a></li>
           </ul>
           <ul class="nav nav-sidebar">
-            <li><a href="#">Nav item</a></li>
-            <li><a href="#">Nav item again</a></li>
-            <li><a href="#">One more nav</a></li>
-            <li><a href="#">Another nav item</a></li>
-            <li><a href="#">More navigation</a></li>
+            <li><a href="#">Topic</a></li>
+            <li><a href="#">Topic</a></li>
+            <li><a href="#">Topic</a></li>
           </ul>
           <ul class="nav nav-sidebar">
-            <li><a href="#">Nav item again</a></li>
-            <li><a href="#">One more nav</a></li>
-            <li><a href="#">Another nav item</a></li>
+            <li><a href="#">Topic</a></li>
+            <li><a href="#">Topic</a></li>
+            <li><a href="#">Topic</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Dashboard</h1>
 
-          <div class="row placeholders">
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
+          <div class="btn-toolbar" role="toolbar">
+            <div class="btn-group">
+              <button type="button" class="btn btn-primary">
+                <span class="glyphicon glyphicon-plus"></span> Add Topic
+              </button>
+              <!-- <button type="button" class="btn btn-warning">Edit Topic</button> 
+              <button type="button" class="btn btn-danger">
+                <span class="glyphicon glyphicon-minus"></span> Delete Topic
+              </button> -->
             </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
+            <div class="btn-group">
+              <label></label>
+              <label></label>
+              <label></label>
+              <label></label>
+              <label></label>
+              <label></label>
             </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
+            <div class="btn-group">
+              <button type="button" class="btn btn-warning">
+                <span class="glyphicon glyphicon-plus"></span> Add Card
+              </button>
+              <!-- <button type="button" class="btn btn-warning">Edit Card</button> 
+              <button type="button" class="btn btn-danger">
+                <span class="glyphicon glyphicon-minus"></span> Delete Card
+              </button> -->
             </div>
           </div>
 
-          <h2 class="sub-header">Section title</h2>
+          <h2 class="sub-header">Card List</h2>
           <div class="table-responsive">
-            <table class="table table-striped">
+            <table class="table table-striped table-bordered">
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
+                  <th>Card Title</th>
+                  <th>Card Question</th>
+                  <th>Topic(s)</th>
+                  <th>Last Attempt Date</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -67,6 +72,16 @@
                   <td>ipsum</td>
                   <td>dolor</td>
                   <td>sit</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-play"></span> Review
+                      </button>
+                      <button type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-minus"></span> Delete
+                      </button>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td>1,002</td>
@@ -74,6 +89,16 @@
                   <td>consectetur</td>
                   <td>adipiscing</td>
                   <td>elit</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-play"></span> Review
+                      </button>
+                      <button type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-minus"></span> Delete
+                      </button>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td>1,003</td>
@@ -81,6 +106,16 @@
                   <td>nec</td>
                   <td>odio</td>
                   <td>Praesent</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-play"></span> Review
+                      </button>
+                      <button type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-minus"></span> Delete
+                      </button>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td>1,003</td>
@@ -88,6 +123,16 @@
                   <td>Sed</td>
                   <td>cursus</td>
                   <td>ante</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-play"></span> Review
+                      </button>
+                      <button type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-minus"></span> Delete
+                      </button>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td>1,004</td>
@@ -95,6 +140,16 @@
                   <td>diam</td>
                   <td>Sed</td>
                   <td>nisi</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-play"></span> Review
+                      </button>
+                      <button type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-minus"></span> Delete
+                      </button>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td>1,005</td>
@@ -102,6 +157,16 @@
                   <td>quis</td>
                   <td>sem</td>
                   <td>at</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-play"></span> Review
+                      </button>
+                      <button type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-minus"></span> Delete
+                      </button>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td>1,006</td>
@@ -109,6 +174,16 @@
                   <td>elementum</td>
                   <td>imperdiet</td>
                   <td>Duis</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-play"></span> Review
+                      </button>
+                      <button type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-minus"></span> Delete
+                      </button>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td>1,007</td>
@@ -116,6 +191,16 @@
                   <td>ipsum</td>
                   <td>Praesent</td>
                   <td>mauris</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-play"></span> Review
+                      </button>
+                      <button type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-minus"></span> Delete
+                      </button>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td>1,008</td>
@@ -123,6 +208,16 @@
                   <td>nec</td>
                   <td>tellus</td>
                   <td>sed</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-play"></span> Review
+                      </button>
+                      <button type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-minus"></span> Delete
+                      </button>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td>1,009</td>
@@ -130,6 +225,16 @@
                   <td>semper</td>
                   <td>porta</td>
                   <td>Mauris</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-play"></span> Review
+                      </button>
+                      <button type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-minus"></span> Delete
+                      </button>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td>1,010</td>
@@ -137,42 +242,18 @@
                   <td>Vestibulum</td>
                   <td>lacinia</td>
                   <td>arcu</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-play"></span> Review
+                      </button>
+                      <button type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-minus"></span> Delete
+                      </button>
+                    </div>
+                  </td>
                 </tr>
-                <tr>
-                  <td>1,011</td>
-                  <td>eget</td>
-                  <td>nulla</td>
-                  <td>Class</td>
-                  <td>aptent</td>
-                </tr>
-                <tr>
-                  <td>1,012</td>
-                  <td>taciti</td>
-                  <td>sociosqu</td>
-                  <td>ad</td>
-                  <td>litora</td>
-                </tr>
-                <tr>
-                  <td>1,013</td>
-                  <td>torquent</td>
-                  <td>per</td>
-                  <td>conubia</td>
-                  <td>nostra</td>
-                </tr>
-                <tr>
-                  <td>1,014</td>
-                  <td>per</td>
-                  <td>inceptos</td>
-                  <td>himenaeos</td>
-                  <td>Curabitur</td>
-                </tr>
-                <tr>
-                  <td>1,015</td>
-                  <td>sodales</td>
-                  <td>ligula</td>
-                  <td>in</td>
-                  <td>libero</td>
-                </tr>
+                
               </tbody>
             </table>
           </div>
