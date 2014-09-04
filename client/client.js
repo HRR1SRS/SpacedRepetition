@@ -21,7 +21,7 @@ Template.addToReviewList.events({
     var currentUserId = Meteor.userId();
     // Meteor.call('addTopicToReview', selectedTopic);
     console.log(currentUserId);
-    Meteor.users.update({_id:Meteor.user()._id}, {$push: {"profile.topics": selectedTopic}});
+    Meteor.users.update({_id:Meteor.user()._id}, {$push: {'profile.topics': selectedTopic}});
     console.log(Meteor.user());
   }
 });
