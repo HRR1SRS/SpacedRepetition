@@ -1,5 +1,5 @@
-Template.cardsList.helpers({
-  card: function(){
-    return Cards.find();
-  }
-})
+// Template.cardsList.helpers({
+//   card: function(){
+//     return Cards.find();
+//   }
+// })
