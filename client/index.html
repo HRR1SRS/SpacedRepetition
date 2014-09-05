@@ -5,18 +5,11 @@
 <body>
   {{> loginMenu }}
 
-  <h1>addCard.html</h1>
-  {{> addCard }}
-
-  <h1>review</h1>
-  {{> review }}
-
-  <h1>addToReviewList</h1>
-  {{> addToReviewList }}
-
-  <h1>cardsList</h1>
-  {{> cardsList }}
-
-  <h1>usersList</h1>
-  {{> usersList }}
+  <a href="{{pathFor 'dashboard'}}">dashboard</a> | 
+  <a href="{{pathFor 'addCard'}}">addCard</a> | 
+  <a href="{{pathFor 'review'}}">review</a> | 
+  <a href="{{pathFor 'addToReview'}}">addToReview</a> | 
+  <a href="{{pathFor 'cardsList'}}">cardsList</a> | 
+  <a href="{{pathFor 'usersList'}}">usersList</a> | 
+  <a href="{{pathFor 'intro'}}">intro</a> | 
 </body>
