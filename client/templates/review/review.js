@@ -37,25 +37,40 @@ Template.review.helpers({
   },
   //displays lists of topics available from the topics collection
   topicList : function(){
-  var topics = Topics.find().fetch();
-  return topics;
+    var topics = Topics.find().fetch();
+    //console.log(Meteor.users.find().fetch());
+    return topics;
   },
   //handles adding and removing topics for review from two sources
   clickEventHandler : function(context){
+    console.log(context);
     context.name = context.name || context.innerHTML;
     var name = context.name.toLowerCase().split(' ').join('');
+    if(Meteor.user().profile.topics === undefined){
+      
+      Meteor.user().profile.topics = {};
+    console.log(Meteor.user().profile.topics)
+    }
+    var userTopics = Meteor.user().profile.topics
+    if( !userTopics[context._id]){
+      var setObject = {};
+      setObject['profile.topics.'+context._id] = true;
+      Meteor.users.update(Meteor.userId(),{$set:setObject});
+    }
+
+
+
     if(!clickedTopic[context.name]){
       clickedTopic[context.name] = name;
       $('.selectedTopics').append('<li id="'+name+'"><a href="#">'+context.name+'</a></li>');
-      Template.review.topicQueue();
     }else{
       $('#'+name).remove();
       delete clickedTopic[context.name];
       if(Object.keys(clickedTopic).length === 0){
         $('.question').html('');
       }
-      Template.review.topicQueue();
     }
+    //Template.review.topicQueue();
   }
 });
 //click event that lists topics being reviewed
