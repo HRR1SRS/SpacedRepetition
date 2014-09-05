@@ -6,5 +6,8 @@
   "velocity": {
     "git": "https://github.com/xolvio/velocity",
     "branch": "master"
+  },
+  "packages": {
+    "iron-router": {}
   }
 }
