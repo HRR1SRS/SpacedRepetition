@@ -27,8 +27,10 @@ Template.review.helpers({
     currentList = [];
     for(var prop in clickedTopic){
       var cardList = Topics.find({name: prop}).fetch(); 
-      cardList = cardList[0];  
-      currentList = currentList.concat(cardList.cards);
+      cardList = cardList[0];
+      if(cardList){
+        currentList = currentList.concat(cardList.cards);
+      }  
     }
 
     Template.review.displayQuestion();
@@ -37,34 +39,30 @@ Template.review.helpers({
   topicList : function(){
   var topics = Topics.find().fetch();
   return topics;
+  },
+  //handles adding and removing topics for review from two sources
+  clickEventHandler : function(context){
+    context.name = context.name || context.innerHTML;
+    var name = context.name.toLowerCase().split(' ').join('');
+    if(!clickedTopic[context.name]){
+      clickedTopic[context.name] = name;
+      $('.selectedTopics').append('<li id="'+name+'"><a href="#">'+context.name+'</a></li>');
+      Template.review.topicQueue();
+    }else{
+      $('#'+name).remove();
+      delete clickedTopic[context.name];
+      if(Object.keys(clickedTopic).length === 0){
+        $('.question').html('');
+      }
+      Template.review.topicQueue();
+    }
   }
 });
 //click event that lists topics being reviewed
 Template.review.events({
-  //click even that populates the list of topics being reviewed
-  // 'click select option': function(){
-  //   var name = this.name.toLowerCase().split(' ').join('');
-  //   if(!clickedTopic[this.name]){
-  //     clickedTopic[this.name] = name;
-  //     $('.selectedTopics ul').append('<li id="'+name+'">'+this.name+'</li>');
-  //     Template.review.topicQueue();
-  //   }else{
-  //     $('#'+name).remove();
-  //     delete clickedTopic[this.name];
-  //     Template.review.topicQueue();     
-  //   }
-  // },
+  //populates and removes review topics 
   'click #topics li': function(){
-    var name = this.name.toLowerCase().split(' ').join('');
-    if(!clickedTopic[this.name]){
-      clickedTopic[this.name] = name;
-      $('.selectedTopics').append('<li id="'+name+'"><a href="#">'+this.name+'</a></li>');
-      Template.review.topicQueue();
-    }else{
-      $('#'+name).remove();
-      delete clickedTopic[this.name];
-      Template.review.topicQueue();     
-    }
+    Template.review.clickEventHandler(this);
   },
   //click event that registers the click on the difficulty buttons
   'click .difficulty': function(){
@@ -76,8 +74,12 @@ Template.review.events({
   },
   //button to reveal answer
   'click .button': function(){
-    if(currentList.length){
+    if(currentList.length > 0){
       Template.review.card(currentCard);
     }
+  },
+  //deselects topics for review
+  'click .selectedTopics li': function(e){
+    Template.review.clickEventHandler(e.currentTarget.children[0]);
   }
 });

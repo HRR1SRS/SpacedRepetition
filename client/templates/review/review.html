@@ -1,32 +1,9 @@
 <template name="review">
-  
-<!--   <div class="reviewOptions ">
-    <form> 
-      <select multiple size="10" name="topics">
-        {{#each topicList}}
-          <option class="dropdown">{{name}}</option>
-        {{/each}}
-      </select>
-      
-    </form>
-  </div>
-  <ul class='nav nav-pills nav-stacked'>
-    {{#each topicList}}
-      <li><a href="#">{{name}}</a></li>
-    {{/each}}
-  </ul>
-   -->
-<!--   <br>
-  <div class="selectedTopics">
-    <h4>Topics Selected for Review:</h4> 
-      <ul>
-      </ul>
-  </div> -->  
   <div class="container-fluid" id="dashboard">
     <div class="row"><h1>Review Card</h1></div>
     <div class="row">
         <div class="col-sm-2 col-md-2 panel-primary">
-          <div class="panel-heading">Topics:</div>
+          <div class="panel-heading">Click to Add/Remove Topics:</div>
           <div class="panel-body well">
             <ul class="nav nav-pills nav-stacked" id="topics">
               {{#each topicList}}
