@@ -1,11 +1,5 @@
 <template name="review">
-  <div class='card' align="center" display="block">
-    <p class='question'></p>
-    <br>
-    <div class='answerblock'>
-      <button class="button">click to see answer</button>
-    </div>
-  </div>
+  
 <!--   <div class="reviewOptions ">
     <form> 
       <select multiple size="10" name="topics">
@@ -28,23 +22,38 @@
       <ul>
       </ul>
   </div> -->  
-    
+  <div class="container-fluid" id="dashboard">
+    <div class="row"><h1>Review Card</h1></div>
+    <div class="row">
+        <div class="col-sm-2 col-md-2 panel-primary">
+          <div class="panel-heading">Topics:</div>
+          <div class="panel-body well">
+            <ul class="nav nav-pills nav-stacked" id="topics">
+              {{#each topicList}}
+                <li><a href="#">{{name}}</a></li>
+              {{/each}}
+            </ul>
 
-  <div class="col-sm-2 col-md-2 panel-primary">
-    <div class="panel-heading">Topics:</div>
-    <div class="panel-body well">
-      <ul class="nav nav-pills nav-stacked" id="topics">
-        {{#each topicList}}
-          <li><a href="#">{{name}}</a></li>
-        {{/each}}
-      </ul>
+            <h4><span class="label label-danger">Selected Topics:</span></h4>
+            <ul class="nav nav-pills nav-stacked selectedTopics">
+            </ul>
 
-      <h4><span class="label label-danger">Selected Topics:</span></h4>
-      <ul class="nav nav-pills nav-stacked selectedTopics">
-      </ul>
+          </div>  
+        </div>
+
+        <div class="col-sm-9 col-md-9">
+          <div class='card alert alert-info'>
+            <p class='question'></p>
+            <br>
+            <div class='answerblock alert alert-danger'>
+              
+            </div>
+          </div>
+          <button class="button">click to see answer</button>
+        </div>
 
     </div>
-    
-    
-  </div>
+  </div> 
+
+  
 </template>
