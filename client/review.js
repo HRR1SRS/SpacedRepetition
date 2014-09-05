@@ -1,8 +1,11 @@
 if(Meteor.isClient){
+  var clickedTopic = {};
   Template.review.helpers({
     //displays card question and answer
     card : function(arg){
       var cardData = {question: 'Who Shot Mr. Burns?', answer: 'Maggie'};
+      for(var prop in clickedTopic){
+      }
       if(arg === undefined){
         return cardData.question;
       }else{
@@ -13,15 +16,17 @@ if(Meteor.isClient){
     },
     //displays lists of topics available
     topicList : function(){
-    var topics = [{name:'Javascript'}, {name: 'Spanish'}, {name:'Human Anatomy'}, {name:'Russian Literature'}];
+    var topics = Topics.find().fetch();
+      console.log(Topics.find({name: "math"}).fetch() );
     return topics;
     }
 
   });
     //click event that lists topics being reviewed
-  var clickedTopic = {};
   Template.review.events({
     'click select option': function(){
+    console.log(Topics.find().fetch());
+    console.log(Cards.find().fetch());
       var name = this.name.toLowerCase().split(' ').join('');
       if(!clickedTopic[this.name]){
         clickedTopic[this.name] = name;
@@ -33,7 +38,7 @@ if(Meteor.isClient){
     },
     //button to reveal topic
     'click .button': function(){
-      Template.review.cardQuestion(true);
+      Template.review.card(true);
     }
   });
 }
