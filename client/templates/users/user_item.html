@@ -1,11 +1,13 @@
 <template name='userItem'>
   <div class='user'>
     <div class='user-content'>
+    <p>user_item.html</p>
       <h3>User:</h3>
         <h4>Email: {{emails.[0].address}}</h4>
           <h5>ID: {{_id}}</h5>
-          <h5>Topics: {{profile.topics}}</h5>
-          <h6>topics list:{{>topicsList}}</h6>
+          <h5>Topics: {{topic}}</h5>
+          <h6>Review List: {{reviewList}}</h6>
+          <!-- <h6>topics list:{{>topicsList}}</h6> -->
     </div>
   </div>
 </template>
