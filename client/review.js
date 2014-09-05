@@ -26,7 +26,7 @@ if(Meteor.isClient){
     topicQueue : function(){
       currentList = [];
       for(var prop in clickedTopic){
-        var cardList = Topics.find({name: prop}).fetch() 
+        var cardList = Topics.find({name: prop}).fetch(); 
         cardList = cardList[0];  
         currentList = currentList.concat(cardList.cards);
       }
@@ -60,7 +60,7 @@ if(Meteor.isClient){
       $('.question').html('');
       $('.answerblock').html('');
       Template.review.displayQuestion();
-      $('.question').after('<button class="button">click to see answer</button>')
+      $('.question').after('<button class="button">click to see answer</button>');
     },
     //button to reveal answer
     'click .button': function(){
