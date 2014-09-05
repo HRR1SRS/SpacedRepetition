@@ -6,7 +6,7 @@
 standard-app-packages
 autopublish
 insecure
-ian:accounts-ui-bootstrap-3
 mizzao:bootstrap-3
 accounts-password
+ian:accounts-ui-bootstrap-3
 

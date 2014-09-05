@@ -1,10 +1,44 @@
 <template name='cardItem'>
-  <div class='card'>
+  <!-- <div class='card'>
     <div class='card-content'>
       <h3>Question: {{q}}</h3>
         <h4>Answer: {{a}}</h4>
           <div class='topic'><h5>Topic: {{topic}}</h5></div>
           <h5>ID: {{_id}}</h5>
     </div>
+  </div> -->
+  <div class="panel panel-primary">
+    <div class="panel-heading">Add Card</div>
+    <div class="panel-body">
+        <form role="form" class="panel">
+      {{> cardQuestion}}
+
+      {{> cardAnswer}}
+      
+      <div class="form-group">
+        <label for="topics">Topic(s)</label>
+        <textarea id="topics" class="form-control" rows="6">{{topic}}</textarea>
+      </div>
+      <h5>ID: {{_id}}</h5>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="cancel" class="btn btn-default">Cancel</button>
+    </form>
+    </div>
+  </div>
+  
+</template>
+
+
+<template name="cardAnswer">
+  <div class="form-group">
+    <label for="answer">Answer</label>
+    <input type="text" class="form-control" id="answer" placeholder="Enter Answer" value="{{a}}">
+  </div>
+</template>
+
+<template name="cardQuestion">
+  <div class="form-group">
+    <label for="question">Question</label>
+    <input type="text" class="form-control" id="question" placeholder="Enter Question" value="{{q}}">
   </div>
 </template>
