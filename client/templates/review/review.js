@@ -1,6 +1,7 @@
 var clickedTopic = {};
 var currentCard;
 var currentList = [];
+
 Template.review.helpers({
   //displays card question and answer
   card : function(arg){
@@ -41,11 +42,23 @@ Template.review.helpers({
 //click event that lists topics being reviewed
 Template.review.events({
   //click even that populates the list of topics being reviewed
-  'click select option': function(){
+  // 'click select option': function(){
+  //   var name = this.name.toLowerCase().split(' ').join('');
+  //   if(!clickedTopic[this.name]){
+  //     clickedTopic[this.name] = name;
+  //     $('.selectedTopics ul').append('<li id="'+name+'">'+this.name+'</li>');
+  //     Template.review.topicQueue();
+  //   }else{
+  //     $('#'+name).remove();
+  //     delete clickedTopic[this.name];
+  //     Template.review.topicQueue();     
+  //   }
+  // },
+  'click #topics li': function(){
     var name = this.name.toLowerCase().split(' ').join('');
     if(!clickedTopic[this.name]){
       clickedTopic[this.name] = name;
-      $('.selectedTopics ul').append('<li id="'+name+'">'+this.name+'</li>');
+      $('.selectedTopics').append('<li id="'+name+'"><a href="#">'+this.name+'</a></li>');
       Template.review.topicQueue();
     }else{
       $('#'+name).remove();
