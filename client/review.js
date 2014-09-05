@@ -1,4 +1,5 @@
 if(Meteor.isClient){
+  var clickedTopic = {};
   Template.review.helpers({
     //displays card question and answer
     card : function(arg){
@@ -22,7 +23,6 @@ if(Meteor.isClient){
 
   });
     //click event that lists topics being reviewed
-  var clickedTopic = {};
   Template.review.events({
     'click select option': function(){
     console.log(Topics.find().fetch());
