@@ -28,7 +28,9 @@ Template.cardItem.events({
       //save was successful, so display growl and clear textfield
       //clear(t);
 
-      
+      t.find('#topics').value = '';
+	  t.find('#question').value = '';
+	  t.find('#answer').value = '';
     }
     // else it doesn't exist, so create it
     else {
