@@ -29,8 +29,11 @@ Template.cardItem.events({
       //clear(t);
 
       t.find('#topics').value = '';
-	  t.find('#question').value = '';
-	  t.find('#answer').value = '';
+	    t.find('#question').value = '';
+	    t.find('#answer').value = '';
+
+      //display notification
+      Notifications.info('Save Successful', 'Successfully added Question: '+question);
     }
     // else it doesn't exist, so create it
     else {
