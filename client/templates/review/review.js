@@ -27,8 +27,10 @@ Template.review.helpers({
     currentList = [];
     for(var prop in clickedTopic){
       var cardList = Topics.find({name: prop}).fetch(); 
-      cardList = cardList[0];  
-      currentList = currentList.concat(cardList.cards);
+      cardList = cardList[0];
+      if(cardList){
+        currentList = currentList.concat(cardList.cards);
+      }  
     }
 
     Template.review.displayQuestion();
@@ -40,7 +42,7 @@ Template.review.helpers({
   },
   //handles adding and removing topics for review from two sources
   clickEventHandler : function(context){
-    context.name = context.name || context.id;
+    context.name = context.name || context.innerHTML;
     var name = context.name.toLowerCase().split(' ').join('');
     if(!clickedTopic[context.name]){
       clickedTopic[context.name] = name;
@@ -78,6 +80,6 @@ Template.review.events({
   },
   //deselects topics for review
   'click .selectedTopics li': function(e){
-    Template.review.clickEventHandler(e.currentTarget);
+    Template.review.clickEventHandler(e.currentTarget.children[0]);
   }
 });
