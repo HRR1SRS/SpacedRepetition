@@ -5,6 +5,12 @@ UI.registerHelper('card', function(){
   }
 );
 
+Meteor.startup(function () {
+    _.extend(Notifications.defaultOptions, {
+        timeout: 1500
+    });
+});
+
 Template.cardItem.events({
   'click div.topic': function() {
     var cardId = this._id;

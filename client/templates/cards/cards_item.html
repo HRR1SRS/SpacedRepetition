@@ -7,24 +7,30 @@
           <h5>ID: {{_id}}</h5>
     </div>
   </div> -->
+
+  <!-- ADD NOTIFICATION SYSTEM -->
+  {{> notifications}}
+
   <div class="panel panel-primary">
     <div class="panel-heading">Add Card</div>
     <div class="panel-body">
-        <form role="form" class="panel">
-      {{> cardQuestion}}
+      <form role="form" class="panel">
+        {{> cardQuestion}}
 
-      {{> cardAnswer}}
-      
-      <div class="form-group">
-        <label for="topics">Topic(s)</label>
-        <textarea id="topics" class="form-control" rows="6">{{topic}}</textarea>
-      </div>
-      <h5>ID: {{_id}}</h5>
-      <button type="submit" class="btn btn-primary">Submit</button>
-      <button type="cancel" class="btn btn-default">Cancel</button>
-    </form>
+        {{> cardAnswer}}
+        
+        <div class="form-group">
+          <label for="topics">Topic(s)</label>
+          <textarea id="topics" class="form-control" rows="6">{{topic}}</textarea>
+          <!-- <input type="text" class="form-control" id="topics" placeholder="Enter Answer" value="{{topics}}"> -->
+        </div>
+        <h5>ID: {{_id}}</h5>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="cancel" class="btn btn-default">Cancel</button>
+      </form>
     </div>
   </div>
+  
   
 </template>
 
