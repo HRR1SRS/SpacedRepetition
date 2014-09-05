@@ -69,6 +69,12 @@ Template.cardItem.events({
   }
 });
 
+
+Template.cardTableRowItem.helpers({
+  showTopic: function(){
+    return Topics.findOne({_id: this.topic}).name;
+  }
+})
 // Template.cardItem.clear = function(template){
 // 	var t = template;
 
