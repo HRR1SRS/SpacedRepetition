@@ -1,7 +1,12 @@
 <template name='usersList'>
-  <div class='users'>
-    {{#each user}}
-      {{> userItem}}
-    {{/each}}
+  <div class='contiainer'>
+    {{> loginMenu }}
+  </div>
+  <div class='container'>
+    <div class='users'>
+      {{#each user}}
+        {{> userItem}}
+      {{/each}}
+    </div>
   </div>
 </template>
