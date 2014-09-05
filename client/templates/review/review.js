@@ -49,9 +49,9 @@ Template.review.helpers({
     if(Meteor.user().profile.topics === undefined){
       
       Meteor.user().profile.topics = {};
-    console.log(Meteor.user().profile.topics)
+    console.log(Meteor.user().profile.topics);
     }
-    var userTopics = Meteor.user().profile.topics
+    var userTopics = Meteor.user().profile.topics;
     if( !userTopics[context._id]){
       var setObject = {};
       setObject['profile.topics.'+context._id] = true;
