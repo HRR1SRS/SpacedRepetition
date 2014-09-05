@@ -39,6 +39,14 @@ From within the root directory:
 * `meteor add mizzao:bootstrap-3` OR `meteor add ian:bootstrap-3`
 * `meteor add ian:accounts-ui-bootstrap-3` (see usage instructions at http://atmospherejs.com/ian/accounts-ui-bootstrap-3)
 
+Major Changes Made (5/9/14) <br/>
+-- Refactored the addCard to call cardItem template <br/>
+-- Added Notifications (meteor add gfk:notifications) <br/>
+------ Refactored cardItem to display Notifications on success/failure of save<br/>
+-- Refactored Router links to only display when user is logged in<br/>
+-- Refactored cardList display in dashboard to show questions but not answers<br/>
+-- Refactored Review Cards UI and functionality
+
 
 ### Roadmap
 

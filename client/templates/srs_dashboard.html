@@ -3,7 +3,7 @@
 
     <div class="container-fluid" id="dashboard">
       <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
+        <div class="col-sm-2 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <li class="active"><a href="#">Topics</a></li>
             <li><a href="#">Topic</a></li>
@@ -56,8 +56,11 @@
           <br/>
 
           <div class="table-responsive well" id="cardList">
-            <div id="cardForm" class="hidden col-sm-6 col-md-6">
+            <!-- <div id="cardForm" class="hidden col-sm-6 col-md-6">
               {{> cardItem}}
+            </div> -->
+            <div id="cardForm" class="hidden">
+              {{> addCard}}
             </div>
 
             <h2 class="sub-header">Card List</h2>
