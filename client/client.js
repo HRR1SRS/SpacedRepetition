@@ -24,10 +24,12 @@ Template.addToReviewList.events({
     theEvent.preventDefault();
     var selectedTopic = Session.get('selectedTopic');
     var currentUserId = Meteor.userId();
-    // Meteor.call('addTopicToReview', selectedTopic);
-    console.log(currentUserId);
-    Meteor.users.update({_id:Meteor.user()._id}, {$push: {"profile.topics": selectedTopic}});
-    console.log(Meteor.user());
+    var currentUser = Meteor.user();
+    var setObject = {};
+    setObject['profile.topics.'+selectedTopic] = true;
+    console.log('current user is: '+currentUser);
+    console.log('current user topics are: '+currentUser.profile.topics);
+    Meteor.users.update(Meteor.userId(), {$set:setObject});
   }
 });
 
@@ -64,4 +66,4 @@ Template.dashboard.events({
     //hide the header
     $('.sub-header').removeClass('hidden').addClass('show');
   }
-})
+});
