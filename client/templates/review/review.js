@@ -38,19 +38,17 @@ Template.review.helpers({
   //displays lists of topics available from the topics collection
   topicList : function(){
     var topics = Topics.find().fetch();
-    //console.log(Meteor.users.find().fetch());
+    console.log(topics);
     return topics;
   },
 
   userTopic: function(user){
-    console.log('we are in userTopic');
-    console.log(user);
+    user = user || Meteor.user();
     var userTopicsObj = user.profile.topics;
     var userTopicArr = [];
     for (var k in userTopicsObj){
-      var temp = {};
-      temp.topicName = k;
-      userTopicArr.push(temp);
+      var results = Topics.find({_id: k}).fetch();
+      userTopicArr.push(results[0]);
     }
     console.log(userTopicArr);
     return userTopicArr;
@@ -60,17 +58,14 @@ Template.review.helpers({
     console.log(context);
     context.name = context.name || context.innerHTML;
     var name = context.name.toLowerCase().split(' ').join('');
-
     var setObject = {};
-    setObject['profile.topics.'+context._id] = true;
-    Meteor.users.update(Meteor.userId(),{$set:setObject});
-
-    console.log(Meteor.user().profile);
-
-    var currentUser = Meteor.user();
-
-    Template.review.userTopic(currentUser);
-
+    if(context._id){
+      setObject['profile.topics.'+context._id] = true;
+      Meteor.users.update(Meteor.userId(),{$set:setObject});
+      console.log(Meteor.user().profile);
+      var currentUser = Meteor.user();
+      Template.review.userTopic(currentUser);
+    }
     // if(!clickedTopic[context.name]){
     //   clickedTopic[context.name] = name;
     //   $('.selectedTopics').append('<li id="'+name+'"><a href="#">'+context.name+'</a></li>');
