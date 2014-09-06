@@ -46,12 +46,16 @@ Template.review.helpers({
     if(user){      
       var userTopicsObj = user.profile.topics;
       var userTopicArr = [];
+      clickedTopic = {};
       for (var k in userTopicsObj){
         clickedTopic[k] = k;
         var results = Topics.find({_id: k}).fetch();
         userTopicArr.push(results[0]);
       }
       Template.review.topicQueue();
+      if(Object.keys(clickedTopic).length === 0){
+        $('.question').html('')
+      }
       return userTopicArr;
     }
   },
