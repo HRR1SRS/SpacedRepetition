@@ -26,7 +26,7 @@ Template.review.helpers({
   topicQueue : function(){
     currentList = [];
     for(var prop in clickedTopic){
-      var cardList = Topics.find({name: prop}).fetch(); 
+      var cardList = Topics.find({_id: prop}).fetch(); 
       cardList = cardList[0];
       if(cardList){
         currentList = currentList.concat(cardList.cards);
@@ -38,34 +38,36 @@ Template.review.helpers({
   //displays lists of topics available from the topics collection
   topicList : function(){
     var topics = Topics.find().fetch();
-    console.log(topics);
     return topics;
   },
 
-  userTopic: function(user){
-    user = user || Meteor.user();
-    var userTopicsObj = user.profile.topics;
-    var userTopicArr = [];
-    for (var k in userTopicsObj){
-      var results = Topics.find({_id: k}).fetch();
-      userTopicArr.push(results[0]);
+  userTopic: function(){
+    user = Meteor.user();
+    if(user){      
+      var userTopicsObj = user.profile.topics;
+      var userTopicArr = [];
+      for (var k in userTopicsObj){
+        clickedTopic[k] = k;
+        var results = Topics.find({_id: k}).fetch();
+        userTopicArr.push(results[0]);
+      }
+      Template.review.topicQueue();
+      return userTopicArr;
     }
-    console.log(userTopicArr);
-    return userTopicArr;
   },
   //handles adding and removing topics for review from two sources
   clickEventHandler : function(context){
-    console.log(context);
     context.name = context.name || context.innerHTML;
     var name = context.name.toLowerCase().split(' ').join('');
-    var setObject = {};
-    if(context._id){
-      setObject['profile.topics.'+context._id] = true;
-      Meteor.users.update(Meteor.userId(),{$set:setObject});
-      console.log(Meteor.user().profile);
-      var currentUser = Meteor.user();
-      Template.review.userTopic(currentUser);
+    if(!context._id){
+      var retrieveTopicId = Topics.find({name: context.name}).fetch();
+      context = retrieveTopicId[0];
+      console.log(context);
     }
+    var setObject = {};
+    setObject['profile.topics.'+context._id] = true;
+    Meteor.users.update(Meteor.userId(),{$set:setObject});
+    var currentUser = Meteor.user();
     // if(!clickedTopic[context.name]){
     //   clickedTopic[context.name] = name;
     //   $('.selectedTopics').append('<li id="'+name+'"><a href="#">'+context.name+'</a></li>');
