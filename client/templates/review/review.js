@@ -39,6 +39,7 @@ Template.review.helpers({
   topicList : function(){
     var topics = Topics.find().fetch();
     //console.log(Meteor.users.find().fetch());
+    console.log(topics);
     return topics;
   },
   //handles adding and removing topics for review from two sources
@@ -52,6 +53,7 @@ Template.review.helpers({
     console.log(Meteor.user().profile.topics);
     }
     var userTopics = Meteor.user().profile.topics;
+    
     if( !userTopics[context._id]){
       var setObject = {};
       setObject['profile.topics.'+context._id] = true;
