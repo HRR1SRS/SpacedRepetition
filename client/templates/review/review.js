@@ -8,10 +8,10 @@ Template.review.helpers({
     var starMaker = function(){
       var star = '';
       for( var i = 0; i < 5; i++){
-        star+='<span class="glyphicon glyphicon-star difficulty" style="font-size:32px; color: grey;"></span>'
+        star+='<span class="glyphicon glyphicon-star difficulty" style="font-size:32px; color: grey;"></span>';
       }
       return '<div display="inline">'+star+'</div>';
-    }
+    };
     $('.answerblock').append('<p class="answer"><b>'+arg.answer+'</b></p>');
     $('.answer').after('<br><p class="answer">rate your difficulty with the question. 1 star means no difficulty, 5 means you forgot the answer</p>'+ starMaker());
     $('.button').remove();
@@ -203,7 +203,7 @@ Template.review.events({
       if(elem !== null){
         recurse(elem.previousSibling);
       }
-    }
+    };
     recurse(e.currentTarget.previousSibling);
   },
   'mouseout .difficulty': function(e){
@@ -213,7 +213,7 @@ Template.review.events({
       if(elem !== null){
         recurse(elem.previousSibling);
       }
-    }
+    };
     recurse(e.currentTarget.previousSibling);
   }
 });
