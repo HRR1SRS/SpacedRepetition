@@ -54,11 +54,85 @@ Template.review.helpers({
       }
       Template.review.topicQueue();
       if(Object.keys(clickedTopic).length === 0){
-        $('.question').html('')
+        $('.question').html('');
       }
       return userTopicArr;
     }
   },
+
+
+  createReviewList: function(callback) {
+    // get current user
+    var user = Meteor.user();
+    // check for topics
+    if (user.profile.topics) {
+      console.log('We have some topics, time to create a review list.');
+      // create review list array first time
+      if ( user.profile.reviewList === undefined ) {
+        console.log('There is no review list yet!');
+        // insert .profile.reviewList proerty onto user
+        Meteor.users.update(
+          Meteor.userId(),
+          {
+            $set: {
+              'profile.reviewList': {} 
+            } 
+          },
+          function(err, result) {
+            if ( err ) {
+              console.log('oh no, .profile.reviewList was not created!');
+            } else {
+              var user = Meteor.users.find(Meteor.userId()).fetch();
+              // execute callback on success
+              callback(user && user.profile && user.profile.reviewList);
+            }
+          }
+        );
+      } else {
+        // we have a list...execute callback
+        console.log('Review list found!');
+        callback();
+      }
+    } else {
+      // there are no topics
+      console.log('Nothing to review here...Move along!');
+    }
+  },
+
+  addCardsToReviewList: function(callback) {
+    var user = Meteor.user();
+    // for each topic add cards to review list
+    for (var k in user.profile.topics){
+      // get the topic by id
+      var topic = Topics.find({_id: k}).fetch();
+      for (var i = 0; i < topic[0].cards.length; i++) {
+        // init cardId
+        var cardId = topic[0].cards[i];
+        // check if card has been added to review list yet
+        if ( !user.profile.reviewList.cardId) {
+          // if not:
+          // init cardObject
+          var cardObject = {};
+          var revInterval = 86400000;
+          var revDate = Date.now()+revInterval;
+          // set card_id as key
+          cardObject['profile.reviewList.'+cardId] = {};
+          // add card fields
+          // set card id
+          cardObject['profile.reviewList.'+cardId]._cardId = cardId;
+          // set topic id
+          cardObject['profile.reviewList.'+cardId]._topicId = k;
+          // init card review interval to one day in miliseconds
+          cardObject['profile.reviewList.'+cardId].reviewInterval = revInterval;
+          // set inital review date to one day from date created
+          cardObject['profile.reviewList.'+cardId].reviewDate = revDate;
+          // push card to review list
+          Meteor.users.update(Meteor.userId(),{$set:cardObject});
+        }
+      }
+    }
+  },
+
   //handles adding and removing topics for review from two sources
   clickEventHandler : function(context){
     context.name = context.name || context.innerHTML;
@@ -68,9 +142,15 @@ Template.review.helpers({
       context = retrieveTopicId[0];
       console.log(context);
     }
+
     var setObject = {};
     setObject['profile.topics.'+context._id] = true;
     Meteor.users.update(Meteor.userId(),{$set:setObject});
+
+    // add cards to review list
+    Template.review.createReviewList(Template.review.addCardsToReviewList);
+ 
+
     var currentUser = Meteor.user();
     // if(!clickedTopic[context.name]){
     //   clickedTopic[context.name] = name;
