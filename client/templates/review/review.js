@@ -5,8 +5,15 @@ var currentList = [];
 Template.review.helpers({
   //displays card question and answer
   card : function(arg){
+    var starMaker = function(){
+      var star = '';
+      for( var i = 0; i < 5; i++){
+        star+='<span class="glyphicon glyphicon-star difficulty" style="font-size:32px; color: grey;"></span>'
+      }
+      return '<div display="inline">'+star+'</div>';
+    }
     $('.answerblock').append('<p class="answer"><b>'+arg.answer+'</b></p>');
-    $('.answer').after('<br><p class="answer">rate your difficulty with the question</p><button class="difficulty">easy</button><button class="difficulty">hard</button>');
+    $('.answer').after('<br><p class="answer">rate your difficulty with the question. 1 star means no difficulty, 5 means you forgot the answer</p>'+ starMaker());
     $('.button').remove();
   },
   //pulls card from list and displays the question
@@ -108,5 +115,25 @@ Template.review.events({
   //deselects topics for review
   'click .selectedTopics li': function(e){
     Template.review.clickEventHandler(e.currentTarget.children[0]);
+  },
+  'mouseover .difficulty': function(e){
+    $(e.currentTarget).css('color', 'gold');
+    var recurse = function(elem){
+      $(elem).css('color', 'gold');
+      if(elem !== null){
+        recurse(elem.previousSibling);
+      }
+    }
+    recurse(e.currentTarget.previousSibling);
+  },
+  'mouseout .difficulty': function(e){
+    $(e.currentTarget).css('color', 'grey');
+    var recurse = function(elem){
+      $(elem).css('color', 'grey');
+      if(elem !== null){
+        recurse(elem.previousSibling);
+      }
+    }
+    recurse(e.currentTarget.previousSibling);
   }
 });
