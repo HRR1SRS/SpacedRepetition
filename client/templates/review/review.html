@@ -12,8 +12,11 @@
             </ul>
 
             <h4><span class="label label-danger">Selected Topics:</span></h4>
-              {{>reviewTopics}}
+              <!-- {{>reviewTopics}} -->
             <ul class="nav nav-pills nav-stacked selectedTopics">
+            {{#each userTopic}}
+              <li><a href="#">{{name}}</a></li>
+              {{/each}}
             </ul>
 
           </div>  
