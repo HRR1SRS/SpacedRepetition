@@ -11,7 +11,7 @@ Template.review.helpers({
       for( var i = 0; i < 6; i++){
         star+='<span class="glyphicon difficulty glyphicon-star-empty" style="font-size:32px; color: grey;"></span>';
       }
-      return '<div display="inline">'+star+'</div>';
+      return '<div display="inline">'+star+'<button class="response">submit</button></div>';
     };
     $('.answerblock').append('<p class="answer"><b>'+arg.answer+'</b></p>');
     $('.answer').after('<br><p class="answer">Please rate your answer according to the scale provided.</p>'+ starMaker());
@@ -197,18 +197,70 @@ Template.review.events({
   'click #topics li': function(){
     Template.review.clickEventHandler(this);
   },
-  //click event that registers the click on the difficulty buttons
-  'click .difficulty': function(){
-    //display the next question
-    $('.question').html('');
-    $('.answerblock').html('');
-    Template.review.displayQuestion();
-    $('.question').after('<button class="button">click to see answer</button>');
+  'click .difficulty': function(e){
+    $(e.currentTarget)
+      .removeClass('difficulty')
+      .addClass('clickedStar');
+    var recurse = function(elem){
+      if($(elem).hasClass('difficulty')){
+        $(elem)
+        .removeClass('difficulty')
+        .addClass('clickedStar');
+      }
+      if(elem !== null){
+        recurse(elem.previousSibling);
+      }
+    }
+    recurse(e.currentTarget.previousSibling);
+  },
+  //changes class of star before submission
+  'click .clickedStar': function(e){
+    $(e.currentTarget)
+      .css('color', 'lime');
+    var recurse = function(elem){
+      $(elem)
+        .removeClass('clickedStar')
+        .addClass('difficulty')
+        .removeClass('glyphicon-star')
+        .addClass('glyphicon-star-empty')
+        .css('color', 'grey');
+      var $sibling = $(elem.nextSibling)  
+      if($sibling.hasClass('response') === false && $sibling.hasClass('clickedStar') ){
+        recurse(elem.nextSibling);
+      }
+    }
+    if($(e.currentTarget.nextSibling).hasClass('clickedStar')){
+      recurse(e.currentTarget.nextSibling)
+    }
   },
   //button to reveal answer
   'click .button': function(){
     if(currentList.length > 0){
       Template.review.card(currentCard);
+    }
+  },
+  //click event that registers the click on the difficulty stars
+  //submits rating for algorithm
+  'click .response': function(e){
+    var rating = 0;
+    var recurse = function(elem){
+      if($(elem).hasClass('clickedStar')){
+        rating++;
+      }
+      if(elem !== null){
+        recurse(elem.previousSibling)
+      }
+    }
+    recurse(e.currentTarget.previousSibling)
+    if(rating === 0){
+      alert('please rate the question 1-6 stars')
+    }else{
+//*******************algorithm plugs in here******************
+      //display the next question
+      $('.question').html('');
+      $('.answerblock').html('');
+      Template.review.displayQuestion();
+      $('.question').after('<button class="button">click to see answer</button>');
     }
   },
   //deselects topics for review
@@ -217,28 +269,41 @@ Template.review.events({
   },
   // mouse events for rating stars
   'mouseover .difficulty': function(e){
-    $(e.currentTarget).removeClass('glyphicon-star-empty').addClass('glyphicon-star');
-    $(e.currentTarget).css('color', 'lime');
+    $(e.currentTarget).removeClass('glyphicon-star-empty')
+      .addClass('glyphicon-star')
+      .css('color', 'lime');
     var recurse = function(elem){
-      $(elem).removeClass('glyphicon-star-empty').addClass('glyphicon-star');
-      $(elem).css('color', 'limeGreen');
-      if(elem !== null){
-        recurse(elem.previousSibling);
+      if($(elem).hasClass('difficulty')){
+        $(elem).removeClass('glyphicon-star-empty')
+          .addClass('glyphicon-star')
+          .css('color', 'limeGreen');
+        if(elem !== null){
+          recurse(elem.previousSibling);
+        }
+      }else{
+        $(elem).css('color', 'limeGreen');
       }
     };
-    recurse(e.currentTarget.previousSibling);
+      recurse(e.currentTarget.previousSibling);
   },
   // mouse events for rating stars
   'mouseout .difficulty': function(e){
-    $(e.currentTarget).removeClass('glyphicon-star').addClass('glyphicon-star-empty');
-    $(e.currentTarget).css('color', 'grey');
+    $(e.currentTarget).removeClass('glyphicon-star')
+      .addClass('glyphicon-star-empty')
+      .css('color', 'grey');
     var recurse = function(elem){
-      $(elem).removeClass('glyphicon-star').addClass('glyphicon-star-empty');
-      $(elem).css('color', 'grey');
-      if(elem !== null){
-        recurse(elem.previousSibling);
+      if($(elem).hasClass('difficulty')){
+        $(elem).removeClass('glyphicon-star')
+          .addClass('glyphicon-star-empty')
+          .css('color', 'grey');
+        if(elem !== null){
+          recurse(elem.previousSibling);
+        }
+      }else{
+        $(elem).css('color', 'lime');
       }
     };
     recurse(e.currentTarget.previousSibling);
   }
 });
+
