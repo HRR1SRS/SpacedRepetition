@@ -17,40 +17,91 @@ Template.review.helpers({
     $('.answer').after('<br><p class="answer">Please rate your answer according to the scale provided.</p>'+ starMaker());
     $('.button').remove();
   },
-  //pulls card from list and displays the question
-  //sends card to back of the list
-  displayQuestion : function(){
-    if(currentList.length){
-      $('.question').html('');
-      var cardId = currentList.shift();
-      currentCard = Cards.find({_id: cardId}).fetch();
-      currentCard = currentCard[0];
-      $('.question').append(currentCard.question);
-      currentList.push(cardId);
-    }
+
+  // get milisecond value at midnight for use
+  // in calculating today's review cards
+  getMidnight: function() {
+    // get tomorrow by getting date now and
+    // adding in days worth of miliseconds
+    var tomorrow = Date.now()+86400000;
+    // calculate difference between tomorrow and midnight
+    var diff = tomorrow % 86400000;
+    // subtract diff from tomorrow to get midinght in miliseconds
+    var midnight = tomorrow - diff;
+    // return diff to use as value in determinig today's review cards
+    return midnight;
   },
-  //creates an array of all topics under review and 
-  //calls the display question function
-  topicQueue : function(){
+  
+  // construct today's review list
+  createReviewTodayList: function() {
     // get current user
-
-    currentList = [];
-    for(var prop in clickedTopic){
-      var cardList = Topics.find({_id: prop}).fetch(); 
-      cardList = cardList[0];
-      if(cardList){
-        currentList = currentList.concat(cardList.cards);
-      }  
+    var user = Meteor.user();
+    // get midnight
+    var midnight = Template.review.getMidnight();
+    // get user's review list
+    var wholeList = user.profile.reviewList;
+    // init today's list
+    var reviewToday = [];
+    // iterate through wholeList
+    for ( var k in wholeList ) {
+      // if a card's review date is less than midnight,
+      if ( wholeList[k].reviewDate < midnight ) {
+      // push cards from whole list to today's list
+      reviewToday.push(wholeList[k]);
+      }
     }
-
-    Template.review.displayQuestion();
+    return reviewToday;
   },
+
+  shuffleReviewTodayList: function(array) {
+    // make copy of array
+    var input = array.slice();
+    // iterate over array
+    for (var i = input.length-1; i >=0; i--) {
+      // get gandom index
+      var randomIndex = Math.floor(Math.random()*(i+1)); 
+      // store item at random index
+      var itemAtIndex = input[randomIndex];
+      // replace item at random index with item at current index
+      input[randomIndex] = input[i];
+      // replace item at current index with item from random index
+      input[i] = itemAtIndex;
+    }
+    // return result
+    return input;
+},
+
+  // display questions from today's review list
+  displayQuestion : function(){
+    // initialize today's list
+    var reviewToday = Template.review.createReviewTodayList();
+    // if we have cards, shuffle them
+    var shuffled = [];
+    if (reviewToday.length) {
+      shuffled = Template.review.shuffleReviewTodayList(reviewToday);
+    }
+    // display them
+    if(shuffled.length){
+      $('.question').html('');
+      // grab the cardId from the first index
+      var cardId = shuffled.shift();
+      // query the card from the DB
+      currentCard = Cards.find({_id: cardId._cardId}).fetch();
+      // pull card out of array
+      currentCard = currentCard[0];
+      console.log(currentCard);
+      $('.question').append(currentCard.question);
+      // shuffled.push(cardId);
+    }
+  },
+  
   //displays lists of topics available from the topics collection
   topicList : function(){
     var topics = Topics.find().fetch();
     return topics;
   },
-  // add topics to user
+
+  // display User Topics
   userTopic: function(){
     user = Meteor.user();
     if(user){      
@@ -62,15 +113,13 @@ Template.review.helpers({
         var results = Topics.find({_id: k}).fetch();
         userTopicArr.push(results[0]);
       }
-      Template.review.topicQueue();
-      if(Object.keys(clickedTopic).length === 0){
-        $('.question').html('');
-      }
+      // call displayQuestion to get today's cards
+      Template.review.displayQuestion();
       return userTopicArr;
     }
   },
 
-
+  // create a review list on user.profile
   createReviewList: function(callback) {
     // get current user
     var user = Meteor.user();
@@ -110,6 +159,7 @@ Template.review.helpers({
     }
   },
 
+  // add cards to review list
   addCardsToReviewList: function(callback) {
     // get current user
     var user = Meteor.user();
@@ -235,9 +285,9 @@ Template.review.events({
   },
   //button to reveal answer
   'click .button': function(){
-    if(currentList.length > 0){
+    // if(currentList.length > 0){
       Template.review.card(currentCard);
-    }
+    // }
   },
   //click event that registers the click on the difficulty stars
   //submits rating for algorithm
