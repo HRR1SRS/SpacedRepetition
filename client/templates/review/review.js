@@ -356,4 +356,3 @@ Template.review.events({
     recurse(e.currentTarget.previousSibling);
   }
 });
-
