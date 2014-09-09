@@ -1,5 +1,5 @@
 <template name="review">
-  <div class="container-fluid" id="dashboard">
+  <div class="container-fluid" id="review">
     <div class="row"><h1>Review Card</h1></div>
     <div class="row">
         <div class="col-sm-2 col-md-2 panel-primary">
@@ -22,15 +22,27 @@
           </div>  
         </div>
 
-        <div class="col-sm-9 col-md-9">
+        <div class="col-sm-5 col-md-5">
           <div class='card alert alert-info'>
             <p class='question'></p>
             <br>
-            <div class='answerblock alert alert-danger'>
-              
+            <div class='answerblock alert alert-danger'> 
             </div>
+            <button class="button">Show Answer</button>
           </div>
-          <button class="button">click to see answer</button>
+          
+        </div>
+
+        <div class="col-sm-5 col-md-5">
+          <div class='container'>
+          <h3>Card Rating Scale:</h3>
+          <p> 6 Stars: Perfect Response...Total Domination!</p>
+          <p> 5 Stars: Correct Response...A little tricky but still nailed it.</p>
+          <p> 4 Stars: Correct Response...Man, I had to work for that one.</p>
+          <p> 3 Stars: Incorrect Response...Aw snap, I should have known that.</p>
+          <p> 2 Stars: Incorrect Response, Oh yeah I kind of remember that now.</p>
+          <p> 1 Star : Not in a million years.</p>
+          </div>
         </div>
 
     </div>
