@@ -25,24 +25,24 @@ Template.cardItem.events({
   }
 });
 
-Template.addToReviewList.events({
-  'submit form': function(theEvent, thetemplate) {
-    theEvent.preventDefault();
-    var selectedTopic = Session.get('selectedTopic');
-    var currentUserId = Meteor.userId();
-    var currentUser = Meteor.user();
-    var setObject = {};
-    setObject['profile.topics.'+selectedTopic] = true;
-    console.log('current user is: '+currentUser);
-    console.log('current user topics are: '+currentUser.profile.topics);
-    Meteor.users.update(Meteor.userId(), {$set:setObject});
-  }
-});
+// Template.addToReviewList.events({
+//   'submit form': function(theEvent, thetemplate) {
+//     theEvent.preventDefault();
+//     var selectedTopic = Session.get('selectedTopic');
+//     var currentUserId = Meteor.userId();
+//     var currentUser = Meteor.user();
+//     var setObject = {};
+//     setObject['profile.topics.'+selectedTopic] = true;
+//     console.log('current user is: '+currentUser);
+//     console.log('current user topics are: '+currentUser.profile.topics);
+//     Meteor.users.update(Meteor.userId(), {$set:setObject});
+//   }
+// });
 
-Template.addToReviewList.showSelectedCard = function() {
-  var selectedTopic = Session.get('selectedTopic');
-  return selectedTopic;
-};
+// Template.addToReviewList.showSelectedCard = function() {
+//   var selectedTopic = Session.get('selectedTopic');
+//   return selectedTopic;
+// };
 
 
 
