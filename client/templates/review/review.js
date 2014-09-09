@@ -210,7 +210,7 @@ Template.review.events({
       if(elem !== null){
         recurse(elem.previousSibling);
       }
-    }
+    };
     recurse(e.currentTarget.previousSibling);
   },
   //changes class of star before submission
@@ -224,13 +224,13 @@ Template.review.events({
         .removeClass('glyphicon-star')
         .addClass('glyphicon-star-empty')
         .css('color', 'grey');
-      var $sibling = $(elem.nextSibling)  
+      var $sibling = $(elem.nextSibling) ; 
       if($sibling.hasClass('response') === false && $sibling.hasClass('clickedStar') ){
         recurse(elem.nextSibling);
       }
-    }
+    };
     if($(e.currentTarget.nextSibling).hasClass('clickedStar')){
-      recurse(e.currentTarget.nextSibling)
+      recurse(e.currentTarget.nextSibling);
     }
   },
   //button to reveal answer
@@ -248,12 +248,12 @@ Template.review.events({
         rating++;
       }
       if(elem !== null){
-        recurse(elem.previousSibling)
+        recurse(elem.previousSibling);
       }
-    }
-    recurse(e.currentTarget.previousSibling)
+    };
+    recurse(e.currentTarget.previousSibling);
     if(rating === 0){
-      alert('please rate the question 1-6 stars')
+      alert('please rate the question 1-6 stars');
     }else{
 //*******************algorithm plugs in here******************
       //display the next question
