@@ -24,24 +24,7 @@
           </div>  
         </div> -->
         {{> topicSidebar}}
-       <!--  <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Topics</a></li>
-            <li><a href="#">Topic</a></li>
-            <li><a href="#">Topic</a></li>
-            <li><a href="#">Topic</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="#">Topic</a></li>
-            <li><a href="#">Topic</a></li>
-            <li><a href="#">Topic</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="#">Topic</a></li>
-            <li><a href="#">Topic</a></li>
-            <li><a href="#">Topic</a></li>
-          </ul>
-        </div> -->
+       
         <div class="col-sm-9 col-md-10 main">
           <h4 class="page-header alert alert-info">Dashboard</h4>
 
@@ -78,7 +61,7 @@
             
           </div> <!-- End Button Toolbar -->
 
-          <br/>
+          <br/> 
 
           <!-- Table Responsive -->
           <div class="table-responsive well" id="cardList">
@@ -89,7 +72,10 @@
               {{> addCard}}
             </div>
 
-            <h2 class="sub-header">Card List</h2>
+            {{> cardsList}}
+            <!-- {{> yield}} -->
+
+            <!-- <h2 class="sub-header">Card List</h2>
             <table class="table table-striped table-bordered">
               <thead>
                 <tr>
@@ -106,7 +92,7 @@
                     {{> cardTableRowItem}}
                  {{/each}}
               </tbody>
-            </table>
+            </table> -->
           </div><!-- End Table Responsive -->
         </div>
       </div>
