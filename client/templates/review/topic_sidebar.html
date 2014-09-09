@@ -1,0 +1,13 @@
+<template name="topicSidebar">
+	<div class="col-sm-2 col-md-2 panel-primary">
+    <h4 class="page-header alert alert-info">Topics</h4>
+    <div class="panel-heading"> Select To Display Cards</div>
+    <div class="panel-body well">
+      <ul class="nav nav-pills nav-stacked" id="topics">
+        {{#each topicList}}
+          <li><a href="{{pathFor 'cardsForTopic'}}">{{name}}</a></li>
+        {{/each}}
+      </ul>
+    </div>
+  </div> 
+</template>
