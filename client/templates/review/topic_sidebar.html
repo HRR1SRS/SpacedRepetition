@@ -1,17 +1,13 @@
 <template name="topicSidebar">
 	<div class="col-sm-2 col-md-2 panel-primary">
-      <div class="panel-heading">Topics:</div>
-      <div class="panel-body well">
-        <ul class="nav nav-pills nav-stacked" id="topics">
-          {{#each topicList}}
-            <li><a href="#">{{name}}</a></li>
-          {{/each}}
-        </ul>
-
-        <h4><span class="label label-danger">Selected Topics:</span></h4>
-        <ul class="nav nav-pills nav-stacked selectedTopics">
-        </ul>
-
-      </div>  
+    <h4 class="page-header alert alert-info">Topics</h4>
+    <div class="panel-heading"> Select To Display Cards</div>
+    <div class="panel-body well">
+      <ul class="nav nav-pills nav-stacked" id="topics">
+        {{#each topicList}}
+          <li><a href="#">{{name}}</a></li>
+        {{/each}}
+      </ul>
     </div>
+  </div> 
 </template>
