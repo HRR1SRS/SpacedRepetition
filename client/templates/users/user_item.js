@@ -18,7 +18,7 @@ Template.userItem.helpers({
       reviewCards.push(user.profile.reviewList[k]);
     }
     // reviewCards = Object.keys(user.profile.reviewList);
-    console.dir(reviewCards);
+    // console.dir(reviewCards);
     return reviewCards;
   }
 });
