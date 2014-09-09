@@ -7,13 +7,14 @@ Template.review.helpers({
   card : function(arg){
     var starMaker = function(){
       var star = '';
-      for( var i = 0; i < 5; i++){
-        star+='<span class="glyphicon glyphicon-star difficulty" style="font-size:32px; color: grey;"></span>';
+      var starType = 'glyphicon-star-empty';
+      for( var i = 0; i < 6; i++){
+        star+='<span class="glyphicon difficulty glyphicon-star-empty" style="font-size:32px; color: grey;"></span>';
       }
       return '<div display="inline">'+star+'</div>';
     };
     $('.answerblock').append('<p class="answer"><b>'+arg.answer+'</b></p>');
-    $('.answer').after('<br><p class="answer">rate your difficulty with the question. 1 star means no difficulty, 5 means you forgot the answer</p>'+ starMaker());
+    $('.answer').after('<br><p class="answer">Please rate your answer according to the scale provided.</p>'+ starMaker());
     $('.button').remove();
   },
   //pulls card from list and displays the question
@@ -31,6 +32,8 @@ Template.review.helpers({
   //creates an array of all topics under review and 
   //calls the display question function
   topicQueue : function(){
+    // get current user
+
     currentList = [];
     for(var prop in clickedTopic){
       var cardList = Topics.find({_id: prop}).fetch(); 
@@ -47,7 +50,7 @@ Template.review.helpers({
     var topics = Topics.find().fetch();
     return topics;
   },
-
+  // add topics to user
   userTopic: function(){
     user = Meteor.user();
     if(user){      
@@ -77,7 +80,7 @@ Template.review.helpers({
       // create review list array first time
       if ( user.profile.reviewList === undefined ) {
         console.log('There is no review list yet!');
-        // insert .profile.reviewList proerty onto user
+        // insert .profile.reviewList property onto user
         Meteor.users.update(
           Meteor.userId(),
           {
@@ -90,6 +93,7 @@ Template.review.helpers({
               console.log('oh no, .profile.reviewList was not created!');
             } else {
               var user = Meteor.users.find(Meteor.userId()).fetch();
+              console.log(result);
               // execute callback on success
               callback(user && user.profile && user.profile.reviewList);
             }
@@ -107,6 +111,7 @@ Template.review.helpers({
   },
 
   addCardsToReviewList: function(callback) {
+    // get current user
     var user = Meteor.user();
     // for each topic add cards to review list
     for (var k in user.profile.topics){
@@ -121,23 +126,51 @@ Template.review.helpers({
           // init cardObject
           var cardObject = {};
           var revInterval = 86400000;
-          var revDate = Date.now()+revInterval;
+          var revDate = Date.now();
           // set card_id as key
           cardObject['profile.reviewList.'+cardId] = {};
-          // add card fields
+          // add card fields:
           // set card id
           cardObject['profile.reviewList.'+cardId]._cardId = cardId;
           // set topic id
           cardObject['profile.reviewList.'+cardId]._topicId = k;
-          // init card review interval to one day in miliseconds
+          // set initial easiness factor to 2.5
+          cardObject['profile.reviewList.'+cardId].easinessFactor = 2.5;
+          // set initial card review interval to one day in miliseconds
           cardObject['profile.reviewList.'+cardId].reviewInterval = revInterval;
-          // set inital review date to one day from date created
+          // set inital review date to current date
           cardObject['profile.reviewList.'+cardId].reviewDate = revDate;
           // push card to review list
           Meteor.users.update(Meteor.userId(),{$set:cardObject});
         }
       }
     }
+  },
+
+  updateReviewDate: function() {
+    // get current user
+    var user = Meteor.user();
+    // get card _id
+    // var cardId = card._id;
+    // get card rating
+    // var quality = rating;
+    // get user.profile.reviewList.cardId
+    // var currentUserCard = user.profile.reviewList.cardId;
+    // if quality <= 2 set interval to one day in miliseconds
+    // currenUserCard.reviewInterval = 86400000;
+      // set next review date to one day later
+      // currentUserCard.reviewDate += currenUserCard.reviewInterval;
+    // else if quality > 2 set new easiness factor based on SM-2 Alogorithm
+    // currentUserCard.easinessFactor = currentUserCard.easinessFactor+
+      //(0.1-(5-q)*(0.08+(5-q)*0.02));
+    // recalibrate EF if needed as perscribed by SM-2 algorithm
+    // if currentUserCard.easinessFactor < 1.3
+      // set currentUserCard.easinessFactor = 1.3
+    // update review interval based on new EF
+    // currentUserCard.reviewInterval = currentUserCard.reviewInterval * currentUserCard.easinessFactor;
+    // update new review date
+    // currentUserCard.reviewDate = currentUserCard.reviewDate + currentUserCard.reviewInterval;
+
   },
 
   //handles adding and removing topics for review from two sources
@@ -156,20 +189,6 @@ Template.review.helpers({
 
     // add cards to review list
     Template.review.createReviewList(Template.review.addCardsToReviewList);
- 
-
-    var currentUser = Meteor.user();
-    // if(!clickedTopic[context.name]){
-    //   clickedTopic[context.name] = name;
-    //   $('.selectedTopics').append('<li id="'+name+'"><a href="#">'+context.name+'</a></li>');
-    // }else{
-    //   $('#'+name).remove();
-    //   delete clickedTopic[context.name];
-    //   if(Object.keys(clickedTopic).length === 0){
-    //     $('.question').html('');
-    //   }
-    // }
-    //Template.review.topicQueue();
   }
 });
 //click event that lists topics being reviewed
@@ -196,19 +215,25 @@ Template.review.events({
   'click .selectedTopics li': function(e){
     Template.review.clickEventHandler(e.currentTarget.children[0]);
   },
+  // mouse events for rating stars
   'mouseover .difficulty': function(e){
-    $(e.currentTarget).css('color', 'gold');
+    $(e.currentTarget).removeClass('glyphicon-star-empty').addClass('glyphicon-star');
+    $(e.currentTarget).css('color', 'lime');
     var recurse = function(elem){
-      $(elem).css('color', 'gold');
+      $(elem).removeClass('glyphicon-star-empty').addClass('glyphicon-star');
+      $(elem).css('color', 'limeGreen');
       if(elem !== null){
         recurse(elem.previousSibling);
       }
     };
     recurse(e.currentTarget.previousSibling);
   },
+  // mouse events for rating stars
   'mouseout .difficulty': function(e){
+    $(e.currentTarget).removeClass('glyphicon-star').addClass('glyphicon-star-empty');
     $(e.currentTarget).css('color', 'grey');
     var recurse = function(elem){
+      $(elem).removeClass('glyphicon-star').addClass('glyphicon-star-empty');
       $(elem).css('color', 'grey');
       if(elem !== null){
         recurse(elem.previousSibling);
