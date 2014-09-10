@@ -59,6 +59,9 @@ Template.review.helpers({
       reviewToday.push(wholeList[k]);
       }
     }
+    if(reviewToday.length === 0){
+      $('.question').html('<h5>you\'ve completed your review session for all topics on your Review List</h5>');
+    }
     return reviewToday;
   },
 
@@ -90,7 +93,7 @@ Template.review.helpers({
       shuffled = Template.review.shuffleReviewTodayList(reviewToday);
     }
     // display them
-    if(shuffled.length){
+    if(shuffled.length > 0){
       $('.question').html('');
       // grab the cardId from the first index
       var cardId = shuffled.shift();
@@ -290,7 +293,14 @@ Template.review.events({
 
   //button to reveal answer
   'click .button': function(){
-    Template.review.card(currentCard);
+    //workaround to async problems with database lookup
+    //this condition disables answer button if review
+    //session has been completed. Unable to remove the button
+    //because answer array is populated asyncronously, would have
+    //to write a lengthy callback chain to get it to work properly
+    if($('.question').has('h5').length === 0){
+      Template.review.card(currentCard); 
+    }
   },
 
   'click p.6': function(e) {
