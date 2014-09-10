@@ -3,26 +3,7 @@
 
     <div class="container-fluid" id="dashboard">
       <div class="row">
-        <!-- <div class="col-sm-2 col-md-2 sidebar">
-          <ul class="nav nav-pills nav-stacked" id="topics">
-            {{#each topicList}}
-              <li><a href="#">{{name}}</a></li>
-            {{/each}}
-          </ul>
 
-        </div> -->
-        <!-- <div class="col-sm-2 col-md-2 panel-primary">
-          <h4 class="page-header alert alert-info">Topics</h4>
-          <div class="panel-heading"> Select To Display Cards</div>
-          <div class="panel-body well">
-            <ul class="nav nav-pills nav-stacked" id="topics">
-              {{#each topicList}}
-                <li><a href="#">{{name}}</a></li>
-              {{/each}}
-            </ul>
-
-          </div>  
-        </div> -->
         {{> topicSidebar}}
 
         <div class="col-sm-9 col-md-10 main">
@@ -40,25 +21,6 @@
               </button> -->
             </div>
 
-            <!-- <div class="btn-group">
-              <label></label>
-              <label></label>
-              <label></label>
-              <label></label>
-              <label></label>
-              <label></label>
-            </div>
-
-            <div class="btn-group">
-              <button type="button" class="btn btn-primary" id="btnAddTopic">
-                <span class="glyphicon glyphicon-plus"></span> Add Topic
-              </button>
-              <button type="button" class="btn btn-warning">Edit Topic</button> 
-              <button type="button" class="btn btn-danger">
-                <span class="glyphicon glyphicon-minus"></span> Delete Topic
-              </button>
-            </div> -->
-            
           </div> <!-- End Button Toolbar -->
 
           <br/> 
@@ -72,27 +34,32 @@
               {{> addCard}}
             </div>
 
-            {{> cardsList}}
+            <h2 class="sub-header">Card List</h2>
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Card ID</th>
+                <th>Card Question</th>
+                <th>Card Answer</th>
+                <th>Topic</th>
+        <!--        <th>Last Attempt Date</th>
+                <th>Actions</th> -->
+              </tr>
+            </thead>
+            <tbody>
+               {{#each card}}
+                  {{> cardTableRowItem}}
+               {{/each}}
+            </tbody>
+          </table>
+
+  <!-- <div class='cards'>
+    {{#each card}}
+      {{> cardItem}}
+    {{/each}}
+  </div> -->
             <!-- {{> yield}} -->
 
-            <!-- <h2 class="sub-header">Card List</h2>
-            <table class="table table-striped table-bordered">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Card Question</th>
-                  <th>Card Answer</th>
-                  <th>Topic(s)</th>
-                  <th>Last Attempt Date</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                 {{#each card}}
-                    {{> cardTableRowItem}}
-                 {{/each}}
-              </tbody>
-            </table> -->
           </div><!-- End Table Responsive -->
         </div>
       </div>
