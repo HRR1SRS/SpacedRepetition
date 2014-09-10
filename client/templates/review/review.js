@@ -50,6 +50,10 @@ Template.review.helpers({
       reviewToday.push(wholeList[k]);
       }
     }
+    if(reviewToday.length === 0){
+      //$('.button').remove();
+      $('.question').html('<h5>you\'ve completed your review session for all topics on your Review List!</h5>');
+    }
     return reviewToday;
   },
 
@@ -75,13 +79,13 @@ Template.review.helpers({
   displayQuestion : function(){
     // initialize today's list
     var reviewToday = Template.review.createReviewTodayList();
-    // if we have cards, shuffle them
+    // if we have cards, shuffle them 
     var shuffled = [];
     if (reviewToday.length) {
       shuffled = Template.review.shuffleReviewTodayList(reviewToday);
     }
     // display them
-    if(shuffled.length){
+    if(shuffled.length > 0){
       $('.question').html('');
       // grab the cardId from the first index
       var cardId = shuffled.shift();
@@ -315,9 +319,9 @@ Template.review.events({
   },
   //button to reveal answer
   'click .button': function(){
-    // if(currentList.length > 0){
+    if($('.question').has('h5').length === 0){
       Template.review.card(currentCard);
-    // }
+    }
   },
   //click event that registers the click on the difficulty stars
   //submits rating for algorithm
