@@ -89,7 +89,8 @@ Template.review.helpers({
       currentCard = Cards.find({_id: cardId._cardId}).fetch();
       // pull card out of array
       currentCard = currentCard[0];
-      console.log(currentCard);
+      // console.log(currentCard);
+      $('.question').append('<div style="visibility: hidden;" class="_id">'+cardId._cardId+'</div>');
       $('.question').append(currentCard.question);
       // shuffled.push(cardId);
     }
@@ -190,6 +191,7 @@ Template.review.helpers({
           cardObject['profile.reviewList.'+cardId].reviewInterval = revInterval;
           // set inital review date to current date
           cardObject['profile.reviewList.'+cardId].reviewDate = revDate;
+          console.log(cardObject);
           // push card to review list
           Meteor.users.update(Meteor.userId(),{$set:cardObject});
         }
@@ -197,30 +199,107 @@ Template.review.helpers({
     }
   },
 
-  updateReviewDate: function() {
+  setEasinessFactor: function(q, oldEF) {
+    console.log(q);
+    // calculate quality score from SM-2
+    var qScore = (0.1-(5-q)*(0.08+(5-q)*0.02));
+    var ef = oldEF+ qScore;
+    // recalibrate EF if needed as perscribed by SM-2 algorithm
+    if ( ef < 1.3 ) {
+      ef = 1.3;
+    }
+    return ef;
+  },
+
+  updateCardReviewDate: function(rating, _id) {
     // get current user
     var user = Meteor.user();
     // get card _id
-    // var cardId = card._id;
+    var cardId = _id;
     // get card rating
-    // var quality = rating;
+    var quality = rating - 1;
     // get user.profile.reviewList.cardId
-    // var currentUserCard = user.profile.reviewList.cardId;
+    var currentUserCard = user.profile.reviewList[cardId];
+    // get user.profile.reviewList[cardId].easinessFactor
+    var oldEF = user.profile.reviewList[cardId].easinessFactor;
+    console.log(currentUserCard);
+    // initiaize $set object for db update
+    var cardObjectUnset = {};
+    var cardObjectSet = {};    
     // if quality <= 2 set interval to one day in miliseconds
-    // currenUserCard.reviewInterval = 86400000;
+    if ( quality <= 2) {
+      currentUserCard.reviewInterval = 86400000;
       // set next review date to one day later
-      // currentUserCard.reviewDate += currenUserCard.reviewInterval;
+      currentUserCard.reviewDate += currentUserCard.reviewInterval;
+    }
     // else if quality > 2 set new easiness factor based on SM-2 Alogorithm
-    // currentUserCard.easinessFactor = currentUserCard.easinessFactor+
-      //(0.1-(5-q)*(0.08+(5-q)*0.02));
-    // recalibrate EF if needed as perscribed by SM-2 algorithm
-    // if currentUserCard.easinessFactor < 1.3
-      // set currentUserCard.easinessFactor = 1.3
-    // update review interval based on new EF
-    // currentUserCard.reviewInterval = currentUserCard.reviewInterval * currentUserCard.easinessFactor;
-    // update new review date
-    // currentUserCard.reviewDate = currentUserCard.reviewDate + currentUserCard.reviewInterval;
+    else {
+      var ef = Template.review.setEasinessFactor(quality, oldEF);
+      console.log(ef);
+      // set easiness factor on card
+      currentUserCard.easinessFactor = ef;
+      // update review interval based on new EF
+      currentUserCard.reviewInterval = currentUserCard.reviewInterval * ef;
+      // update new review date
+      currentUserCard.reviewDate = currentUserCard.reviewDate + currentUserCard.reviewInterval;
 
+      // console.log(cardObject);
+      console.log(currentUserCard);
+
+      cardObjectUnset['profile.reviewList.'+cardId] = {};
+      // Meteor.users.update(Meteor.userId(),{$unset: cardObject});
+
+      cardObjectSet['profile.reviewList.'+cardId] = currentUserCard;
+      // Meteor.users.update(Meteor.userId(),{$set:cardObject});
+      Template.review.unsetCard(cardObjectUnset, Template.review.setObject, cardObjectSet);
+    }
+
+    currentUserCard = user.profile.reviewList[cardId];
+    console.log(currentUserCard);
+
+  },
+
+  unsetCard: function(obj, callback, objCallback) {
+    console.log(objCallback);
+    Meteor.users.update(
+      Meteor.userId(),
+      {
+        $unset: obj
+      },
+      function(err, result) {
+        if ( err ) {
+          console.log('oh no, .profile.reviewList was not unset!');
+
+        } else {
+          var user = Meteor.users.find(Meteor.userId()).fetch();
+          console.log(result);
+          // execute callback on success
+          // callback(user && user.profile && user.profile.reviewList);
+          Template.review.setCard(objCallback, user && user.profile && user.profile.reviewList);
+
+        }
+      }
+    );
+  },
+
+  setCard: function(obj) {
+    Meteor.users.update(
+      Meteor.userId(),
+      {
+        $set: obj
+      },
+      function(err, result) {
+        if ( err ) {
+          console.log('oh no, .profile.reviewList was not re-set!');
+          console.log(err);
+        } else {
+          var user = Meteor.users.find(Meteor.userId()).fetch();
+          console.log(result);
+          // execute callback on success
+          // callback(user && user.profile && user.profile.reviewList);
+        }
+      }
+    );
   },
 
   //handles adding and removing topics for review from two sources
@@ -230,7 +309,7 @@ Template.review.helpers({
     if(!context._id){
       var retrieveTopicId = Topics.find({name: context.name}).fetch();
       context = retrieveTopicId[0];
-      console.log(context);
+      // console.log(context);
     }
 
     var setObject = {};
@@ -293,6 +372,8 @@ Template.review.events({
   //submits rating for algorithm
   'click .response': function(e){
     var rating = 0;
+    var cardId = $('._id').text();
+    // console.log(cardId);
     var recurse = function(elem){
       if($(elem).hasClass('clickedStar')){
         rating++;
@@ -306,6 +387,7 @@ Template.review.events({
       alert('please rate the question 1-6 stars');
     }else{
 //*******************algorithm plugs in here******************
+      Template.review.updateCardReviewDate(rating, cardId);
       //display the next question
       $('.question').html('');
       $('.answerblock').html('');
