@@ -14,10 +14,9 @@ Template.userItem.helpers({
     console.log('we are in userItem helpers.reviewItem');
     var reviewCards = [];
     var user = Meteor.user();
-    for ( var k in user.profile.reviewList ) {
-      reviewCards.push(user.profile.reviewList[k]);
+    for ( var k in this.profile.reviewList ) {
+      reviewCards.push(this.profile.reviewList[k]);
     }
-    // reviewCards = Object.keys(user.profile.reviewList);
     // console.dir(reviewCards);
     return reviewCards;
   }
