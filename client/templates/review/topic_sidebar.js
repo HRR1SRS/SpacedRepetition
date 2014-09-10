@@ -4,8 +4,8 @@ Template.topicSidebar.helpers({
   }
 });
 
-Template.topicSidebar.events({
-  'click li a': function(){
-    console.log(Cards.find({topic: this._id}).fetch());
-  }
-});
+// Template.topicSidebar.events({
+//   'click li a': function(){
+//     console.log(Cards.find({topic: this._id}).fetch());
+//   }
+// });

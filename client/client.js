@@ -1,9 +1,9 @@
 Meteor.subscribe('userList');
 
-UI.registerHelper('card', function(){
-    return Cards.find();
-  }
-);
+// UI.registerHelper('card', function(){
+//     return Cards.find();
+//   }
+// );
 
 Meteor.startup(function () {
     _.extend(Notifications.defaultOptions, {
