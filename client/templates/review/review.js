@@ -89,7 +89,8 @@ Template.review.helpers({
       currentCard = Cards.find({_id: cardId._cardId}).fetch();
       // pull card out of array
       currentCard = currentCard[0];
-      console.log(currentCard);
+      // console.log(currentCard);
+      $('.question').append('<div style="visibility: hidden;" class="_id">'+cardId._cardId+'</div>');
       $('.question').append(currentCard.question);
       // shuffled.push(cardId);
     }
@@ -120,7 +121,9 @@ Template.review.helpers({
   },
 
   // create a review list on user.profile
-  createReviewList: function(callback) {
+  createReviewList: function(_id, callback) {
+    console.log(_id);
+    var topicId = _id;
     // get current user
     var user = Meteor.user();
     // check for topics
@@ -142,16 +145,15 @@ Template.review.helpers({
               console.log('oh no, .profile.reviewList was not created!');
             } else {
               var user = Meteor.users.find(Meteor.userId()).fetch();
-              console.log(result);
               // execute callback on success
-              callback(user && user.profile && user.profile.reviewList);
+              callback(topicId, user && user.profile && user.profile.reviewList);
             }
           }
         );
       } else {
         // we have a list...execute callback
         console.log('Review list found!');
-        callback();
+        callback(topicId);
       }
     } else {
       // there are no topics
@@ -160,66 +162,95 @@ Template.review.helpers({
   },
 
   // add cards to review list
-  addCardsToReviewList: function(callback) {
+  addCardsToReviewList: function(topicId) {
+    console.log(topicId);
     // get current user
     var user = Meteor.user();
-    // for each topic add cards to review list
-    for (var k in user.profile.topics){
-      // get the topic by id
-      var topic = Topics.find({_id: k}).fetch();
-      for (var i = 0; i < topic[0].cards.length; i++) {
-        // init cardId
-        var cardId = topic[0].cards[i];
-        // check if card has been added to review list yet
-        if ( !user.profile.reviewList.cardId) {
-          // if not:
-          // init cardObject
-          var cardObject = {};
-          var revInterval = 86400000;
-          var revDate = Date.now();
-          // set card_id as key
-          cardObject['profile.reviewList.'+cardId] = {};
-          // add card fields:
-          // set card id
-          cardObject['profile.reviewList.'+cardId]._cardId = cardId;
-          // set topic id
-          cardObject['profile.reviewList.'+cardId]._topicId = k;
-          // set initial easiness factor to 2.5
-          cardObject['profile.reviewList.'+cardId].easinessFactor = 2.5;
-          // set initial card review interval to one day in miliseconds
-          cardObject['profile.reviewList.'+cardId].reviewInterval = revInterval;
-          // set inital review date to current date
-          cardObject['profile.reviewList.'+cardId].reviewDate = revDate;
-          // push card to review list
-          Meteor.users.update(Meteor.userId(),{$set:cardObject});
-        }
+    // get the topic by id
+    var topic = Topics.find({_id: topicId}).fetch();
+    for (var i = 0; i < topic[0].cards.length; i++) {
+      // init cardId
+      var cardId = topic[0].cards[i];
+      // check if card has been added to review list yet
+      if ( user.profile.reviewList[cardId] === undefined ) {
+        console.log('Creating review card with id: '+ cardId);
+        // init cardObject
+        var cardObject = {};
+        var revInterval = 86400000;
+        var revDate = Date.now();
+        // set card_id as key
+        cardObject['profile.reviewList.'+cardId] = {};
+        // add card fields:
+        // set card id
+        cardObject['profile.reviewList.'+cardId]._cardId = cardId;
+        // set topic id
+        cardObject['profile.reviewList.'+cardId]._topicId = topicId;
+        // set initial easiness factor to 2.5
+        cardObject['profile.reviewList.'+cardId].easinessFactor = 2.5;
+        // set initial card review interval to one day in miliseconds
+        cardObject['profile.reviewList.'+cardId].reviewInterval = revInterval;
+        // set inital review date to current date
+        cardObject['profile.reviewList.'+cardId].reviewDate = revDate;
+        // push card to review list
+        Meteor.users.update(Meteor.userId(),{$set:cardObject});
+      } else {
+        console.log('Review card with id '+cardId+' already exists');
       }
     }
   },
 
-  updateReviewDate: function() {
+  setEasinessFactor: function(q, oldEF) {
+    console.log(q);
+    // calculate quality score from SM-2
+    var qScore = (0.1-(5-q)*(0.08+(5-q)*0.02));
+    var ef = oldEF+ qScore;
+    // recalibrate EF if needed as perscribed by SM-2 algorithm
+    if ( ef < 1.3 ) {
+      ef = 1.3;
+    }
+    return ef;
+  },
+
+  updateCardReviewDate: function(rating, _id) {
     // get current user
     var user = Meteor.user();
     // get card _id
-    // var cardId = card._id;
+    var cardId = _id;
     // get card rating
-    // var quality = rating;
+    var quality = rating - 1;
     // get user.profile.reviewList.cardId
-    // var currentUserCard = user.profile.reviewList.cardId;
-    // if quality <= 2 set interval to one day in miliseconds
-    // currenUserCard.reviewInterval = 86400000;
+    var currentUserCard = user.profile.reviewList[cardId];
+    // get user.profile.reviewList[cardId].easinessFactor
+    var oldEF = user.profile.reviewList[cardId].easinessFactor;
+    console.log(currentUserCard);
+    // initiaize $set object for db update
+    var cardObjectSet = {};    
+    // if quality <= 2
+    if ( quality <= 2) {
+      //  set interval to one day in miliseconds
+      currentUserCard.reviewInterval = 86400000;
       // set next review date to one day later
-      // currentUserCard.reviewDate += currenUserCard.reviewInterval;
+      currentUserCard.reviewDate += currentUserCard.reviewInterval;
+      // prep cardObject for db insert
+      cardObjectSet['profile.reviewList.'+cardId] = currentUserCard;
+      // update db based on rating
+      Meteor.users.update(Meteor.userId(),{$set:cardObjectSet});
+    }
     // else if quality > 2 set new easiness factor based on SM-2 Alogorithm
-    // currentUserCard.easinessFactor = currentUserCard.easinessFactor+
-      //(0.1-(5-q)*(0.08+(5-q)*0.02));
-    // recalibrate EF if needed as perscribed by SM-2 algorithm
-    // if currentUserCard.easinessFactor < 1.3
-      // set currentUserCard.easinessFactor = 1.3
-    // update review interval based on new EF
-    // currentUserCard.reviewInterval = currentUserCard.reviewInterval * currentUserCard.easinessFactor;
-    // update new review date
-    // currentUserCard.reviewDate = currentUserCard.reviewDate + currentUserCard.reviewInterval;
+    else {
+      var ef = Template.review.setEasinessFactor(quality, oldEF);
+      console.log(ef);
+      // set easiness factor on card
+      currentUserCard.easinessFactor = ef;
+      // update review interval based on new EF
+      currentUserCard.reviewInterval = currentUserCard.reviewInterval * ef;
+      // update new review date
+      currentUserCard.reviewDate = currentUserCard.reviewDate + currentUserCard.reviewInterval;
+      // prep cardObject for db insert
+      cardObjectSet['profile.reviewList.'+cardId] = currentUserCard;
+      // update db based on rating
+      Meteor.users.update(Meteor.userId(),{$set:cardObjectSet});
+    }
 
   },
 
@@ -230,7 +261,6 @@ Template.review.helpers({
     if(!context._id){
       var retrieveTopicId = Topics.find({name: context.name}).fetch();
       context = retrieveTopicId[0];
-      console.log(context);
     }
 
     var setObject = {};
@@ -238,7 +268,7 @@ Template.review.helpers({
     Meteor.users.update(Meteor.userId(),{$set:setObject});
 
     // add cards to review list
-    Template.review.createReviewList(Template.review.addCardsToReviewList);
+    Template.review.createReviewList(context._id, Template.review.addCardsToReviewList);
   }
 });
 //click event that lists topics being reviewed
@@ -293,6 +323,8 @@ Template.review.events({
   //submits rating for algorithm
   'click .response': function(e){
     var rating = 0;
+    var cardId = $('._id').text();
+    // console.log(cardId);
     var recurse = function(elem){
       if($(elem).hasClass('clickedStar')){
         rating++;
@@ -306,6 +338,7 @@ Template.review.events({
       alert('please rate the question 1-6 stars');
     }else{
 //*******************algorithm plugs in here******************
+      Template.review.updateCardReviewDate(rating, cardId);
       //display the next question
       $('.question').html('');
       $('.answerblock').html('');
