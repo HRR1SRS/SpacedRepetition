@@ -7,30 +7,28 @@
     <div class="panel-heading">Add Card</div>
     <div class="panel-body">
       <form role="form" class="panel">
+        <div class="form-group">
+          <label for="topics">Topic</label>
+          <input type="text" id="topics" class="form-control" value="{{topic}}" placeholder="Enter Topic">
+          <!-- <input type="text" class="form-control" id="topics" placeholder="Enter Answer" value="{{topics}}"> -->
+        </div>
         {{> cardQuestion}}
 
         {{> cardAnswer}}
-        
-        <div class="form-group">
-          <label for="topics">Topic(s)</label>
-          <textarea id="topics" class="form-control" rows="6">{{topic}}</textarea>
-          <!-- <input type="text" class="form-control" id="topics" placeholder="Enter Answer" value="{{topics}}"> -->
-        </div>
-        <h5>ID: {{_id}}</h5>
+
+        <!-- <h5>ID: {{_id}}</h5> -->
         <button type="submit" class="btn btn-primary">Submit</button>
-        <button type="cancel" class="btn btn-default">Cancel</button>
+        <!-- <button type="cancel" class="btn btn-default">Cancel</button> -->
       </form>
     </div>
   </div>
-  
-  
 </template>
 
 
 <template name="cardAnswer">
   <div class="form-group">
     <label for="answer">Answer</label>
-    <input type="text" class="form-control" id="answer" placeholder="Enter Answer" value="{{a}}">
+    <textarea rows="6" class="form-control" id="answer" placeholder="Enter Answer">{{a}}</textarea>
   </div>
 </template>
 

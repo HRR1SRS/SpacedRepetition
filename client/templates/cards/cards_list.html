@@ -1,22 +1,22 @@
 <template name='cardsList'>
     <h2 class="sub-header">Card List</h2>
-	<table class="table table-striped table-bordered">
-	  <thead>
-	    <tr>
-	      <th>#</th>
-	      <th>Card Question</th>
-	      <th>Card Answer</th>
-	      <th>Topic(s)</th>
-	      <th>Last Attempt Date</th>
-	      <th>Actions</th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	     {{#each card}}
-	        {{> cardTableRowItem}}
-	     {{/each}}
-	  </tbody>
-	</table>
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Card ID</th>
+        <th>Card Question</th>
+        <th>Card Answer</th>
+        <th>Topic</th>
+<!--        <th>Last Attempt Date</th>
+        <th>Actions</th> -->
+      </tr>
+    </thead>
+    <tbody>
+       {{#each card}}
+          {{> cardTableRowItem}}
+       {{/each}}
+    </tbody>
+  </table>
 
   <!-- <div class='cards'>
     {{#each card}}
