@@ -14,8 +14,17 @@ Template.review.helpers({
       return '<div display="inline">'+star+'<button class="response">submit</button></div>';
     };
     $('.answerblock').append('<p class="answer"><b>'+arg.answer+'</b></p>');
-    $('.answer').after('<br><p class="answer">Please rate your answer according to the scale provided.</p>'+ starMaker());
     $('.button').remove();
+    $('.card').append(
+      '<div class="container ratingsBlock">'
+      +'<h4>Click a rating below:</h4>'
+      +'<p class="6">Perfect Response...Total Domination!</p>'
+      +'<p class="5">Correct Response...A little tricky but still nailed it.</p>'
+      +'<p class="4">Correct Response...Man, I had to work for that one.</p>'
+      +'<p class="3">Incorrect Response...Aw snap, I should have known that.</p>'
+      +'<p class="2">Incorrect Response, Oh yeah I kind of remember that now.</p>'
+      +'<p class="1">Total blackout...Not in a million years.</p>'
+      +'</div>');
   },
 
   // get milisecond value at midnight for use
@@ -50,10 +59,6 @@ Template.review.helpers({
       reviewToday.push(wholeList[k]);
       }
     }
-    if(reviewToday.length === 0){
-      //$('.button').remove();
-      $('.question').html('<h5>you\'ve completed your review session for all topics on your Review List!</h5>');
-    }
     return reviewToday;
   },
 
@@ -79,13 +84,13 @@ Template.review.helpers({
   displayQuestion : function(){
     // initialize today's list
     var reviewToday = Template.review.createReviewTodayList();
-    // if we have cards, shuffle them 
+    // if we have cards, shuffle them
     var shuffled = [];
     if (reviewToday.length) {
       shuffled = Template.review.shuffleReviewTodayList(reviewToday);
     }
     // display them
-    if(shuffled.length > 0){
+    if(shuffled.length){
       $('.question').html('');
       // grab the cardId from the first index
       var cardId = shuffled.shift();
@@ -275,121 +280,161 @@ Template.review.helpers({
     Template.review.createReviewList(context._id, Template.review.addCardsToReviewList);
   }
 });
+
 //click event that lists topics being reviewed
 Template.review.events({
   //populates and removes review topics 
   'click #topics li': function(){
     Template.review.clickEventHandler(this);
   },
-  'click .difficulty': function(e){
-    $(e.currentTarget)
-      .removeClass('difficulty')
-      .addClass('clickedStar');
-    var recurse = function(elem){
-      if($(elem).hasClass('difficulty')){
-        $(elem)
-        .removeClass('difficulty')
-        .addClass('clickedStar');
-      }
-      if(elem !== null){
-        recurse(elem.previousSibling);
-      }
-    };
-    recurse(e.currentTarget.previousSibling);
-  },
-  //changes class of star before submission
-  'click .clickedStar': function(e){
-    $(e.currentTarget)
-      .css('color', 'lime');
-    var recurse = function(elem){
-      $(elem)
-        .removeClass('clickedStar')
-        .addClass('difficulty')
-        .removeClass('glyphicon-star')
-        .addClass('glyphicon-star-empty')
-        .css('color', 'grey');
-      var $sibling = $(elem.nextSibling) ; 
-      if($sibling.hasClass('response') === false && $sibling.hasClass('clickedStar') ){
-        recurse(elem.nextSibling);
-      }
-    };
-    if($(e.currentTarget.nextSibling).hasClass('clickedStar')){
-      recurse(e.currentTarget.nextSibling);
-    }
-  },
+
   //button to reveal answer
   'click .button': function(){
-    if($('.question').has('h5').length === 0){
-      Template.review.card(currentCard);
-    }
+    Template.review.card(currentCard);
   },
-  //click event that registers the click on the difficulty stars
-  //submits rating for algorithm
-  'click .response': function(e){
-    var rating = 0;
+
+  'click p.6': function(e) {
+    console.log('rating list 6 clicked');
+    var rating = 6;
     var cardId = $('._id').text();
-    // console.log(cardId);
-    var recurse = function(elem){
-      if($(elem).hasClass('clickedStar')){
-        rating++;
-      }
-      if(elem !== null){
-        recurse(elem.previousSibling);
-      }
-    };
-    recurse(e.currentTarget.previousSibling);
-    if(rating === 0){
-      alert('please rate the question 1-6 stars');
-    }else{
-//*******************algorithm plugs in here******************
-      Template.review.updateCardReviewDate(rating, cardId);
-      //display the next question
-      $('.question').html('');
-      $('.answerblock').html('');
-      Template.review.displayQuestion();
-      $('.question').after('<button class="button">click to see answer</button>');
-    }
+    console.log(rating);
+    console.log(cardId);
+    // pass rated card to algorithm for next interval
+    Template.review.updateCardReviewDate(rating, cardId);
+    //display the next question
+    $('.ratingsBlock').remove();
+    Template.review.displayQuestion();
+    $('.question').html('');
+    $('.answerblock').html('');
+    $('.answerblock').after('<button class="button">click to see answer</button>');
   },
-  //deselects topics for review
-  'click .selectedTopics li': function(e){
-    Template.review.clickEventHandler(e.currentTarget.children[0]);
+
+  'click p.5': function(e) {
+    console.log('rating list 5 clicked');
+    var rating = 5;
+    var cardId = $('._id').text();
+    console.log(rating);
+    console.log(cardId);
+    // pass rated card to algorithm for next interval
+    Template.review.updateCardReviewDate(rating, cardId);
+    //display the next question
+    $('.ratingsBlock').remove();
+    Template.review.displayQuestion();
+    $('.question').html('');
+    $('.answerblock').html('');
+    $('.answerblock').after('<button class="button">click to see answer</button>');
   },
-  // mouse events for rating stars
-  'mouseover .difficulty': function(e){
-    $(e.currentTarget).removeClass('glyphicon-star-empty')
-      .addClass('glyphicon-star')
-      .css('color', 'lime');
-    var recurse = function(elem){
-      if($(elem).hasClass('difficulty')){
-        $(elem).removeClass('glyphicon-star-empty')
-          .addClass('glyphicon-star')
-          .css('color', 'limeGreen');
-        if(elem !== null){
-          recurse(elem.previousSibling);
-        }
-      }else{
-        $(elem).css('color', 'limeGreen');
-      }
-    };
-      recurse(e.currentTarget.previousSibling);
+
+    'click p.4': function(e) {
+    console.log('rating list 4 clicked');
+    var rating = 4;
+    var cardId = $('._id').text();
+    console.log(rating);
+    console.log(cardId);
+    // pass rated card to algorithm for next interval
+    Template.review.updateCardReviewDate(rating, cardId);
+    //display the next question
+    $('.ratingsBlock').remove();
+    Template.review.displayQuestion();
+    $('.question').html('');
+    $('.answerblock').html('');
+    $('.answerblock').after('<button class="button">click to see answer</button>');
   },
-  // mouse events for rating stars
-  'mouseout .difficulty': function(e){
-    $(e.currentTarget).removeClass('glyphicon-star')
-      .addClass('glyphicon-star-empty')
-      .css('color', 'grey');
-    var recurse = function(elem){
-      if($(elem).hasClass('difficulty')){
-        $(elem).removeClass('glyphicon-star')
-          .addClass('glyphicon-star-empty')
-          .css('color', 'grey');
-        if(elem !== null){
-          recurse(elem.previousSibling);
-        }
-      }else{
-        $(elem).css('color', 'lime');
-      }
-    };
-    recurse(e.currentTarget.previousSibling);
-  }
+
+    'click p.3': function(e) {
+    console.log('rating list 3 clicked');
+    var rating = 3;
+    var cardId = $('._id').text();
+    console.log(rating);
+    console.log(cardId);
+    // pass rated card to algorithm for next interval
+    Template.review.updateCardReviewDate(rating, cardId);
+    //display the next question
+    $('.ratingsBlock').remove();
+    Template.review.displayQuestion();
+    $('.question').html('');
+    $('.answerblock').html('');
+    $('.answerblock').after('<button class="button">click to see answer</button>');
+  },
+
+    'click p.2': function(e) {
+    console.log('rating list 2 clicked');
+    var rating = 2;
+    var cardId = $('._id').text();
+    console.log(rating);
+    console.log(cardId);
+    // pass rated card to algorithm for next interval
+    Template.review.updateCardReviewDate(rating, cardId);
+    //display the next question
+    $('.ratingsBlock').remove();
+    Template.review.displayQuestion();
+    $('.question').html('');
+    $('.answerblock').html('');
+    $('.answerblock').after('<button class="button">click to see answer</button>');
+  },
+
+    'click p.1': function(e) {
+    console.log('rating list 1 clicked');
+    var rating = 1;
+    var cardId = $('._id').text();
+    console.log(rating);
+    console.log(cardId);
+    // pass rated card to algorithm for next interval
+    Template.review.updateCardReviewDate(rating, cardId);
+    //display the next question
+    $('.ratingsBlock').remove();
+    Template.review.displayQuestion();
+    $('.question').html('');
+    $('.answerblock').html('');
+    $('.answerblock').after('<button class="button">click to see answer</button>');
+  },
+
+  'mouseover p.6': function(e) {
+    $(e.currentTarget).css({'color':'YellowGreen', 'font-weight': 'bold' });
+  },
+
+  'mouseout p.6': function(e) {
+    $(e.currentTarget).removeAttr('style');
+  },
+
+  'mouseover p.5': function(e) {
+    $(e.currentTarget).css({'color':'YellowGreen', 'font-weight': 'bold' });
+  },
+
+  'mouseout p.5': function(e) {
+    $(e.currentTarget).removeAttr('style');
+  },
+
+  'mouseover p.4': function(e) {
+    $(e.currentTarget).css({'color':'YellowGreen', 'font-weight': 'bold' });
+  },
+
+  'mouseout p.4': function(e) {
+    $(e.currentTarget).removeAttr('style');
+  },
+
+  'mouseover p.3': function(e) {
+    $(e.currentTarget).css({'color':'YellowGreen', 'font-weight': 'bold' });
+  },
+
+  'mouseout p.3': function(e) {
+    $(e.currentTarget).removeAttr('style');
+  },
+
+  'mouseover p.2': function(e) {
+    $(e.currentTarget).css({'color':'YellowGreen', 'font-weight': 'bold' });
+  },
+
+  'mouseout p.2': function(e) {
+    $(e.currentTarget).removeAttr('style');
+  },
+
+   'mouseover p.1': function(e) {
+    $(e.currentTarget).css({'color':'YellowGreen', 'font-weight': 'bold' });
+  },
+
+  'mouseout p.1': function(e) {
+    $(e.currentTarget).removeAttr('style');
+  },
+
 });
