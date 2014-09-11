@@ -1,6 +1,7 @@
-// function copied/pasted from addCard.js
-function addCard(topic, question, answer) {
-  // first create card
+// this file populates an empty database with some review cards
+
+var addCard = function(topic, question, answer) {
+  // first create a card
   var newCard = Cards.insert({
     question: question,
     answer: answer
@@ -13,15 +14,16 @@ function addCard(topic, question, answer) {
     Topics.update({_id: topicId._id}, {$push: {cards: newCard}});
     Cards.update({_id: newCard}, {$set: {topic: topicId._id}});
   }
-  // else it doesn't exist, so create it
+  // else the topic doesn't exist, so create a new topic
   else {
     var newTopic = Topics.insert({name: topic, cards: [newCard]});
     // update newCard to have newTopic
     Cards.update({_id: newCard}, {$set: {topic: newTopic}});
   }
-}
+};
 
-if (Cards.find().count() === 0 ) {
+// if the dabase is empty, then add the following cards
+if(Cards.find().count() === 0 ) {
   addCard('math', '1 + 1 = ?', 2);
   addCard('math', '1 + 2 = ?', 3);
   addCard('math', '2 + 2 = ?', 4);
