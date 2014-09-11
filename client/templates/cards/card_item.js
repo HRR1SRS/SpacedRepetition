@@ -1,9 +1,3 @@
-// Template.cardItem.helpers({
-//   card: function(){
-//     return this;
-//   }
-// })
-
 Template.cardItem.events({
   'submit': function(event, template) {
     var e = event;
@@ -12,30 +6,23 @@ Template.cardItem.events({
     var topic = t.find('#topics').value;
     var question = t.find('#question').value;
     var answer = t.find('#answer').value;
-
     var newCard = null;
-
     //test for successful save
     var isSave = false;
-
     //only create card if fields are not blank
     if ( question && answer ){
-      //console.log(question + ': '+answer);
       // first create card
       newCard = Cards.insert({
         question: question,
         answer: answer
       });
     }else{
-      //console.log('fields r blank');
       isSave = false;
     }
-
-    if ( newCard ) {
+    if( newCard ){
       //only create topic if field is not blank
       var topicId = topic !== null ? Topics.findOne({name: topic}) : null;
-
-      if( topicId ) {
+      if( topicId ){
         // update topic to have newCard
         Topics.update({_id: topicId._id}, {$push: {cards: newCard}});
         Cards.update({_id: newCard}, {$set: {topic: topicId._id}});
@@ -46,11 +33,8 @@ Template.cardItem.events({
         // update newCard to have newTopic
         Cards.update({_id: newCard}, {$set: {topic: newTopic}});
       }
-
       isSave = true;
     }
-    
-
     if (isSave){
       //save was successful, so display growl and clear textfield
       //clear(t);
@@ -65,10 +49,8 @@ Template.cardItem.events({
       //display notification
       Notifications.error('Save Unsuccessful', 'Could not save Question: '+question);
     }
-
   }
 });
-
 
 Template.cardTableRowItem.helpers({
   showTopic: function(){
@@ -76,11 +58,3 @@ Template.cardTableRowItem.helpers({
   }
 });
 
-
-// Template.cardItem.clear = function(template){
-// 	var t = template;
-
-// 	t.find('#topics').value = '';
-// 	t.find('#question').value = '';
-// 	t.find('#tanswer').value = '';
-// }
