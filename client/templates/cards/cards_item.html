@@ -1,7 +1,7 @@
 <template name='cardItem'>
 
   <!-- ADD NOTIFICATION SYSTEM -->
-  {{> notifications}}
+  <!-- {{> notifications}} -->
 
   <div class="panel panel-primary">
     <div class="panel-heading">Add Card</div>
@@ -10,13 +10,11 @@
         <div class="form-group">
           <label for="topics">Topic</label>
           <input type="text" id="topics" class="form-control" value="{{topic}}" placeholder="Enter Topic">
-          <!-- <input type="text" class="form-control" id="topics" placeholder="Enter Answer" value="{{topics}}"> -->
         </div>
         {{> cardQuestion}}
 
         {{> cardAnswer}}
 
-        <!-- <h5>ID: {{_id}}</h5> -->
         <button type="submit" class="btn btn-primary">Submit</button>
         <!-- <button type="cancel" class="btn btn-default">Cancel</button> -->
       </form>
