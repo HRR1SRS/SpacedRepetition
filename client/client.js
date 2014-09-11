@@ -22,7 +22,7 @@ Template.cardItem.events({
 
 //Template dashboard
 Template.dashboard.events({
-  'click #btnAddCard': function(){
+  'click #btnAddCard': function() {
     //show AddForm
     //UI.insert('cardItem', $('#dashboard').html(), $('#cardList'));
     $('#cardForm').removeClass('hidden').addClass('show');
@@ -35,7 +35,7 @@ Template.dashboard.events({
     $('.sub-header').removeClass('show').addClass('hidden');
   },
 
-  'click #btnHideCard': function(){
+  'click #btnHideCard': function() {
     //hide AddForm
     $('#cardForm').removeClass('show').addClass('hidden');
 
