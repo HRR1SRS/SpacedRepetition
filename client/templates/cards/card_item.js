@@ -57,4 +57,3 @@ Template.cardTableRowItem.helpers({
     return Topics.findOne({_id: this.topic}).name;
   }
 });
-

@@ -1,14 +1,9 @@
 Meteor.subscribe('userList');
 
-// UI.registerHelper('card', function(){
-//     return Cards.find();
-//   }
-// );
-
 Meteor.startup(function () {
-    _.extend(Notifications.defaultOptions, {
-        timeout: 1500
-    });
+  _.extend(Notifications.defaultOptions, {
+      timeout: 1500
+  });
 });
 
 Template.cardItem.events({
@@ -24,27 +19,6 @@ Template.cardItem.events({
     console.log(selectedTopic);
   }
 });
-
-// Template.addToReviewList.events({
-//   'submit form': function(theEvent, thetemplate) {
-//     theEvent.preventDefault();
-//     var selectedTopic = Session.get('selectedTopic');
-//     var currentUserId = Meteor.userId();
-//     var currentUser = Meteor.user();
-//     var setObject = {};
-//     setObject['profile.topics.'+selectedTopic] = true;
-//     console.log('current user is: '+currentUser);
-//     console.log('current user topics are: '+currentUser.profile.topics);
-//     Meteor.users.update(Meteor.userId(), {$set:setObject});
-//   }
-// });
-
-// Template.addToReviewList.showSelectedCard = function() {
-//   var selectedTopic = Session.get('selectedTopic');
-//   return selectedTopic;
-// };
-
-
 
 //Template dashboard
 Template.dashboard.events({
