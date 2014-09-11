@@ -36,10 +36,18 @@ HR SRS is a study aid that leverages the principles of [Spaced Repetition](http:
 
 From within the root directory:
 
-* `meteor add accounts-passwords`
+(OS X)
+
+* 'curl https://install.meteor.com | /bin/sh'
+
+* `meteor add accounts-password`
 * `meteor add mizzao:bootstrap-3` OR `meteor add ian:bootstrap-3`
 * `meteor add ian:accounts-ui-bootstrap-3` (see usage instructions at http://atmospherejs.com/ian/accounts-ui-bootstrap-3)
 * `meteor add iron:router`
+
+### Runnign Local environment
+
+Simply type 'meteor' in the root dirctory.
 
 
 ### Roadmap
