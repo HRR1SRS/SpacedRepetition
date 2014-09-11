@@ -12,8 +12,9 @@ HR SRS is a study aid that leverages the principles of [Spaced Repetition](http:
 1. [Requirements](#requirements)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
-1. [Team](#team)
+    1. [Roadmap](#roadmap)
+    1. [Helpful Documentation](#helpful-documentation)
+    1. [Additional Notes](#additional-notes)
 1. [Contributing](#contributing)
 
 ## Usage
@@ -45,6 +46,19 @@ From within the root directory:
 
 View the project roadmap [here](https://waffle.io/HRR1SRS/SpacedRepetition)
 
+
+### Helpful Documentation
+
+Learn Meteor [here](http://meteortips.com/book/).
+
+Our database schema is [here](https://docs.google.com/document/d/1vHZV4cjHDKYcCDlvV60Vaixfp0wMBEGiX1p39ItZrMs/edit).
+
+Our initial wireframe is [here](https://docs.google.com/drawings/d/1P_6yg45gWw40iKUcyrIK9BeMFaR7vNnQJO0VORN8X1s/edit?usp=sharing).
+
+
+### Additional Notes
+
+Velocity, the unified testing framework for Meteor, is not yet available for Meteor 0.9. Check the current status [here](http://atmospherejs.com/xolvio/velocity).
 
 ## Contributing
 
