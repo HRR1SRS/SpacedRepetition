@@ -116,7 +116,7 @@ Template.review.helpers({
         topic.selected = false;
       }
     });
-
+    console.log(topicsList);
     return topicsList;
   },
   // display User Topics
