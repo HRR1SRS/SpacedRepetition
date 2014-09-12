@@ -19,8 +19,9 @@
 
               <!-- DISPLAY LINKS IF CURRENT USER IS LOGGED IN -->
               {{# if currentUser}}
-              <li><a href="/dashboard">Dashboard</a></li>
-              <li><a href="{{pathFor 'review'}}">Review Cards</a></li>
+              <li><a href="/#change-routing-here-dan">Dashboard</a></li>
+              <li><a href="/cards">Cards</a></li>
+              <li><a href="{{pathFor 'review'}}">Review</a></li>
               <!-- <li><a href="{{pathFor 'usersList'}}">Users List</a></li> -->
               {{/if}}
 
