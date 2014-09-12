@@ -190,6 +190,7 @@ Template.review.helpers({
       }
     }
   },
+
   //algorithm for calculating easiness factor 
   setEasinessFactor: function(q, oldEF) {
     // calculate quality score from SM-2
@@ -246,7 +247,7 @@ Template.review.helpers({
 Template.review.events({
   //populates and removes review topics 
   'click #topics li': function() {
-    var context = this; 
+    var context = this;
     if(!context._id){
       var retrieveTopicId = Topics.find({name: context.name}).fetch();
       context = retrieveTopicId[0];
