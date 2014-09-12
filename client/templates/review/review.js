@@ -102,6 +102,7 @@ Template.review.helpers({
   },
   //displays lists of topics available from the topics collection
   topicList: function() {
+    console.log(Topics.find().fetch());
     return Topics.find().fetch();
   },
   // display User Topics
@@ -118,6 +119,10 @@ Template.review.helpers({
       Template.review.displayQuestion();
       return userTopicArr;
     }
+  },
+  // Creates an object that has selected tags on it with the topics the user has chosen
+  filteredTopics: function() {
+
   },
   // create a review list on user.profile
   createReviewList: function(_id, callback) {
