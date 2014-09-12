@@ -259,8 +259,6 @@ Template.review.events({
 
     $('#' + this.name + ' a').css('background-color', '#428bca');
     $('#' + this.name + ' a').css('color', 'white');
-    console.log(this);
-    console.log(context);
   },
   //button to reveal answer
   'click .button': function() {
