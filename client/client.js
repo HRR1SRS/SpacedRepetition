@@ -45,5 +45,25 @@ Template.dashboard.events({
 
     //hide the header
     $('.sub-header').removeClass('hidden').addClass('show');
-  }
+  },
+});
+
+// Template._loginButtonsLoggedInDropdown.events({
+//     'click #startBtn': function(event) {
+//         event.stopPropagation();
+//         Template._loginButtons.toggleDropdown();
+//         console.log("hello");
+//         //Router.go('profileEdit');
+//     }
+// });
+
+Template.intro.events({
+  
+  'click #startBtn': function(event) {
+        //event.stopPropagation();
+        //Template._loginButtons.toggleDropdown();
+        //Router.go('/dashboard');
+        Router.go('/dashboard');
+  },
+
 });

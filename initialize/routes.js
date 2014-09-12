@@ -6,7 +6,23 @@ Router.map(function() {
 
   // render template 'dashboard' with ALL cards when at path '/dashboard'
   this.route('dashboard', {
-    path: '/dashboard/',
+  path: '/dashboard/',
+  onBeforeAction: function () {
+    if (!Meteor.user()) {
+      if (Meteor.loggingIn()) {
+        Router.go('/dashboard');
+      }
+      else{
+        //testing
+        Router.go('/contact');
+      }
+    }
+  }
+});
+
+
+  this.route('cards', {
+    path: '/cards/',
     data: function() {
       return {
         card: Cards.find({}).fetch()
@@ -16,8 +32,8 @@ Router.map(function() {
 
   // render template 'dashboard' with only cards for selected topic
   // when at path '/dashboard/:_id' where _id is topicId
-  this.route('dashboard', {
-    path: '/dashboard/:_id',
+  this.route('cards', {
+    path: '/cards/:_id',
     data: function() {
       var _id = this.params._id;
       return {
@@ -25,6 +41,10 @@ Router.map(function() {
       };
     }
   });
+
+  this.route('cards');
+
+ 
 
   // render template 'review' when at path '/review'
   this.route('review');
