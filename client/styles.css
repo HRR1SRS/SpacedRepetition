@@ -186,3 +186,18 @@ body {
 .center{
   text-align: center;
 }
+
+
+/* Landing Page button */
+.button{
+  background-color:#cc6666;
+  border:none;
+  position: absolute;
+  margin-left: -80px;
+  padding:15px 50px;
+  border-radius:8px;
+  color:white;
+}
+.button:hover{
+  background-color:#3ac;
+}
