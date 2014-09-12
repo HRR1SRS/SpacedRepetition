@@ -7,7 +7,12 @@
           <div class="panel-body well">
             <ul class="nav nav-pills nav-stacked" id="topics">
               {{#each topicList}}
-                <li id="{{name}}"><a href="#">{{name}}</a></li>
+                {{#if selected true}}
+                  <li><a href="#" class="selected">{{name}}</a></li>
+                {{/if}}
+                {{#if selected true}}
+                  <li><a href="#">{{name}}</a></li>
+                {{/if}}
               {{/each}}
             </ul>
 

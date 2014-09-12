@@ -102,8 +102,22 @@ Template.review.helpers({
   },
   //displays lists of topics available from the topics collection
   topicList: function() {
-    console.log(Topics.find().fetch());
-    return Topics.find().fetch();
+    var topicsList = Topics.find().fetch();
+    var userTopicsList = Template.review.userTopic();
+
+    topicsList.forEach(function(topic) {
+      for (var i = 0; i < userTopicsList.length; i++) {
+        if (topic.name === userTopicsList[i].name) {
+          topic.selected = true;
+        }
+      }
+
+      if (topic.selected === undefined) {
+        topic.selected = false;
+      }
+    });
+
+    return topicsList;
   },
   // display User Topics
   userTopic: function() {
@@ -262,9 +276,6 @@ Template.review.events({
     Meteor.users.update(Meteor.userId(),{$set:setObject});
     // add cards to review list
     Template.review.createReviewList(context._id, Template.review.addCardsToReviewList);
-
-    $('#' + this.name + ' a').css('background-color', '#428bca');
-    $('#' + this.name + ' a').css('color', 'white');
   },
   //button to reveal answer
   'click .button': function() {

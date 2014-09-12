@@ -95,6 +95,12 @@ body {
   letter-spacing: -1px;
 }
 
+/* Selected Topics
+------------------------- */
+.selected {
+  background-color: #428bca;
+  color: white;
+}
 
 
 /* RESPONSIVE CSS
