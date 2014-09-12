@@ -24,19 +24,19 @@ var addCard = function(topic, question, answer) {
 
 // if the dabase is empty, then add the following cards
 if(Cards.find().count() === 0 ) {
-  addCard('math', '1 + 1 = ?', 2);
-  addCard('math', '1 + 2 = ?', 3);
-  addCard('math', '2 + 2 = ?', 4);
-  addCard('math', '5 * 3 = ?', 15);
-  addCard('math', 'abs(-4) = ?', 4);
-  addCard('reading', 'mans best friend', 'dog');
-  addCard('reading', 'evil feline', 'cat');
-  addCard('reading', 'annoying repeater', 'parrot');
-  addCard('reading', 'alarm clock', 'rooster');
-  addCard('science', 'h2o', 'water');
-  addCard('science', 'co2', 'carbon dioxide');
-  addCard('science', 'space', 'the final frontier');
-  addCard('science', 'moon landing', 'hoax');
-  addCard('science', '3rd rock from the sun', 'Earth');
-  addCard('science', 'demoted from planethood', 'Pluto');
+  addCard('Math', '1 + 1 = ?', 2);
+  addCard('Math', '1 + 2 = ?', 3);
+  addCard('Math', '2 + 2 = ?', 4);
+  addCard('Math', '5 * 3 = ?', 15);
+  addCard('Math', 'abs(-4) = ?', 4);
+  addCard('Reading', 'mans best friend', 'dog');
+  addCard('Reading', 'evil feline', 'cat');
+  addCard('Reading', 'annoying repeater', 'parrot');
+  addCard('Reading', 'alarm clock', 'rooster');
+  addCard('Science', 'h2o', 'water');
+  addCard('Science', 'co2', 'carbon dioxide');
+  addCard('Science', 'space', 'the final frontier');
+  addCard('Science', 'moon landing', 'hoax');
+  addCard('Science', '3rd rock from the sun', 'Earth');
+  addCard('Science', 'demoted from planethood', 'Pluto');
 }
