@@ -257,7 +257,9 @@ Template.review.events({
     // add cards to review list
     Template.review.createReviewList(context._id, Template.review.addCardsToReviewList);
 
-    $(this).css('background', 'green');
+    //$(this).css('background', 'green');
+    console.log(this);
+    console.log(context);
   },
   //button to reveal answer
   'click .button': function() {
