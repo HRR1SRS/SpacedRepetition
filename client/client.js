@@ -6,6 +6,17 @@ Meteor.startup(function () {
   });
 });
 
+Meteor.users.find({ 'status.online': true }).observe({
+  added: function(id) {
+    console.log('id just came online');
+    Router.go('/dashboard');
+  },
+  removed: function(id) {
+    console.log('id just went offline');
+    Router.go('/');
+  }
+});
+
 Template.cardItem.events({
   'click div.topic': function() {
     var cardId = this._id;
@@ -60,10 +71,22 @@ Template.dashboard.events({
 Template.intro.events({
   
   'click #startBtn': function(event) {
-        //event.stopPropagation();
-        //Template._loginButtons.toggleDropdown();
+        // event.stopPropagation();
+        // Template._loginButtons.toggleDropdown();
         //Router.go('/dashboard');
+    if (!Meteor.user()) {
+      if (Meteor.loggingIn()) {
         Router.go('/dashboard');
+      }
+      else{
+        //Template._loginButtons.toggleDropdown();
+
+        //Router.go('/cards');
+      }
+    }
+
   },
+
+
 
 });
