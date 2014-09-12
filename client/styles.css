@@ -190,7 +190,7 @@ body {
 
 /* Landing Page button */
 .button{
-  background-color:#66c;
+  background-color:#66cc66;
   border:none;
   position: absolute;
   margin-left: -85px;
@@ -199,5 +199,5 @@ body {
   color:white;
 }
 .button:hover{
-  background-color:#6f6fcc;
+  background-color:#54b054;
 }
