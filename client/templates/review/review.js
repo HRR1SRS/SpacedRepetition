@@ -256,6 +256,8 @@ Template.review.events({
     Meteor.users.update(Meteor.userId(),{$set:setObject});
     // add cards to review list
     Template.review.createReviewList(context._id, Template.review.addCardsToReviewList);
+
+    $(this).css('background', 'green');
   },
   //button to reveal answer
   'click .button': function() {
