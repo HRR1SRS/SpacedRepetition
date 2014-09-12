@@ -257,8 +257,8 @@ Template.review.events({
     // add cards to review list
     Template.review.createReviewList(context._id, Template.review.addCardsToReviewList);
 
-    $('#' + this.name).css('background-color', '#428bca');
-    $('#' + this.name).css('color', 'white');
+    $('#' + this.name + ' a').css('background-color', '#428bca');
+    $('#' + this.name + ' a').css('color', 'white');
     console.log(this);
     console.log(context);
   },
