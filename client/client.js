@@ -6,6 +6,7 @@ Meteor.startup(function () {
   });
 });
 
+// mizzao:user-status used for determning login status
 Meteor.users.find({ 'status.online': true }).observe({
   //login action
   added: function(id) {

@@ -45,6 +45,8 @@ From within the root directory:
 * `meteor add ian:accounts-ui-bootstrap-3` (see usage instructions at http://atmospherejs.com/ian/accounts-ui-bootstrap-3)
 * `meteor add iron:router`
 * 'mizzao:user-status'
+* 'npm install -g meteorite'
+* 'mrt add s-alert'
 
 ### Runnign Local environment
 
