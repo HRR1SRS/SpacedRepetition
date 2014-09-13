@@ -290,7 +290,8 @@ Template.review.events({
     Template.review.displayQuestion();
     $('#card').removeClass('flipped');
     $('.help').animate({'left': 0}, 100);
-    $('.help-div').fadeOut(1000);
+    $('.help').animate({'border-color': '#fff'}, 10);
+    $('.help-div').fadeIn(10);
     //$('.question').html('');
   },
   //highlights ratings on mouseover
