@@ -1,11 +1,10 @@
 Template.topicSidebar.helpers({
   topicList: function(){
     return Topics.find({}).fetch();
+  },
+  isSelected: function(id){
+    var path = window.location.pathname;
+    path = path.replace(/(\/cards\/?)/, '');
+    return path === id? 'selected': '';
   }
 });
-
-// Template.topicSidebar.events({
-//   'click li a': function(){
-//     console.log(Cards.find({topic: this._id}).fetch());
-//   }
-// });

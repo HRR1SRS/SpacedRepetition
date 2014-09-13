@@ -6,6 +6,7 @@ Meteor.startup(function () {
   });
 });
 
+// mizzao:user-status used for determning login status
 Meteor.users.find({ 'status.online': true }).observe({
   //login action
   added: function(id) {
@@ -34,58 +35,18 @@ Template.cardItem.events({
   }
 });
 
-//Template dashboard
-Template.cards.events({
-  'click #btnAddCard': function() {
-    //show AddForm
-    //UI.insert('cardItem', $('#dashboard').html(), $('#cardList'));
-    $('#cardForm').removeClass('hidden').addClass('show');
-
-    //Show #btnRemoveCard and hide #btnAddCard
-    $('#btnHideCard').removeClass('hidden').addClass('show');
-    $('#btnAddCard').removeClass('show').addClass('hidden');
-
-    //hide the header
-    $('.sub-header').removeClass('show').addClass('hidden');
-  },
-
-  'click #btnHideCard': function() {
-    //hide AddForm
-    $('#cardForm').removeClass('show').addClass('hidden');
-
-    //Hide #btnRemoveCard and show #btnAddCard
-    $('#btnAddCard').removeClass('hidden').addClass('show');
-    $('#btnHideCard').removeClass('show').addClass('hidden');
-
-    //hide the header
-    $('.sub-header').removeClass('hidden').addClass('show');
-  },
-});
-
-// Template._loginButtonsLoggedInDropdown.events({
-//     'click #startBtn': function(event) {
-//         event.stopPropagation();
-//         Template._loginButtons.toggleDropdown();
-//         console.log("hello");
-//         //Router.go('profileEdit');
-//     }
-// });
-
 Template.intro.events({
   
   'click #startBtn': function(event) {
-        //Router.go('/dashboard');
     if (!Meteor.user()) {
       if (Meteor.loggingIn()) {
-        console.log('logging in...')
+        console.log('logging in...');
+        Router.go('/dashboard');
       }
       else{
-        //alert("Oops! Please login ➚");
-        Session.set('sAlert', {condition: 'red', effect: 'stackslide', message: 'Oops! Please Login First', position: 'right-bottom', timeout: 10000});
+        Session.set('sAlert', {condition: 'red', effect: 'jelly', message: 'Oops! Please Login First', position: 'right-top', timeout: 3000});
       }
     }
-    //Router.go('/dashboard');
-
   },
 
 });
