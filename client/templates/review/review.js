@@ -300,26 +300,22 @@ Template.review.events({
      $(e.currentTarget).removeAttr('style');
   },
 
-  'click #card' : function() {
+  'click #card': function() {
     $('#card').addClass('flipped');
     $('.help').animate({'left': 500}, 100);
     $('.help').animate({'border-color': '#000'});
     $('.help-div').fadeIn(1000);
   },
 
-  'mouseover .star' : function(e) {
-    console.log(e.currentTarget);
-    /*$('.star').hover(
-      function() {
-        var id = $(this).attr('id');
-        $('.t' + id).css('visibility', 'visible');
-        $('.t' + id).fadeIn(500);
-      },
-      function() {
-        var id = $(this).attr('id');
-        $('.t' + id).css('visibility', 'hidden');
-      }
-    );*/
+  'mouseover .star': function(e) {
+    var id = $(e.currentTarget).attr('id');
+    $('.t' + id).css('visibility', 'visible');
+    $('.t' + id).fadeIn(500);
+  },
+
+  'mouseout .star': function(e) {
+    var id = $(e.currentTarget).attr('id');
+    $('.t' + id).css('visibility', 'hidden');
   }
 
 });
