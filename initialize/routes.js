@@ -12,7 +12,7 @@ Router.map(function() {
         Router.go('/dashboard');
       }
       else{
-        Router.go('/contact');
+        Router.go('/intro');
         Session.set('sAlert', {condition: 'red', effect: 'jelly', message: 'Oops! Please Login First', position: 'right-top', timeout: 3000});
       }
     }
