@@ -1,26 +1,15 @@
-<template name="dashboard">
+<template name="cards">
 
-  <div class="container-fluid" id="dashboard">
+  <div class="container-fluid" id="page-cards">
+  <div id="cardForm" class="hidden">
+    {{> cardItem}}
+  </div>
     <div class="row">
 
       {{> topicSidebar}}
 
       <div class="col-sm-9 col-md-10 main">
         <h4 class="page-header alert alert-info">Dashboard</h4>
-
-        <!-- Button Toolbar -->
-        <div class="btn-toolbar" role="toolbar">
-          <div class="btn-group">
-            <button type="button" class="btn btn-primary" id="btnAddCard">
-              <span class="glyphicon glyphicon-plus"></span> Add Card
-            </button>
-            <button type="button" class="btn btn-danger hidden" id="btnHideCard">Hide Card</button> 
-            <!-- <button type="button" class="btn btn-danger">
-              <span class="glyphicon glyphicon-minus"></span> Delete Card
-            </button> -->
-          </div>
-        </div>
-        <!-- End Button Toolbar -->
 
         <br/>
 
@@ -29,17 +18,17 @@
           <!-- <div id="cardForm" class="hidden col-sm-6 col-md-6">
             {{> cardItem}}
           </div> -->
-          <div id="cardForm" class="hidden">
-            {{> addCard}}
-          </div>
 
-          <h2 class="sub-header">Card List</h2>
+          <h2 class="sub-header">Cards</h2>
+          <button type="button" class="btn btn-primary" id="btnAddCard">
+            <span class="glyphicon glyphicon-plus"></span> Add Card
+          </button>
           <table class="table table-striped table-bordered">
             <thead>
               <tr>
                 <!-- <th>Card ID</th> -->
-                <th>Card Question</th>
-                <th>Card Answer</th>
+                <th>Question</th>
+                <th>Answer</th>
                 <th>Topic</th>
                 <!-- <th>Last Attempt Date</th> -->
                 <!-- <th>Actions</th> -->

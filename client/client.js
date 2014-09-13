@@ -6,6 +6,20 @@ Meteor.startup(function () {
   });
 });
 
+Meteor.users.find({ 'status.online': true }).observe({
+  //login action
+  added: function(id) {
+    console.log(id.emails[0].address, 'logged in!');
+    Router.go('/dashboard');
+    stopMonitor: true;
+  },
+  //logout action
+  removed: function(id) {
+    console.log(id.emails[0].address, 'logged out!');
+    Router.go('/');
+  }
+});
+
 Template.cardItem.events({
   'click div.topic': function() {
     var cardId = this._id;
@@ -21,7 +35,7 @@ Template.cardItem.events({
 });
 
 //Template dashboard
-Template.dashboard.events({
+Template.cards.events({
   'click #btnAddCard': function() {
     //show AddForm
     //UI.insert('cardItem', $('#dashboard').html(), $('#cardList'));
@@ -45,5 +59,35 @@ Template.dashboard.events({
 
     //hide the header
     $('.sub-header').removeClass('hidden').addClass('show');
-  }
+  },
 });
+
+// Template._loginButtonsLoggedInDropdown.events({
+//     'click #startBtn': function(event) {
+//         event.stopPropagation();
+//         Template._loginButtons.toggleDropdown();
+//         console.log("hello");
+//         //Router.go('profileEdit');
+//     }
+// });
+
+Template.intro.events({
+  
+  'click #startBtn': function(event) {
+        //Router.go('/dashboard');
+    if (!Meteor.user()) {
+      if (Meteor.loggingIn()) {
+        console.log('logging in...')
+      }
+      else{
+        //alert("Oops! Please login ➚");
+        Session.set('sAlert', {condition: 'red', effect: 'stackslide', message: 'Oops! Please Login First', position: 'right-bottom', timeout: 10000});
+      }
+    }
+    //Router.go('/dashboard');
+
+  },
+
+});
+
+

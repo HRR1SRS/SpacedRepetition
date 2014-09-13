@@ -81,6 +81,43 @@ body {
 }
 
 
+/* CARDS PAGE CONTENT
+-------------------------------------------------- */
+
+#page-cards .sub-header {
+  float: left;
+}
+
+#page-cards #btnAddCard {
+  float: right;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+#page-cards .panel .btn-primary {
+  float: left;
+}
+
+#page-cards .panel .btn-danger {
+  float: right;
+}
+
+#page-cards #cardForm.show { 
+  position: absolute;
+  top: 51px;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  background: rgba(0,0,0,0.7);
+}
+#page-cards #cardForm .panel-primary {
+  position: absolute;
+  top: 71px;
+  right: 10%;
+  left: 10%;
+}
+
 /* Featurettes
 ------------------------- */
 
@@ -275,4 +312,19 @@ body {
  */
 .center{
   text-align: center;
+}
+
+
+/* Landing Page button */
+#startBtn{
+  background-color:#66cc66;
+  border:none;
+  position: absolute;
+  margin-left: -85px;
+  padding:15px 50px;
+  border-radius:8px;
+  color:white;
+}
+#startBtn:hover{
+  background-color:#54b054;
 }

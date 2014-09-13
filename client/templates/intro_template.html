@@ -53,6 +53,21 @@
   </div><!-- /.carousel -->
 
 
+  <div style="text-align: center;">
+    <Button id="startBtn">Get Started!</Button>
+  </div>
+  {{# if currentUser}}
+  {{/if}}
+    {{> sAlert}}
+
+
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
 
   <!-- Marketing messaging and featurettes
   ================================================== -->
@@ -67,17 +82,19 @@
         <h2>Visual Learning System</h2>
         <p>Interactive. Engage your senses while you study. View and learn with ease.</p>
       </div><!-- /.col-lg-4 -->
+       <div class="col-lg-4">
+        <img class="img-circle" src="3.png" alt="Generic placeholder image" style="width: 231px; height: 130px;">
+        <h2>Spaced Repetition</h2>
+        <p>Reinforce concepts through repetition. Wrong answers repeated frequently to aid retention and make learning faster.</p>
+      </div><!-- /.col-lg-4 -->
       <div class="col-lg-4">
         <img class="img-circle" src="2.png" alt="Generic placeholder image" style="width: 231px; height: 130px;">
         <h2>Progress Tracking</h2>
         <p>Know what you know, and know what you don't.</p>
       </div><!-- /.col-lg-4 -->
-      <div class="col-lg-4">
-        <img class="img-circle" src="3.png" alt="Generic placeholder image" style="width: 231px; height: 130px;">
-        <h2>Spaced Repetition</h2>
-        <p>Reinforce concepts through repetition. Wrong answers repeated frequently to aid retention and make learning faster.</p>
-      </div><!-- /.col-lg-4 -->
+     
     </div><!-- /.row -->
+
 
 
     <!-- START THE FEATURETTES -->
