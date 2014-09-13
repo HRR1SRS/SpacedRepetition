@@ -77,12 +77,14 @@ Template.intro.events({
         //Router.go('/dashboard');
     if (!Meteor.user()) {
       if (Meteor.loggingIn()) {
-      
+        console.log('logging in...')
       }
       else{
-        alert("Oops! Please login ➚");
+        //alert("Oops! Please login ➚");
+        Session.set('sAlert', {condition: 'red', effect: 'stackslide', message: 'Oops! Please Login First', position: 'right-bottom', timeout: 10000});
       }
     }
+    //Router.go('/dashboard');
 
   },
 
