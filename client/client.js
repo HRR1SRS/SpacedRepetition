@@ -7,12 +7,15 @@ Meteor.startup(function () {
 });
 
 Meteor.users.find({ 'status.online': true }).observe({
+  //login action
   added: function(id) {
-    console.log('id just came online');
+    console.log(id.emails[0].address, 'logged in!');
     Router.go('/dashboard');
+    stopMonitor: true;
   },
+  //logout action
   removed: function(id) {
-    console.log('id just went offline');
+    console.log(id.emails[0].address, 'logged out!');
     Router.go('/');
   }
 });
