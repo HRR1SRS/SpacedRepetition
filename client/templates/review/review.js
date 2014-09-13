@@ -288,7 +288,9 @@ Template.review.events({
     console.log(rating, cardId);
     Template.review.updateCardReviewDate(rating, cardId);
     Template.review.displayQuestion();
-    $('.card').removeClass('flipped');
+    $('#card').removeClass('flipped');
+    $('.help').animate({'left': 0}, 100);
+    $('.help-div').fadeOut(1000);
     //$('.question').html('');
   },
   //highlights ratings on mouseover
