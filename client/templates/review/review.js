@@ -56,7 +56,7 @@ Template.review.helpers({
       }
     }
     if (reviewToday.length === 0){
-      $('.question').html('you\'ve completed your review session for all topics on your Review List');
+      $('.question').html('You\'re Review List is empty!');
     }
     return reviewToday;
   },
@@ -277,7 +277,7 @@ Template.review.events({
     //because answer array is populated asyncronously, would have
     //to write a lengthy callback chain to get it to work properly
     
-    if($('.question').text() !== 'you\'ve completed your review session for all topics on your Review List'){
+    if($('.question').text() !== 'You\'re Review List is empty!'){
       Template.review.cardDisplayFunction(currentCard); 
     }
   },
