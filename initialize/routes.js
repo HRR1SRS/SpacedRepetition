@@ -4,7 +4,6 @@ Router.map(function() {
     path: '/'
   });
 
-  // render template 'dashboard' with ALL cards when at path '/dashboard'
   this.route('dashboard', {
   path: '/dashboard/',
   onBeforeAction: function () {
@@ -21,6 +20,7 @@ Router.map(function() {
 });
 
 
+  // render template 'cards' with ALL cards when at path '/cards'
   this.route('cards', {
     path: '/cards/',
       onBeforeAction: function () {
@@ -42,8 +42,8 @@ Router.map(function() {
     }
   });
 
-  // render template 'dashboard' with only cards for selected topic
-  // when at path '/dashboard/:_id' where _id is topicId
+  // render template 'cards' with only cards for selected topic
+  // when at path '/cards/:_id' where _id is topicId
   this.route('cards', {
     path: '/cards/:_id',
     data: function() {
