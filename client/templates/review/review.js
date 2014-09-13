@@ -111,12 +111,8 @@ Template.review.helpers({
           topic.selected = true;
         }
       }
-
-      if (topic.selected === undefined) {
-        topic.selected = false;
-      }
     });
-    console.log(topicsList);
+    
     return topicsList;
   },
   // display User Topics
@@ -306,5 +302,9 @@ Template.review.events({
   //reverts highlight on mouseout
   'mouseout .container p': function(e) {
      $(e.currentTarget).removeAttr('style');
+  },
+
+  'click #card' : function() {
+    $('#card').addClass('flipped');
   }
 });
