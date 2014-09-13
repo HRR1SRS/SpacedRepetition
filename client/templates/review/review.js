@@ -290,7 +290,7 @@ Template.review.events({
     Template.review.displayQuestion();
     $('#card').removeClass('flipped');
     $('.help').animate({'left': 0}, 100);
-    $('.help').animate({'border-color': '#fff'}, 10);
+    $('.help').animate({'border-size': 0}, 10);
     $('.help-div').fadeIn(10);
     //$('.question').html('');
   },
@@ -306,7 +306,7 @@ Template.review.events({
   'click #card': function() {
     $('#card').addClass('flipped');
     $('.help').animate({'left': 500}, 100);
-    $('.help').animate({'border-color': '#000'});
+    $('.help').animate({'border-size': '1px'}, 100);
     $('.help-div').fadeIn(1000);
   },
 
