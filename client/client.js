@@ -34,34 +34,6 @@ Template.cardItem.events({
   }
 });
 
-//Template dashboard
-Template.cards.events({
-  'click #btnAddCard': function() {
-    //show AddForm
-    //UI.insert('cardItem', $('#dashboard').html(), $('#cardList'));
-    $('#cardForm').removeClass('hidden').addClass('show');
-
-    //Show #btnRemoveCard and hide #btnAddCard
-    $('#btnHideCard').removeClass('hidden').addClass('show');
-    $('#btnAddCard').removeClass('show').addClass('hidden');
-
-    //hide the header
-    $('.sub-header').removeClass('show').addClass('hidden');
-  },
-
-  'click #btnHideCard': function() {
-    //hide AddForm
-    $('#cardForm').removeClass('show').addClass('hidden');
-
-    //Hide #btnRemoveCard and show #btnAddCard
-    $('#btnAddCard').removeClass('hidden').addClass('show');
-    $('#btnHideCard').removeClass('show').addClass('hidden');
-
-    //hide the header
-    $('.sub-header').removeClass('hidden').addClass('show');
-  },
-});
-
 // Template._loginButtonsLoggedInDropdown.events({
 //     'click #startBtn': function(event) {
 //         event.stopPropagation();

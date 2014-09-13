@@ -4,7 +4,7 @@
   {{> notifications}}
 
   <div class="panel panel-primary">
-    <div class="panel-heading">Add Card</div>
+    <div class="panel-heading" id="addCardTitle">Add Card</div>
     <div class="panel-body">
       <form role="form" class="panel clearfix">
         <div class="form-group">
@@ -15,7 +15,7 @@
         {{> cardAnswer}}
         <button type="submit" class="btn btn-primary">Submit</button>
         <!-- <button type="cancel" class="btn btn-default">Cancel</button> -->
-        <button type="button" class="btn btn-danger" id="btnHideCard">Hide Card</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Hide Card</button>
       </form>
     </div>
   </div>
