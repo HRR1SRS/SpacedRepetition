@@ -302,5 +302,21 @@ Template.review.events({
 
   'click #card' : function() {
     $('#card').addClass('flipped');
+  },
+
+  'mouseover .star' : function(e) {
+    console.log(e.currentTarget);
+    /*$('.star').hover(
+      function() {
+        var id = $(this).attr('id');
+        $('.t' + id).css('visibility', 'visible');
+        $('.t' + id).fadeIn(500);
+      },
+      function() {
+        var id = $(this).attr('id');
+        $('.t' + id).css('visibility', 'hidden');
+      }
+    );*/
   }
+
 });

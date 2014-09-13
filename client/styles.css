@@ -207,18 +207,48 @@ body {
 .rating {
   unicode-bidi: bidi-override;
   direction: rtl;
+  height: 20px;
 }
 
-.rating > span {
+.rating > .star {
   display: inline-block;
   position: relative;
   width: 0.8em;
 }
 
-.rating > span:hover:before,
-.rating > span:hover ~ span:before {
+.rating > .star:hover:before,
+.rating > .star:hover ~ .star:before {
   content: "\2605";
   position: absolute;
+}
+
+.help {
+  position: relative;
+  width: 400px;
+  height: 260px;
+  border: 1px solid black;
+  border-radius: 5px;
+  z-index: -10;
+}
+
+.help-div {
+  position: relative;
+  display: none;
+  top: 85px
+}
+
+.t1, .t2, .t3, .t4, .t5, .t6 {
+  position: absolute;
+  left: 0px;
+  visibility: hidden;
+  text-align: center;
+  width: 100%;
+  display: block-inline;
+}
+
+.tool {
+  position: relative;
+  top: 50px;
 }
 
 /* RESPONSIVE CSS
