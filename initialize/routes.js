@@ -23,6 +23,18 @@ Router.map(function() {
 
   this.route('cards', {
     path: '/cards/',
+      onBeforeAction: function () {
+    if (!Meteor.user()) {
+      if (Meteor.loggingIn()) {
+        Router.go('/cards');
+      }
+      else{
+        //testing
+         Router.go('/contact');
+        
+      }
+    }
+  },
     data: function() {
       return {
         card: Cards.find({}).fetch()
@@ -41,13 +53,22 @@ Router.map(function() {
       };
     }
   });
-
-  this.route('cards');
-
  
 
   // render template 'review' when at path '/review'
-  this.route('review');
+  this.route('review', {
+    onBeforeAction: function () {
+    if (!Meteor.user()) {
+      if (Meteor.loggingIn()) {
+        Router.go('/review');
+      }
+      else{
+        //testing
+         Router.go('/contact');
+      }
+    }
+  },
+  });
 
   // uncomment the following line to help debug while developing
   // this.route('usersList');

@@ -74,22 +74,18 @@ Template.cards.events({
 Template.intro.events({
   
   'click #startBtn': function(event) {
-        // event.stopPropagation();
-        // Template._loginButtons.toggleDropdown();
         //Router.go('/dashboard');
     if (!Meteor.user()) {
       if (Meteor.loggingIn()) {
-        Router.go('/dashboard');
+      
       }
       else{
-        //Template._loginButtons.toggleDropdown();
-
-        //Router.go('/cards');
+        alert("Oops! Please login ➚");
       }
     }
 
   },
 
-
-
 });
+
+
