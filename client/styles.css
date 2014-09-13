@@ -233,3 +233,17 @@ body {
 #startBtn:hover{
   background-color:#54b054;
 }
+
+
+/* s-alert styling override */ 
+.s-alert-red {
+    background: #cc6666;
+    color: #fff;
+}
+
+.s-alert-right-top {
+  top: 58px;
+  right: 8px;
+  bottom: auto;
+  left: auto;
+}
