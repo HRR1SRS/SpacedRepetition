@@ -81,7 +81,7 @@ Template.intro.events({
       }
       else{
         //alert("Oops! Please login ➚");
-        Session.set('sAlert', {condition: 'red', effect: 'stackslide', message: 'Oops! Please Login First', position: 'right-bottom', timeout: 10000});
+        Session.set('sAlert', {condition: 'red', effect: 'jelly', message: 'Oops! Please Login First', position: 'right-top', timeout: 3000});
       }
     }
     //Router.go('/dashboard');
