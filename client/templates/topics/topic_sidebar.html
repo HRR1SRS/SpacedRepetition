@@ -1,12 +1,15 @@
 <template name="topicSidebar">
-  <div class="col-sm-2 col-md-2 panel-primary">
-    <h4 class="page-header alert alert-info">Topics</h4>
-    <div class="panel-heading"> Select To Display Cards</div>
+  <div class="col-sm-2 col-md-2 panel-primary featurette-divider">
+    <div class="panel-heading">Choose Topics</div>
     <div class="panel-body well">
       <ul class="nav nav-pills nav-stacked" id="topics">
-          <li><a href="/dashboard">All</a></li>
+          <li><a href="/cards" class="{{isSelected ''}}">All</a></li>
         {{#each topicList}}
-          <li><a href="{{pathFor 'cards' _id=this._id}}">{{name}}</a></li>
+          <li>
+            <a href="{{pathFor 'cards' _id=this._id}}" class="{{isSelected this._id}}">
+              {{name}}
+            </a>
+          </li>
         {{/each}}
       </ul>
     </div>
