@@ -302,6 +302,9 @@ Template.review.events({
 
   'click #card' : function() {
     $('#card').addClass('flipped');
+    $('.help').animate({'left': 500}, 100);
+    $('.help').animate({'border-color': '#000'});
+    $('.help-div').fadeIn(1000);
   },
 
   'mouseover .star' : function(e) {
