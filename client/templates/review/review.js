@@ -304,10 +304,12 @@ Template.review.events({
   },
 
   'click #card': function() {
-    $('#card').addClass('flipped');
-    $('.help').animate({'left': 500}, 100);
-    $('.help').animate({'border-size': '1px'}, 100);
-    $('.help-div').fadeIn(1000);
+    if ($('.question').text() !== 'You\'re Review List is empty!') {
+      $('#card').addClass('flipped');
+      $('.help').animate({'left': 500}, 100);
+      $('.help').animate({'border-size': '1px'}, 100);
+      $('.help-div').fadeIn(1000);
+    }
   },
 
   'mouseover .star': function(e) {
