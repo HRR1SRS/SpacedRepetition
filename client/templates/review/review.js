@@ -56,7 +56,7 @@ Template.review.helpers({
       }
     }
     if (reviewToday.length === 0){
-      $('.question').html('<h5>you\'ve completed your review session for all topics on your Review List</h5>');
+      $('.question').html('you\'ve completed your review session for all topics on your Review List');
     }
     return reviewToday;
   },
@@ -276,7 +276,8 @@ Template.review.events({
     //session has been completed. Unable to remove the button
     //because answer array is populated asyncronously, would have
     //to write a lengthy callback chain to get it to work properly
-    if($('.question').has('h5').length === 0){
+    
+    if($('.question').text() !== 'you\'ve completed your review session for all topics on your Review List'){
       Template.review.cardDisplayFunction(currentCard); 
     }
   },
@@ -292,7 +293,6 @@ Template.review.events({
     $('.help').animate({'left': 0}, 100);
     $('.help').animate({'border-size': 0}, 10);
     $('.help-div').fadeIn(10);
-    //$('.question').html('');
   },
   //highlights ratings on mouseover
   'mouseover .container p': function(e) {
