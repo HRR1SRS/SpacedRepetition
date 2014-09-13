@@ -141,7 +141,7 @@ body {
 
 /* Cards
 ------------------------- */
-.container {
+.card-container {
   width: 400px;
   height: 260px;
   position: relative;

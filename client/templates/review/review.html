@@ -2,60 +2,58 @@
   <div class="container-fluid" id="review">
     <div class="row"><h1>Review Card</h1></div>
     <div class="row">
-        <div class="col-sm-2 col-md-2 panel-primary">
-          <div class="panel-heading">Click to Add Topics:</div>
-          <div class="panel-body well">
-            <ul class="nav nav-pills nav-stacked" id="topics">
-              {{#each topicList}}
-                {{#if selected}}
-                  <li><a href="#" class="selected">{{name}}</a></li>
-                {{else}}
-                  <li><a href="#">{{name}}</a></li>
-                {{/if}}
-              {{/each}}
-            </ul>
+      <div class="col-sm-2 col-md-2 panel-primary">
+        <div class="panel-heading">Click to Add Topics:</div>
+        <div class="panel-body well">
+          <ul class="nav nav-pills nav-stacked" id="topics">
+            {{#each topicList}}
+              {{#if selected}}
+                <li><a href="#" class="selected">{{name}}</a></li>
+              {{else}}
+                <li><a href="#">{{name}}</a></li>
+              {{/if}}
+            {{/each}}
+          </ul>
 
-            <ul class="nav nav-pills nav-stacked selectedTopics" style="display:none">
-            {{#each userTopic}}
-              <li><a href="#">{{name}}</a></li>
-              {{/each}}
-            </ul>
-
-          </div>
+          <ul class="nav nav-pills nav-stacked selectedTopics" style="display:none">
+          {{#each userTopic}}
+            <li><a href="#">{{name}}</a></li>
+            {{/each}}
+          </ul>
         </div>
+      </div>
 
-        <!-- <div class="col-sm-5 col-md-5">
-          <div class='card alert alert-info'>
-            <p class='question'></p>
-            <br>
-            <div class='answerblock alert alert-danger'> 
-            </div>
-            <button class="button">Show Answer</button>
+      <!-- <div class="col-sm-5 col-md-5">
+        <div class='card alert alert-info'>
+          <p class='question'></p>
+          <br>
+          <div class='answerblock alert alert-danger'>
           </div>
-        </div> -->
+          <button class="button">Show Answer</button>
+        </div>
+      </div> -->
 
-        <div class="col-sm-5 col-md-5 container">
-          <div id="card">
-            <figure class="front">
-              <p class="question"></p>
-            </figure>
-            <figure class="answerblock back">
-              <div class="ratingsBlock center">
-                <p class="answer"><b>carbon dioxide</b></p>
-                <h4>Confidence Level:</h4>
-                <div class="rating">
-                  <span id="1">☆</span>
-                  <span id="2">☆</span>
-                  <span id="3">☆</span>
-                  <span id="4">☆</span>
-                  <span id="5">☆</span>
-                  <span id="6">☆</span>
-                </div>
+      <div class="col-sm-5 col-md-5 card-container">
+        <div id="card">
+          <figure class="front">
+            <p class="question"></p>
+          </figure>
+          <figure class="answerblock back">
+            <div class="ratingsBlock center">
+              <p class="answer"><b>carbon dioxide</b></p>
+              <h4>Confidence Level:</h4>
+              <div class="rating">
+                <span id="1">☆</span>
+                <span id="2">☆</span>
+                <span id="3">☆</span>
+                <span id="4">☆</span>
+                <span id="5">☆</span>
+                <span id="6">☆</span>
+              </div>
             </div>
           </figure>
         </div>
       </div>
     </div>
   </div>
-
 </template>
