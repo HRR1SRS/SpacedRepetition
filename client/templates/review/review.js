@@ -11,9 +11,9 @@ Template.review.helpers({
     //   }
     //   return '<div display="inline">'+star+'<button class="response">submit</button></div>';
     // };
-    $('.answerblock').append('<p class="answer"><b>'+arg.answer+'</b></p>');
+    $('.answer b').text(arg.answer);
     $('.button').remove();
-    $('.card').append(
+    /*$('.card').append(
       '<div class="container ratingsBlock">'
       +'<h4>Click a rating below:</h4>'
       +'<p class="6">Perfect Response...Total Domination!</p>'
@@ -22,7 +22,7 @@ Template.review.helpers({
       +'<p class="3">Incorrect Response...Aw snap, I should have known that.</p>'
       +'<p class="2">Incorrect Response, Oh yeah I kind of remember that now.</p>'
       +'<p class="1">Total blackout...Not in a million years.</p>'
-      +'</div>');
+      +'</div>');*/
   },
   // get milisecond value at midnight for use
   // in calculating today's review cards
@@ -56,7 +56,7 @@ Template.review.helpers({
       }
     }
     if (reviewToday.length === 0){
-      $('.question').html('<h5>you\'ve completed your review session for all topics on your Review List</h5>');
+      $('.question').html('You\'re Review List is empty!');
     }
     return reviewToday;
   },
@@ -96,13 +96,24 @@ Template.review.helpers({
       currentCard = Cards.find({_id: cardId._cardId}).fetch();
       // pull card out of array
       currentCard = currentCard[0];
-      $('.question').append('<div style="visibility: hidden;" class="_id">'+cardId._cardId+'</div>');
+      $('.question').append('<div style="display: none;" class="_id">'+cardId._cardId+'</div>');
       $('.question').append(currentCard.question);
     }
   },
   //displays lists of topics available from the topics collection
   topicList: function() {
-    return Topics.find().fetch();
+    var topicsList = Topics.find().fetch();
+    var userTopicsList = Template.review.userTopic();
+
+    topicsList.forEach(function(topic) {
+      for (var i = 0; i < userTopicsList.length; i++) {
+        if (topic.name === userTopicsList[i].name) {
+          topic.selected = true;
+        }
+      }
+    });
+    
+    return topicsList;
   },
   // display User Topics
   userTopic: function() {
@@ -190,6 +201,7 @@ Template.review.helpers({
       }
     }
   },
+
   //algorithm for calculating easiness factor 
   setEasinessFactor: function(q, oldEF) {
     // calculate quality score from SM-2
@@ -246,7 +258,7 @@ Template.review.helpers({
 Template.review.events({
   //populates and removes review topics 
   'click #topics li': function() {
-    var context = this; 
+    var context = this;
     if(!context._id){
       var retrieveTopicId = Topics.find({name: context.name}).fetch();
       context = retrieveTopicId[0];
@@ -258,26 +270,28 @@ Template.review.events({
     Template.review.createReviewList(context._id, Template.review.addCardsToReviewList);
   },
   //button to reveal answer
-  'click .button': function() {
+  'click .front': function() {
     //workaround to async problems with database lookup
     //this condition disables answer button if review
     //session has been completed. Unable to remove the button
     //because answer array is populated asyncronously, would have
     //to write a lengthy callback chain to get it to work properly
-    if($('.question').has('h5').length === 0){
+    
+    if($('.question').text() !== 'Your Review List is empty!'){
       Template.review.cardDisplayFunction(currentCard); 
     }
   },
   //clicks on rating and submits card id for 
-  'click .container p': function(e) {
+  'click .rating span': function(e) {
+    console.log(e);
     var rating = e.currentTarget.classList[0];
     var cardId = $('._id').text();
+    console.log(rating, cardId);
     Template.review.updateCardReviewDate(rating, cardId);
-    $('.ratingsBlock').remove();
     Template.review.displayQuestion();
-    $('.question').html('');
-    $('.answerblock').html('');
-    $('.answerblock').after('<button class="button">click to see answer</button>');
+    $('#card').removeClass('flipped');
+    $('.help').animate({'left': 0}, 250);
+    $('.help-div').fadeIn(10);
   },
   //highlights ratings on mouseover
   'mouseover .container p': function(e) {
@@ -286,5 +300,25 @@ Template.review.events({
   //reverts highlight on mouseout
   'mouseout .container p': function(e) {
      $(e.currentTarget).removeAttr('style');
+  },
+
+  'click #card': function() {
+    if ($('.question').text() !== 'Your Review List is empty!') {
+      $('#card').addClass('flipped');
+      $('.help').animate({'left': 500}, 100);
+      $('.help-div').fadeIn(1000);
+    }
+  },
+
+  'mouseover .star': function(e) {
+    var id = $(e.currentTarget).attr('id');
+    $('.t' + id).css('visibility', 'visible');
+    $('.t' + id).fadeIn(500);
+  },
+
+  'mouseout .star': function(e) {
+    var id = $(e.currentTarget).attr('id');
+    $('.t' + id).css('visibility', 'hidden');
   }
+
 });

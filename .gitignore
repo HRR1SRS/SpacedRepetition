@@ -31,3 +31,10 @@ bower_components/
 # floobits
 .floo
 .flooignore
+
+# windows
+.meteor
+.vagrant
+meteor.sh
+packages
+Vagrantfile
