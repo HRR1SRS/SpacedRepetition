@@ -319,6 +319,12 @@ Template.review.events({
   'mouseout .star': function(e) {
     var id = $(e.currentTarget).attr('id');
     $('.t' + id).css('visibility', 'hidden');
+  },
+
+  'mouseover #card': function(e) {
+    if ($('.question').text() === '') {
+      Template.review.displayQuestion();
+    }
   }
 
 });
