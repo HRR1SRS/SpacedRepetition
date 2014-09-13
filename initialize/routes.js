@@ -13,8 +13,8 @@ Router.map(function() {
         Router.go('/dashboard');
       }
       else{
-        //testing
-        Router.go('/contact');
+        Router.go('/');
+        Session.set('sAlert', {condition: 'red', effect: 'jelly', message: 'Oops! Please Login First', position: 'right-top', timeout: 3000});
       }
     }
   }
@@ -29,8 +29,8 @@ Router.map(function() {
         Router.go('/cards');
       }
       else{
-        //testing
-         Router.go('/contact');
+         Router.go('/');
+         Session.set('sAlert', {condition: 'red', effect: 'jelly', message: 'Oops! Please Login First', position: 'right-top', timeout: 3000});
         
       }
     }
@@ -63,8 +63,8 @@ Router.map(function() {
         Router.go('/review');
       }
       else{
-        //testing
-         Router.go('/contact');
+         Router.go('/');
+         Session.set('sAlert', {condition: 'red', effect: 'jelly', message: 'Oops! Please Login First', position: 'right-top', timeout: 3000});
       }
     }
   },

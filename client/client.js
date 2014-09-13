@@ -35,30 +35,18 @@ Template.cardItem.events({
   }
 });
 
-// Template._loginButtonsLoggedInDropdown.events({
-//     'click #startBtn': function(event) {
-//         event.stopPropagation();
-//         Template._loginButtons.toggleDropdown();
-//         console.log("hello");
-//         //Router.go('profileEdit');
-//     }
-// });
-
 Template.intro.events({
   
   'click #startBtn': function(event) {
-        //Router.go('/dashboard');
     if (!Meteor.user()) {
       if (Meteor.loggingIn()) {
-        console.log('logging in...')
+        console.log('logging in...');
+        Router.go('/dashboard');
       }
       else{
-        //alert("Oops! Please login ➚");
         Session.set('sAlert', {condition: 'red', effect: 'jelly', message: 'Oops! Please Login First', position: 'right-top', timeout: 3000});
       }
     }
-    //Router.go('/dashboard');
-
   },
 
 });
