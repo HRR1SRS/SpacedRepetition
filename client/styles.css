@@ -316,7 +316,7 @@ body {
 
 
 /* Landing Page button */
-#startBtn{
+#startBtn {
   background-color:#66cc66;
   border:none;
   position: absolute;
@@ -325,6 +325,7 @@ body {
   border-radius:8px;
   color:white;
 }
-#startBtn:hover{
+
+#startBtn:hover {
   background-color:#54b054;
 }
