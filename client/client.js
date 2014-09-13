@@ -6,6 +6,20 @@ Meteor.startup(function () {
   });
 });
 
+Meteor.users.find({ 'status.online': true }).observe({
+  //login action
+  added: function(id) {
+    console.log(id.emails[0].address, 'logged in!');
+    Router.go('/dashboard');
+    stopMonitor: true;
+  },
+  //logout action
+  removed: function(id) {
+    console.log(id.emails[0].address, 'logged out!');
+    Router.go('/');
+  }
+});
+
 Template.cardItem.events({
   'click div.topic': function() {
     var cardId = this._id;
@@ -60,10 +74,22 @@ Template.cards.events({
 Template.intro.events({
   
   'click #startBtn': function(event) {
-        //event.stopPropagation();
-        //Template._loginButtons.toggleDropdown();
+        // event.stopPropagation();
+        // Template._loginButtons.toggleDropdown();
         //Router.go('/dashboard');
+    if (!Meteor.user()) {
+      if (Meteor.loggingIn()) {
         Router.go('/dashboard');
+      }
+      else{
+        //Template._loginButtons.toggleDropdown();
+
+        //Router.go('/cards');
+      }
+    }
+
   },
+
+
 
 });
