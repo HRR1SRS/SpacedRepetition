@@ -281,7 +281,8 @@ Template.review.events({
     }
   },
   //clicks on rating and submits card id for 
-  'click .container span': function(e) {
+  'click .rating span': function(e) {
+    console.log(e);
     var rating = e.currentTarget.classList[0];
     var cardId = $('._id').text();
     Template.review.updateCardReviewDate(rating, cardId);
