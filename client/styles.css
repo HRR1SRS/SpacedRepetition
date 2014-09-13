@@ -94,6 +94,14 @@ body {
   margin-bottom: 10px;
 }
 
+#page-cards .panel .btn-primary {
+  float: left;
+}
+
+#page-cards .panel .btn-danger {
+  float: right;
+}
+
 /* Featurettes
 ------------------------- */
 
