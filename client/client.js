@@ -11,7 +11,7 @@ Meteor.users.find({ 'status.online': true }).observe({
   //login action
   added: function(id) {
     console.log(id.emails[0].address, 'logged in!');
-    Router.go('/dashboard');
+    Router.go('/cards');
     stopMonitor: true;
   },
   //logout action
@@ -41,7 +41,7 @@ Template.intro.events({
     if (!Meteor.user()) {
       if (Meteor.loggingIn()) {
         console.log('logging in...');
-        Router.go('/dashboard');
+        Router.go('/cards');
       }
       else{
         Session.set('sAlert', {condition: 'red', effect: 'jelly', message: 'Oops! Please Login First', position: 'right-top', timeout: 3000});

@@ -4,20 +4,20 @@ Router.map(function() {
     path: '/'
   });
 
-  this.route('dashboard', {
-  path: '/dashboard/',
-  onBeforeAction: function () {
-    if (!Meteor.user()) {
-      if (Meteor.loggingIn()) {
-        Router.go('/dashboard');
-      }
-      else{
-        Router.go('/');
-        Session.set('sAlert', {condition: 'red', effect: 'jelly', message: 'Oops! Please Login First', position: 'right-top', timeout: 3000});
-      }
-    }
-  }
-});
+//   this.route('dashboard', {
+//   path: '/dashboard/',
+//   onBeforeAction: function () {
+//     if (!Meteor.user()) {
+//       if (Meteor.loggingIn()) {
+//         Router.go('/dashboard');
+//       }
+//       else{
+//         Router.go('');
+//         Session.set('sAlert', {condition: 'red', effect: 'jelly', message: 'Oops! Please Login First', position: 'right-top', timeout: 3000});
+//       }
+//     }
+//   }
+// });
 
 
   // render template 'cards' with ALL cards when at path '/cards'
@@ -29,7 +29,7 @@ Router.map(function() {
         Router.go('/cards');
       }
       else{
-         Router.go('/');
+         Router.go('');
          Session.set('sAlert', {condition: 'red', effect: 'jelly', message: 'Oops! Please Login First', position: 'right-top', timeout: 3000});
         
       }
@@ -63,7 +63,7 @@ Router.map(function() {
         Router.go('/review');
       }
       else{
-         Router.go('/');
+         Router.go('');
          Session.set('sAlert', {condition: 'red', effect: 'jelly', message: 'Oops! Please Login First', position: 'right-top', timeout: 3000});
       }
     }
