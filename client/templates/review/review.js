@@ -321,7 +321,7 @@ Template.review.events({
     $('.t' + id).css('visibility', 'hidden');
   },
 
-  'mouseover body': function(e) {
+  'mouseover .container-fluid': function() {
     if ($('.question').text() === '') {
       Template.review.displayQuestion();
     }
