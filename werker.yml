@@ -1,0 +1,19 @@
+box: mies/meteor
+build:
+  steps:
+    - script:
+        name: echo nodejs information
+        code: |
+          echo "node version $(node -v) running"
+          echo "npm version $(npm -v) runnin:g"
+    - script:
+        name: install laika
+        code: sudo npm install -g laika
+    - script:
+        name: run laika
+        code: laika -D
+deploy:
+  steps:
+    - script:
+        name: meteor_deploy
+        code: meteor deploy spaced.meteor.com
