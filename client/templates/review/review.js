@@ -277,7 +277,7 @@ Template.review.events({
     //because answer array is populated asyncronously, would have
     //to write a lengthy callback chain to get it to work properly
     
-    if($('.question').text() !== 'Your Review List is empty!'){
+    if($('.question').text() !== 'Your Review List is empty!' || $('.question').text() === ''){
       Template.review.cardDisplayFunction(currentCard); 
     }
   },
@@ -290,7 +290,7 @@ Template.review.events({
     Template.review.updateCardReviewDate(rating, cardId);
     Template.review.displayQuestion();
     $('#card').removeClass('flipped');
-    $('.help').animate({'left': 0}, 250);
+    $('.help').animate({'left': 0}, 500);
     $('.help-div').fadeIn(10);
   },
   //highlights ratings on mouseover
@@ -303,7 +303,7 @@ Template.review.events({
   },
 
   'click #card': function() {
-    if ($('.question').text() !== 'Your Review List is empty!') {
+    if ($('.question').text() !== 'Your Review List is empty!' || $('.question').text() === '') {
       $('#card').addClass('flipped');
       $('.help').animate({'left': 500}, 100);
       $('.help-div').fadeIn(1000);
