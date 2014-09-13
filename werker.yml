@@ -1,4 +1,4 @@
-box: mies/meteor
+box: wercker/default
 build:
   steps:
     - script:

@@ -1,5 +1,8 @@
 # HR SRS
 
+[![wercker status](https://app.wercker.com/status/75adf6272b2670a210a4c4df6d95f958/m "wercker status")](https://app.wercker.com/project/bykey/75adf6272b2670a210a4c4df6d95f958)
+
+
 HR SRS is a study aid that leverages the principles of [Spaced Repetition](http://en.wikipedia.org/wiki/Spaced_repetition). You can find a deployed version [here](http://hr-srs.meteor.com/).
 
 ## Team
