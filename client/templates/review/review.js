@@ -270,7 +270,7 @@ Template.review.events({
     Template.review.createReviewList(context._id, Template.review.addCardsToReviewList);
   },
   //button to reveal answer
-  'click .card': function() {
+  'click .front': function() {
     //workaround to async problems with database lookup
     //this condition disables answer button if review
     //session has been completed. Unable to remove the button
@@ -285,11 +285,9 @@ Template.review.events({
     var rating = e.currentTarget.classList[0];
     var cardId = $('._id').text();
     Template.review.updateCardReviewDate(rating, cardId);
-    $('.ratingsBlock').remove();
     Template.review.displayQuestion();
-    $('.question').html('');
-    $('.answerblock').html('');
-    $('.answerblock').after('<button class="button">click to see answer</button>');
+    $('.card').removeClass('flipped');
+    //$('.question').html('');
   },
   //highlights ratings on mouseover
   'mouseover .container p': function(e) {
