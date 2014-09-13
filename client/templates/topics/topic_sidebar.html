@@ -6,7 +6,7 @@
       <ul class="nav nav-pills nav-stacked" id="topics">
           <li><a href="/dashboard">All</a></li>
         {{#each topicList}}
-          <li><a href="{{pathFor 'dashboard' _id=this._id}}">{{name}}</a></li>
+          <li><a href="{{pathFor 'cards' _id=this._id}}">{{name}}</a></li>
         {{/each}}
       </ul>
     </div>
