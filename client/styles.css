@@ -8,7 +8,10 @@ body {
   color: #5a5a5a;
 }
 
-
+.selected {
+  background-color: #428bca;
+  color: white;
+}
 
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
@@ -130,13 +133,6 @@ body {
   font-weight: 300;
   line-height: 1;
   letter-spacing: -1px;
-}
-
-/* Selected Topics
-------------------------- */
-.selected {
-  background-color: #428bca;
-  color: white;
 }
 
 /* Cards

@@ -11,9 +11,9 @@ Template.review.helpers({
     //   }
     //   return '<div display="inline">'+star+'<button class="response">submit</button></div>';
     // };
-    $('.answerblock').append('<p class="answer"><b>'+arg.answer+'</b></p>');
+    $('.answer b').text(arg.answer);
     $('.button').remove();
-    $('.card').append(
+    /*$('.card').append(
       '<div class="container ratingsBlock">'
       +'<h4>Click a rating below:</h4>'
       +'<p class="6">Perfect Response...Total Domination!</p>'
@@ -22,7 +22,7 @@ Template.review.helpers({
       +'<p class="3">Incorrect Response...Aw snap, I should have known that.</p>'
       +'<p class="2">Incorrect Response, Oh yeah I kind of remember that now.</p>'
       +'<p class="1">Total blackout...Not in a million years.</p>'
-      +'</div>');
+      +'</div>');*/
   },
   // get milisecond value at midnight for use
   // in calculating today's review cards
@@ -96,7 +96,7 @@ Template.review.helpers({
       currentCard = Cards.find({_id: cardId._cardId}).fetch();
       // pull card out of array
       currentCard = currentCard[0];
-      $('.question').append('<div style="visibility: hidden;" class="_id">'+cardId._cardId+'</div>');
+      $('.question').append('<div style="display: none;" class="_id">'+cardId._cardId+'</div>');
       $('.question').append(currentCard.question);
     }
   },
@@ -129,10 +129,6 @@ Template.review.helpers({
       Template.review.displayQuestion();
       return userTopicArr;
     }
-  },
-  // Creates an object that has selected tags on it with the topics the user has chosen
-  filteredTopics: function() {
-
   },
   // create a review list on user.profile
   createReviewList: function(_id, callback) {
@@ -274,7 +270,7 @@ Template.review.events({
     Template.review.createReviewList(context._id, Template.review.addCardsToReviewList);
   },
   //button to reveal answer
-  'click .button': function() {
+  'click .card': function() {
     //workaround to async problems with database lookup
     //this condition disables answer button if review
     //session has been completed. Unable to remove the button
