@@ -1,6 +1,9 @@
 <template name="cards">
 
   <div class="container-fluid" id="page-cards">
+  <div id="cardForm" class="hidden">
+    {{> cardItem}}
+  </div>
     <div class="row">
 
       {{> topicSidebar}}
@@ -15,9 +18,6 @@
           <!-- <div id="cardForm" class="hidden col-sm-6 col-md-6">
             {{> cardItem}}
           </div> -->
-          <div id="cardForm" class="hidden">
-            {{> addCard}}
-          </div>
 
           <h2 class="sub-header">Card List</h2>
           <button type="button" class="btn btn-primary" id="btnAddCard">
