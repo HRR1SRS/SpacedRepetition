@@ -81,6 +81,19 @@ body {
 }
 
 
+/* CARDS PAGE CONTENT
+-------------------------------------------------- */
+
+#page-cards .sub-header {
+  float: left;
+}
+
+#page-cards #btnAddCard {
+  float: right;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
 /* Featurettes
 ------------------------- */
 

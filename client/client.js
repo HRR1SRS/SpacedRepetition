@@ -35,7 +35,7 @@ Template.cardItem.events({
 });
 
 //Template dashboard
-Template.dashboard.events({
+Template.cards.events({
   'click #btnAddCard': function() {
     //show AddForm
     //UI.insert('cardItem', $('#dashboard').html(), $('#cardList'));
