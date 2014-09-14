@@ -9,7 +9,7 @@ body {
 }
 
 .selected, .selected:hover {
-  background-color: #428bca;
+  background-color: #428bca !important;
   color: white;
 }
 
