@@ -8,6 +8,7 @@ body {
   color: #5a5a5a;
 }
 
+
 .selected, .selected:hover, li a.selected:hover {
   background-color: #428bca;
   color: white;
@@ -205,6 +206,7 @@ body {
   display: inline-block;
   position: relative;
   width: 0.8em;
+  font-size: 30px;
 }
 
 .rating > .star:hover:before,

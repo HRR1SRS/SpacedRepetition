@@ -56,7 +56,7 @@ Template.review.helpers({
       }
     }
     if (reviewToday.length === 0){
-      $('.question').html('You\'re Review List is empty!');
+      $('.question').html('Your Review List is empty!');
     }
     return reviewToday;
   },
@@ -104,6 +104,10 @@ Template.review.helpers({
   topicList: function() {
     var topicsList = Topics.find().fetch();
     var userTopicsList = Template.review.userTopic();
+
+    if (userTopicsList === undefined) {
+      return topicsList;
+    }
 
     topicsList.forEach(function(topic) {
       for (var i = 0; i < userTopicsList.length; i++) {
@@ -277,8 +281,8 @@ Template.review.events({
     //because answer array is populated asyncronously, would have
     //to write a lengthy callback chain to get it to work properly
     
-    if($('.question').text() !== 'Your Review List is empty!'){
-      Template.review.cardDisplayFunction(currentCard); 
+    if($('.question').text() !== 'Your Review List is empty!') {
+      Template.review.cardDisplayFunction(currentCard);
     }
   },
   //clicks on rating and submits card id for 
@@ -290,7 +294,7 @@ Template.review.events({
     Template.review.updateCardReviewDate(rating, cardId);
     Template.review.displayQuestion();
     $('#card').removeClass('flipped');
-    $('.help').animate({'left': 0}, 250);
+    $('.help').animate({'left': 0}, 500);
     $('.help-div').fadeIn(10);
   },
   //highlights ratings on mouseover
@@ -305,7 +309,7 @@ Template.review.events({
   'click #card': function() {
     if ($('.question').text() !== 'Your Review List is empty!') {
       $('#card').addClass('flipped');
-      $('.help').animate({'left': 500}, 100);
+      $('.help').animate({'left': 500}, 500);
       $('.help-div').fadeIn(1000);
     }
   },
@@ -319,6 +323,12 @@ Template.review.events({
   'mouseout .star': function(e) {
     var id = $(e.currentTarget).attr('id');
     $('.t' + id).css('visibility', 'hidden');
+  },
+
+  'mouseover .container-fluid': function() {
+    if ($('.question').text() === '') {
+      Template.review.displayQuestion();
+    }
   }
 
 });
