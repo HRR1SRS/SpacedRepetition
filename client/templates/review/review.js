@@ -309,7 +309,7 @@ Template.review.events({
   'click #card': function() {
     if ($('.question').text() !== 'Your Review List is empty!') {
       $('#card').addClass('flipped');
-      $('.help').animate({'left': 500}, 100);
+      $('.help').animate({'left': 500}, 500);
       $('.help-div').fadeIn(1000);
     }
   },
