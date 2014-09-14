@@ -4,22 +4,6 @@ Router.map(function() {
     path: '/'
   });
 
-  this.route('dashboard', {
-  path: '/cards/',
-  onBeforeAction: function () {
-    if (!Meteor.user()) {
-      if (Meteor.loggingIn()) {
-        Router.go('/cards');
-      }
-      else{
-        Router.go('/');
-        Session.set('sAlert', {condition: 'red', effect: 'jelly', message: 'Oops! Please Login First', position: 'right-top', timeout: 3000});
-      }
-    }
-  }
-});
-
-
   // render template 'cards' with ALL cards when at path '/cards'
   this.route('cards', {
     path: '/cards/',
