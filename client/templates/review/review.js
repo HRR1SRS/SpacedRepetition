@@ -56,7 +56,7 @@ Template.review.helpers({
       }
     }
     if (reviewToday.length === 0){
-      $('.question').html('You\'re Review List is empty!');
+      $('.question').html('Your Review List is empty!');
     }
     return reviewToday;
   },
@@ -282,9 +282,7 @@ Template.review.events({
     //to write a lengthy callback chain to get it to work properly
     
     if($('.question').text() !== 'Your Review List is empty!') {
-      if ($('.question').text() !== '') {
-        Template.review.cardDisplayFunction(currentCard); 
-      }
+      Template.review.cardDisplayFunction(currentCard);
     }
   },
   //clicks on rating and submits card id for 
@@ -310,11 +308,9 @@ Template.review.events({
 
   'click #card': function() {
     if ($('.question').text() !== 'Your Review List is empty!') {
-      if ($('.question').text() !== '') {
-        $('#card').addClass('flipped');
-        $('.help').animate({'left': 500}, 100);
-        $('.help-div').fadeIn(1000);
-      }
+      $('#card').addClass('flipped');
+      $('.help').animate({'left': 500}, 100);
+      $('.help-div').fadeIn(1000);
     }
   },
 
