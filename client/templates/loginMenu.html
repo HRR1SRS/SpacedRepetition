@@ -17,12 +17,12 @@
             <ul class="nav navbar-nav navbar-right">
               <!-- DISPLAY LINKS IF CURRENT USER IS LOGGED IN -->
               {{# if currentUser}}
-              <li><a href="/cards">Cards</a></li>
-              <li><a href="{{pathFor 'review'}}">Review</a></li>
+              <li><a href="/cards" class="nav-item {{isSelected 'cards'}}">Cards</a></li>
+              <li><a href="{{pathFor 'review'}}" class="nav-item {{isSelected 'review'}}">Review</a></li>
               <!-- <li><a href="{{pathFor 'usersList'}}">Users List</a></li> -->
               {{/if}}
 
-              <li><a href="{{pathFor 'contact'}}">Contact</a></li>
+              <li><a href="{{pathFor 'contact'}}" class="nav-item {{isSelected 'contact'}}">Contact</a></li>
               {{> loginButtons}}
             </ul>
           </div>
