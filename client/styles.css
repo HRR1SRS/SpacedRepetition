@@ -131,7 +131,7 @@ li a.selected:hover,
   letter-spacing: -1px;
 }
 
-/* Cards
+/* Cards - Animations
 ------------------------- */
 .card-container {
   width: 400px;
@@ -200,6 +200,9 @@ li a.selected:hover,
 
 }
 
+/* Star - Animations
+----------------------*/
+
 .rating {
   unicode-bidi: bidi-override;
   direction: rtl;
@@ -219,6 +222,8 @@ li a.selected:hover,
   position: absolute;
 }
 
+/* Help DIV
+--------------*/
 .help {
   position: relative;
   width: 400px;
