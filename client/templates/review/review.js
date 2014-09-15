@@ -287,23 +287,14 @@ Template.review.events({
   },
   //clicks on rating and submits card id for 
   'click .rating span': function(e) {
-    console.log(e);
-    var rating = e.currentTarget.classList[0];
+    var rating = e.currentTarget.classList[1];
     var cardId = $('._id').text();
-    console.log(rating, cardId);
+
     Template.review.updateCardReviewDate(rating, cardId);
     Template.review.displayQuestion();
     $('#card').removeClass('flipped');
     $('.help').animate({'left': 0}, 500);
     $('.help-div').fadeIn(10);
-  },
-  //highlights ratings on mouseover
-  'mouseover .container p': function(e) {
-    $(e.currentTarget).css({'color':'YellowGreen', 'font-weight': 'bold' });  
-  },
-  //reverts highlight on mouseout
-  'mouseout .container p': function(e) {
-     $(e.currentTarget).removeAttr('style');
   },
 
   'click #card': function() {
