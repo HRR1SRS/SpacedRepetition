@@ -219,7 +219,6 @@ Template.review.helpers({
   },
   //updates next review date for user
   updateCardReviewDate: function(rating, _id) {
-    console.log(rating, _id);
     // get current user
     var user = Meteor.user();
     // get card _id
@@ -288,8 +287,7 @@ Template.review.events({
   },
   //clicks on rating and submits card id for 
   'click .rating span': function(e) {
-    console.log(e);
-    var rating = e.currentTarget.classList[0];
+    var rating = e.currentTarget.classList[1];
     var cardId = $('._id').text();
     console.log(rating, cardId);
     Template.review.updateCardReviewDate(rating, cardId);
