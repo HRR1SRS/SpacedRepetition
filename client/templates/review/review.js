@@ -219,6 +219,7 @@ Template.review.helpers({
   },
   //updates next review date for user
   updateCardReviewDate: function(rating, _id) {
+    console.log(rating, _id);
     // get current user
     var user = Meteor.user();
     // get card _id
@@ -296,14 +297,6 @@ Template.review.events({
     $('#card').removeClass('flipped');
     $('.help').animate({'left': 0}, 500);
     $('.help-div').fadeIn(10);
-  },
-  //highlights ratings on mouseover
-  'mouseover .container p': function(e) {
-    $(e.currentTarget).css({'color':'YellowGreen', 'font-weight': 'bold' });  
-  },
-  //reverts highlight on mouseout
-  'mouseout .container p': function(e) {
-     $(e.currentTarget).removeAttr('style');
   },
 
   'click #card': function() {
