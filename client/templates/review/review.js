@@ -289,7 +289,7 @@ Template.review.events({
   'click .rating span': function(e) {
     var rating = e.currentTarget.classList[1];
     var cardId = $('._id').text();
-    console.log(rating, cardId);
+
     Template.review.updateCardReviewDate(rating, cardId);
     Template.review.displayQuestion();
     $('#card').removeClass('flipped');
