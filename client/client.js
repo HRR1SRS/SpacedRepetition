@@ -6,19 +6,22 @@ Meteor.startup(function () {
   });
 });
 
-// mizzao:user-status used for determning login status
+// mizzao:user-status used for determning login status & routing triggers
 Meteor.users.find({ 'status.online': true }).observe({
   //login action
   added: function(id) {
     console.log(id.emails[0].address, 'logged in!');
     Router.go('/cards');
+    //clears selected menu item
     $('.nav-item').removeClass('selected');
     $(event.target).addClass('selected');
+    //prevents router from navigating back to cards constantly
     stopMonitor: true;
   },
   //logout action
   removed: function(id) {
     console.log(id.emails[0].address, 'logged out!');
+    //sets selected menu item to be cards
     $('.nav-item').removeClass('selected');
     Router.go('/');
   }
@@ -47,6 +50,7 @@ Template.intro.events({
         Router.go('/cards');
       }
       else{
+        //call s-Alert box if not logged in
         Session.set('sAlert', {condition: 'red', effect: 'jelly', message: 'Oops! Please Login First', position: 'right-top', timeout: 3000});
       }
     }
