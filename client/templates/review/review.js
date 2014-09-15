@@ -104,13 +104,14 @@ Template.review.helpers({
   topicList: function() {
     var topicsList = Topics.find().fetch();
     var userTopicsList = Template.review.userTopic();
-
+    // Checks to see if the user has no selected review topics
     if (userTopicsList === undefined) {
       return topicsList;
     }
-
+    // Checks to see if the user has selected topics
     topicsList.forEach(function(topic) {
       for (var i = 0; i < userTopicsList.length; i++) {
+        // If they did assigns a true value to selected
         if (topic.name === userTopicsList[i].name) {
           topic.selected = true;
         }
@@ -292,30 +293,34 @@ Template.review.events({
 
     Template.review.updateCardReviewDate(rating, cardId);
     Template.review.displayQuestion();
+    // Flips the card back over and removes the text from the helper div
     $('#card').removeClass('flipped');
     $('.help').animate({'left': 0}, 500);
-    $('.help-div').fadeIn(10);
+    $('.help-div').fadeOut(10);
   },
 
   'click #card': function() {
+    // Only allows clicks if a question is displayed
     if ($('.question').text() !== 'Your Review List is empty!') {
+      // Animation for flipping card and confidence reveal
       $('#card').addClass('flipped');
       $('.help').animate({'left': 500}, 500);
       $('.help-div').fadeIn(1000);
     }
   },
-
+  // Shows meaning of the star
   'mouseover .star': function(e) {
     var id = $(e.currentTarget).attr('id');
     $('.t' + id).css('visibility', 'visible');
     $('.t' + id).fadeIn(500);
   },
-
+  // Removes meaning of star
   'mouseout .star': function(e) {
     var id = $(e.currentTarget).attr('id');
     $('.t' + id).css('visibility', 'hidden');
   },
 
+  // Loads a question if there is nothing displayed
   'mouseover .container-fluid': function() {
     if ($('.question').text() === '') {
       Template.review.displayQuestion();

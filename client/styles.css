@@ -127,7 +127,7 @@ body {
   letter-spacing: -1px;
 }
 
-/* Cards
+/* Cards - Animations
 ------------------------- */
 .card-container {
   width: 400px;
@@ -196,6 +196,9 @@ body {
 
 }
 
+/* Star - Animations
+----------------------*/
+
 .rating {
   unicode-bidi: bidi-override;
   direction: rtl;
@@ -215,6 +218,8 @@ body {
   position: absolute;
 }
 
+/* Help DIV
+--------------*/
 .help {
   position: relative;
   width: 400px;
