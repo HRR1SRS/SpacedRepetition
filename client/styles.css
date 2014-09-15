@@ -9,7 +9,11 @@ body {
 }
 
 
-.selected, .selected:hover, li a.selected:hover {
+.selected, 
+.selected:hover,
+li a.selected:hover,
+.nav a.nav-item.selected,
+.nav a.nav-item.selected:hover {
   background-color: #428bca;
   color: white;
 }

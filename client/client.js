@@ -12,11 +12,14 @@ Meteor.users.find({ 'status.online': true }).observe({
   added: function(id) {
     console.log(id.emails[0].address, 'logged in!');
     Router.go('/cards');
+    $('.nav-item').removeClass('selected');
+    $(event.target).addClass('selected');
     stopMonitor: true;
   },
   //logout action
   removed: function(id) {
     console.log(id.emails[0].address, 'logged out!');
+    $('.nav-item').removeClass('selected');
     Router.go('/');
   }
 });
