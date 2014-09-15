@@ -2,6 +2,6 @@
 // should only exist for development environments
 // should be REMOVED for production environments
 
-// Meteor.publish('userList', function() {
-//   return Meteor.users.find({});
-// });
+Meteor.publish('userList', function() {
+  return Meteor.users.find({});
+});
