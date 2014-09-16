@@ -8,6 +8,7 @@ HR SRS is a study aid that leverages the principles of [Spaced Repetition](http:
 ## Team
 
   - __Development Team Members__: [Mike Axtman](https://github.com/mdaxtman), [Chris Bradley](https://github.com/chrbradley), [Chibueze Ikedi](https://github.com/icukaegbu), [Robin Kim](https://github.com/therobinkim)
+  - __Additional Team Members__: [Dan Chamberlain](https://github.com/dscx), [Justin Cruz](https://github.com/Digikid13), [Zach Gibb](https://github.com/bighazycrab)
 
 ## Table of Contents
 
