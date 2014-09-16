@@ -6,6 +6,27 @@ Meteor.startup(function () {
   });
 });
 
+// mizzao:user-status used for determning login status & routing triggers
+Meteor.users.find({ 'status.online': true }).observe({
+  //login action
+  added: function(id) {
+    console.log(id.emails[0].address, 'logged in!');
+    Router.go('/cards');
+    //clears selected menu item
+    $('.nav-item').removeClass('selected');
+    $(event.target).addClass('selected');
+    //prevents router from navigating back to cards constantly
+    stopMonitor: true;
+  },
+  //logout action
+  removed: function(id) {
+    console.log(id.emails[0].address, 'logged out!');
+    //sets selected menu item to be cards
+    $('.nav-item').removeClass('selected');
+    Router.go('/');
+  }
+});
+
 Template.cardItem.events({
   'click div.topic': function() {
     var cardId = this._id;
@@ -20,30 +41,21 @@ Template.cardItem.events({
   }
 });
 
-//Template dashboard
-Template.dashboard.events({
-  'click #btnAddCard': function() {
-    //show AddForm
-    //UI.insert('cardItem', $('#dashboard').html(), $('#cardList'));
-    $('#cardForm').removeClass('hidden').addClass('show');
-
-    //Show #btnRemoveCard and hide #btnAddCard
-    $('#btnHideCard').removeClass('hidden').addClass('show');
-    $('#btnAddCard').removeClass('show').addClass('hidden');
-
-    //hide the header
-    $('.sub-header').removeClass('show').addClass('hidden');
+Template.intro.events({
+  
+  'click #startBtn': function(event) {
+    if (!Meteor.user()) {
+      if (Meteor.loggingIn()) {
+        console.log('logging in...');
+        Router.go('/cards');
+      }
+      else{
+        //call s-Alert box if not logged in
+        Session.set('sAlert', {condition: 'red', effect: 'jelly', message: 'Oops! Please Login First', position: 'right-top', timeout: 3000});
+      }
+    }
   },
 
-  'click #btnHideCard': function() {
-    //hide AddForm
-    $('#cardForm').removeClass('show').addClass('hidden');
-
-    //Hide #btnRemoveCard and show #btnAddCard
-    $('#btnAddCard').removeClass('hidden').addClass('show');
-    $('#btnHideCard').removeClass('show').addClass('hidden');
-
-    //hide the header
-    $('.sub-header').removeClass('hidden').addClass('show');
-  }
 });
+
+

@@ -2,13 +2,19 @@
   "meteor": {},
   "dependencies": {
     "basePackages": {
-      "iron-router": {}
+      "iron-router": {},
+      "s-alert": {}
     },
     "packages": {
       "iron-router": {
         "git": "https://github.com/EventedMind/iron-router.git",
         "tag": "v0.8.2",
         "commit": "05415a8891ea87a00fb1e2388585f2ca5a38e0da"
+      },
+      "s-alert": {
+        "git": "https://github.com/juliancwirko/meteor-s-alert",
+        "tag": "v0.0.2",
+        "commit": "0ab788c28067f21bdf882802e3fa478966c8fb5a"
       },
       "iron-layout": {
         "git": "https://github.com/EventedMind/iron-layout.git",

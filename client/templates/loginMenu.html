@@ -11,20 +11,18 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">HR-SRS-Demo</a>
+            <a class="navbar-brand" href="#">Spaced Repetition</a>
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="{{pathFor 'intro'}}">Home</a></li>
-
               <!-- DISPLAY LINKS IF CURRENT USER IS LOGGED IN -->
               {{# if currentUser}}
-              <li><a href="/dashboard">Dashboard</a></li>
-              <li><a href="{{pathFor 'review'}}">Review Cards</a></li>
+              <li><a href="/cards" class="nav-item {{isSelected 'cards'}}">Cards</a></li>
+              <li><a href="{{pathFor 'review'}}" class="nav-item {{isSelected 'review'}}">Review</a></li>
               <!-- <li><a href="{{pathFor 'usersList'}}">Users List</a></li> -->
               {{/if}}
 
-              <li><a href="{{pathFor 'contact'}}">Contact</a></li>
+              <li><a href="{{pathFor 'contact'}}" class="nav-item {{isSelected 'contact'}}">Contact</a></li>
               {{> loginButtons}}
             </ul>
           </div>
