@@ -28,7 +28,7 @@ HR SRS is a study aid that leverages the principles of [Spaced Repetition](http:
 
 
 ## Requirements
-
+              
 - Node 0.10.x
 - Meteor 0.9.x
 
