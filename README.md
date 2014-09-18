@@ -78,3 +78,5 @@ Velocity, the unified testing framework for Meteor, is not yet available for Met
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+
+<!-- shawn wuz here -->
