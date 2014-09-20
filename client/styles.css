@@ -1,0 +1,369 @@
+/* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+
+body {
+  padding-top: 50px;
+  padding-bottom: 40px;
+  color: #5a5a5a;
+}
+
+
+.selected, 
+.selected:hover,
+li a.selected:hover,
+.nav a.nav-item.selected,
+.nav a.nav-item.selected:hover {
+  background-color: #428bca;
+  color: white;
+}
+
+/* CUSTOMIZE THE NAVBAR
+-------------------------------------------------- */
+
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+.navbar-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 20;
+}
+
+/* Flip around the padding for proper display in narrow viewports */
+.navbar-wrapper > .container {
+  padding-right: 0;
+  padding-left: 0;
+}
+.navbar-wrapper .navbar {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.navbar-wrapper .navbar .container {
+  width: auto;
+}
+
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+/* Carousel base class */
+.carousel {
+  height: 300px;
+  margin-bottom: 60px;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel .item {
+  height: 300px;
+  background-color: #66c;
+}
+.carousel-inner > .item > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 300px;
+}
+
+
+
+/* MARKETING CONTENT
+-------------------------------------------------- */
+
+/* Center align the text within the three columns below the carousel */
+.marketing .col-lg-4 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+.marketing h2 {
+  font-weight: normal;
+}
+.marketing .col-lg-4 p {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+
+/* CARDS PAGE CONTENT
+-------------------------------------------------- */
+
+#page-cards .sub-header {
+  float: left;
+}
+
+#page-cards #btnAddCard {
+  float: right;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+#page-cards .panel .btn-primary {
+  float: left;
+}
+
+#page-cards .panel .btn-danger {
+  float: right;
+}
+
+#page-cards #cardForm .panel-primary {
+  position: absolute;
+  top: 71px;
+  right: 10%;
+  left: 10%;
+}
+
+/* Featurettes
+------------------------- */
+
+.featurette-divider {
+  margin: 80px 0; /* Space out the Bootstrap <hr> more */
+}
+
+/* Thin out the marketing headings */
+.featurette-heading {
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+/* Cards - Animations
+------------------------- */
+.card-container {
+  width: 400px;
+  height: 260px;
+  position: relative;
+  -webkit-perspective: 800px;
+     -moz-perspective: 800px;
+       -o-perspective: 800px;
+          perspective: 800px;
+}
+
+#card {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  -webkit-transition: -webkit-transform 1s;
+     -moz-transition: -moz-transform 1s;
+       -o-transition: -o-transform 1s;
+          transition: transform 1s;
+  -webkit-transform-style: preserve-3d;
+     -moz-transform-style: preserve-3d;
+       -o-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  z-index: -1;
+}
+
+#card.flipped {
+  -webkit-transform: rotateX(180deg);
+     -moz-transform: rotateX(180deg);
+       -o-transform: rotateX(180deg);
+          transform: rotateX(180deg);
+}
+
+#card figure {
+  display: block;
+  height: 100%;
+  width: 100%;
+  line-height: 260px;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  position: absolute;
+  -webkit-backface-visibility: hidden;
+     -moz-backface-visibility: hidden;
+       -o-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+#card .front {
+  background: #66c;
+  border-radius: 5px;
+}
+
+#card .back {
+  background: #66cc66;
+  border-radius: 5px;
+  -webkit-transform: rotateX(180deg);
+     -moz-transform: rotateX(180deg);
+       -o-transform: rotateX(180deg);
+          transform: rotateX(180deg);
+}
+
+#card .back p {
+  height: 37px;
+
+}
+
+/* Star - Animations
+----------------------*/
+
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  height: 20px;
+}
+
+.rating > .star {
+  display: inline-block;
+  position: relative;
+  width: 0.8em;
+  font-size: 30px;
+}
+
+.rating > .star:hover:before,
+.rating > .star:hover ~ .star:before {
+  content: "\2605";
+  position: absolute;
+}
+
+/* Help DIV
+--------------*/
+.help {
+  position: relative;
+  width: 400px;
+  height: 260px;
+  border: 1px solid black;
+  border-radius: 5px;
+  z-index: -10;
+}
+
+.help-div {
+  position: relative;
+  display: none;
+  top: 85px
+}
+
+.t1, .t2, .t3, .t4, .t5, .t6 {
+  position: absolute;
+  left: 0px;
+  visibility: hidden;
+  text-align: center;
+  width: 100%;
+  display: block-inline;
+}
+
+.tool {
+  position: relative;
+  top: 50px;
+}
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+
+@media (min-width: 768px) {
+
+  /* Navbar positioning foo */
+  .navbar-wrapper {
+    margin-top: 20px;
+  }
+  .navbar-wrapper .container {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  .navbar-wrapper .navbar {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  /* Bump up size of carousel content */
+  .carousel-caption p {
+    margin-bottom: 20px;
+    font-size: 21px;
+    line-height: 1.4;
+  }
+
+  .featurette-heading {
+    font-size: 50px;
+  }
+}
+
+@media (min-width: 992px) {
+  .featurette-heading {
+    margin-top: 120px;
+  }
+}
+
+
+/*
+ * Sidebar
+ */
+
+/* Hide for mobile, show later */
+.sidebar {
+  display: none;
+}
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 15px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #f5f5f5;
+    border-right: 1px solid #eee;
+  }
+}
+
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  color: #fff;
+  background-color: #428bca;
+}
+
+/*
+ * Contact
+ */
+.center{
+  text-align: center;
+}
+
+
+/* Landing Page button */
+#startBtn {
+  background-color:#66cc66;
+  border:none;
+  position: absolute;
+  margin-left: -85px;
+  padding:15px 50px;
+  border-radius:8px;
+  color:white;
+}
+
+#startBtn:hover {
+  background-color:#54b054;
+}
+
+/* s-alert styling override */ 
+.s-alert-red {
+    background: #cc6666;
+    color: #fff;
+}
+
+.s-alert-right-top {
+  top: 58px;
+  right: 8px;
+  bottom: auto;
+  left: auto;
+}
+

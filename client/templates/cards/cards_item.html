@@ -1,0 +1,38 @@
+<template name='cardItem'>
+
+  <!-- ADD NOTIFICATION SYSTEM -->
+  {{> notifications}}
+
+  <div class="panel panel-primary">
+    <div class="panel-heading" id="addCardTitle">Add Card</div>
+    <div class="panel-body">
+      <form role="form" class="panel clearfix">
+        <div class="form-group">
+          <label for="topics">Topic</label>
+          <input type="text" id="topics" class="form-control" value="{{topic}}" placeholder="Enter Topic">
+        </div>
+        {{> cardQuestion}}
+        {{> cardAnswer}}
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <!-- <button type="cancel" class="btn btn-default">Cancel</button> -->
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Hide Card</button>
+      </form>
+    </div>
+  </div>
+</template>
+
+
+<template name="cardAnswer">
+  <div class="form-group">
+    <label for="answer">Answer</label>
+    <textarea rows="6" class="form-control" id="answer" placeholder="Enter Answer">{{a}}</textarea>
+  </div>
+</template>
+
+
+<template name="cardQuestion">
+  <div class="form-group">
+    <label for="question">Question</label>
+    <input type="text" class="form-control" id="question" placeholder="Enter Question" value="{{q}}">
+  </div>
+</template>

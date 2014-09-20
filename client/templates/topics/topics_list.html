@@ -1,0 +1,13 @@
+<template name='topicsList'>
+  <div class='contiainer'>
+    {{> loginMenu }}
+  </div>
+  <div class='container'>
+    <p>topics_list.html</p>
+     <div class='topics'>
+        {{#each topic}}
+          {{>topicItem}}
+        {{/each}}
+      </div>
+  </div>
+</template>

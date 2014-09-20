@@ -1,0 +1,46 @@
+<template name="cards">
+
+  <div class="container-fluid" id="page-cards">
+    <div id="cardForm" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="addCardTitle">
+      {{> cardItem}}
+    </div>
+    <div class="row">
+
+      {{> topicSidebar}}
+
+      <div class="col-sm-9 col-md-10 main">
+
+        <!-- Table Responsive -->
+        <div class="table-responsive well featurette-divider" id="cardList">
+          <!-- <div id="cardForm" class="hidden col-sm-6 col-md-6">
+            {{> cardItem}}
+          </div> -->
+
+          <h2 class="sub-header">{{cardsCount}} Cards</h2>
+          <button type="button" class="btn btn-primary" id="btnAddCard" data-toggle="modal" data-target="#cardForm">
+            <span class="glyphicon glyphicon-plus"></span> Add Card
+          </button>
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <!-- <th>Card ID</th> -->
+                <th>Question</th>
+                <th>Answer</th>
+                <th>Topic</th>
+                <!-- <th>Last Attempt Date</th> -->
+                <!-- <th>Actions</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              {{#each card}}
+                {{> cardTableRowItem}}
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+        <!-- End Table Responsive -->
+
+      </div>
+    </div>
+  </div>
+</template>

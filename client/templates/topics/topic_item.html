@@ -1,0 +1,15 @@
+<template name="topicItem">
+  <div class='container'>
+    <p>topic_item.html</p>
+    <div class="topic">
+      <div class="topic-content">
+        <h3>{{name}}</h3>
+        <h5>topic id: {{_id}}</h5>
+        <p>
+          <a href="{{pathFor 'topicPage'}}">{{cardsCount "card"}} Cards</a>
+          <!-- <a href="{{pathFor 'topicPage'}}">{{pluralize cardsCount "card"}}</a> -->
+        </p>
+      </div>
+    </div>
+  </div>
+</template>
